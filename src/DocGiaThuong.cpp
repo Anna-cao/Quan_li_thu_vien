@@ -1,4 +1,4 @@
-#include "DocGiaThuong_Duong.h"
+#include "DocGiaThuong_.h"
 #include <iostream>
 
 using namespace std;
@@ -24,3 +24,4 @@ void DocGiaThuong::hienThiThongTin() const {
     cout << "Gioi han muon: " << gioiHanMuon << " quyen" << endl;
     cout << "===============================" << endl;
 }
+
