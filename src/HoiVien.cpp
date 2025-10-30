@@ -1,4 +1,4 @@
-#include "HoiVien_Duong.h"
+#include "HoiVien.h"
 #include <iostream>
 using namespace std;
 
@@ -47,3 +47,4 @@ void HoiVien::hienThiThongTin() const {
     cout << "Ngay het han: " << ngayHetHan << endl;
     cout << "==========================" << endl;
 }
+
