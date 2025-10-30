@@ -1,5 +1,5 @@
-#ifndef DOCGIATHUONG_DUONG_H
-#define DOCGIATHUONG_DUONG_H
+#ifndef DOCGIATHUONG_H
+#define DOCGIATHUONG_H
 
 #include "DocGia.h"
 #include <string>
@@ -19,3 +19,4 @@ public:
 };
 
 #endif
+
