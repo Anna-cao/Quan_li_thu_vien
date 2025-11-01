@@ -1,19 +1,1 @@
-class NhaXuatBan {
-private:
-    string NXB;
-    vector<string> SoSachXB;
-public:
-    NhaXuatBan() = default;
-    NhaXuatBan(const string& nxb) : NXB(nxb) {}
-    void ThemSach(const string& maSach) {
-        SoSachXB.push_back(maSach);
-    }
-    void Xuat() const {
-        cout << "NXB: " << NXB << "\nDanh sach sach: ";
-        for (auto& s : SoSachXB) cout << s << " ";
-        cout << endl;
-    }
 
-    string getNXB() const { return NXB; }
-    vector<string> getSoSachXB() const { return SoSachXB; }
-};
