@@ -3,7 +3,9 @@
 
 #include "DocGia.h"
 #include <string>
+#include<iostream>
 
+using namespace std;
 class HoiVien : public DocGia {
 private:
     int thoiGianMuonMax;
@@ -30,3 +32,4 @@ public:
 };
 
 #endif
+
