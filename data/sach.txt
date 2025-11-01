@@ -1,0 +1,29 @@
+S001
+Toi thay hoa vang tren co xanh
+Nguyen Nhat Anh
+NXB Tre
+Tieu thuyet
+250
+12
+3
+85000
+
+S002
+Tuoi tho du doi
+Phung Quan
+NXB Kim Dong
+Tieu thuyet
+180
+20
+5
+65000
+
+S003
+Lap trinh C++ co ban
+Nguyen Van A
+NXB GD
+Giao trinh
+350
+10
+4
+75000
