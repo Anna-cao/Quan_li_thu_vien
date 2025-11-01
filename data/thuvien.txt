@@ -1,0 +1,14 @@
+class ThuVien {
+private:
+    Sach danhSachSach[MAX_SACH];
+    DocGia* danhSachDocGia[MAX_DOCGIA];
+    HoaDon danhSachHoaDon[MAX_HOADON];
+public:
+    ThuVien() = default;
+
+    void ThemSach(const Sach& s) {}
+    void ThemDocGia(DocGia* dg) {}
+    void LapHoaDon(const HoaDon& hd) {}
+    void TimKiemSach(const string& maSach) { cout << "Tim sach: " << maSach << endl; }
+    void ThongKe() { cout << "Thong ke sach, doc gia, hoa don...\n"; }
+};
