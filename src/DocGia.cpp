@@ -14,7 +14,7 @@ int DocGia::getSoLuotMuon() const { return soLuotMuon; }
 TheMuon* DocGia::getTheMuon() const { return theMuon; }
 void DocGia::setTheMuon(TheMuon* tm) { theMuon = tm; }
 
-bool DocGia::muonSach(const string& maSach, const Date& ngayHienTai) 
+virtual bool muonSach(const string& maSach, const Date& ngayHienTai) 
 {
     if (theMuon == nullptr) 
     {
@@ -61,7 +61,7 @@ void DocGia::hienThiThongTin() const
 
     if (theMuon != nullptr)
         cout << "  -> Gioi han muon: " << theMuon->getGioiHanMuon()
-             << ", Trang thai: " << (theMuon->getTrangThai() ? "Con han" : "Het han") << endl;
+             << ", Trang thai: " << (theMuon->getStatus() ? "Con han" : "Het han") << endl;
 
     cout << "  -> Danh sach sach dang muon (" << dsMaSachDangMuon.size() << "): ";
     for (size_t i = 0; i < dsMaSachDangMuon.size(); ++i)

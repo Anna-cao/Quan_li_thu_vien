@@ -1,6 +1,6 @@
 #include "TheMuon.h"
 
-TheMuon::TheMuon():gioiHanMuon(0), trangThai(true) {}
+TheMuon::TheMuon():gioiHanMuon(0), status(true) {}
 
 TheMuon::TheMuon(string maThe, string maDocGia, Date ngLapThe, Date HSD, int gioiHanMuon, bool status)
     : maThe(maThe), maDocGia(maDocGia), ngLapThe(ngLapThe), HSD(HSD), gioiHanMuon(gioiHanMuon), status(status) {}
@@ -8,9 +8,9 @@ TheMuon::TheMuon(string maThe, string maDocGia, Date ngLapThe, Date HSD, int gio
 string TheMuon::getMaThe() const { return maThe; }
 string TheMuon::getMaDocGia() const { return maDocGia; }
 int TheMuon::getGioiHanMuon() const { return gioiHanMuon; }
-bool TheMuon::getStatus() const { return trangThai; }
+bool TheMuon::getStatus() const { return status; }
 void TheMuon::setGioiHanMuon(int g) { gioiHanMuon = g; }
-void TheMuon::setStatus(bool t) { trangThai = t; }
+void TheMuon::setStatus(bool t) { status = t; }
 
 bool TheMuon::kiemTraHieuLuc(const Date& ngayHienTai) const 
 {
