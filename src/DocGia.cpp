@@ -33,6 +33,11 @@ virtual bool muonSach(const string& maSach, const Date& ngayHienTai)
         cout << "Vuot gioi han muon (" << theMuon->getGioiHanMuon() << " sach).\n";
         return false;
     }
+    if (find(dsMaSachDangMuon.begin(), dsMaSachDangMuon.end(), maSach) != dsMaSachDangMuon.end()) 
+	{
+        cout << "Sach nay da duoc muon truoc do.\n";
+        return false;
+    }
 
     dsMaSachDangMuon.push_back(maSach);
     soLuotMuon++;
