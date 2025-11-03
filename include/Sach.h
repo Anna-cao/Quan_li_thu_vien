@@ -1,4 +1,4 @@
- #ifndef SACH_H
+#ifndef SACH_H
 #define SACH_H
 
 #include<iostream>
@@ -30,8 +30,8 @@ public:
 
     bool muonSach();
     bool traSach();
-    virtual void nhap();
-    virtual void hienThiThongTin();
+    void nhap();
+    void hienThiThongTin();
     int soSachConLai() const;
 
     ~Sach() {}

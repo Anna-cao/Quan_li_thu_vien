@@ -28,8 +28,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/C++/QLTV/Quan_li_thu_vien",
-      "program": "d:/C++/QLTV/Quan_li_thu_vien/build/Debug/outDebug",
+      "cwd": "d:/C++/QLTV/Quan_li_thu_vien/include",
+      "program": "d:/C++/QLTV/Quan_li_thu_vien/include/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
