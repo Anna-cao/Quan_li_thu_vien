@@ -30,7 +30,7 @@ public:
     TheMuon* getTheMuon() const;
     void setTheMuon(TheMuon* tm);
 
-    virtual bool muonSach(const string& maSach);   
+    virtual bool muonSach(const string& maSach, const Date& ngayHienTai);   
     virtual void traSach(const string& maSach);    
     virtual void hienThiThongTin() const;          
 

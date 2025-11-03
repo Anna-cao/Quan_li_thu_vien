@@ -14,7 +14,7 @@ int DocGia::getSoLuotMuon() const { return soLuotMuon; }
 TheMuon* DocGia::getTheMuon() const { return theMuon; }
 void DocGia::setTheMuon(TheMuon* tm) { theMuon = tm; }
 
-virtual bool muonSach(const string& maSach, const Date& ngayHienTai) 
+void DocGia::muonSach(const string& maSach, const Date& ngayHienTai) 
 {
     if (theMuon == nullptr) 
     {
