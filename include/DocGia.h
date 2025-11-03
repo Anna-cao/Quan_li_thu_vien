@@ -20,8 +20,8 @@ protected:
 public:
     
     DocGia();
+    DocGia(string ma, string ten, int soLuotMuon = 0);
     DocGia(string ma, string ten, TheMuon* tm);
-
     virtual ~DocGia();  
 
     string getMaDocGia() const;
@@ -30,13 +30,15 @@ public:
     TheMuon* getTheMuon() const;
     void setTheMuon(TheMuon* tm);
 
-    virtual bool muonSach(const string& maSach);   
+    virtual bool muonSach(const string& maSach, const Date& ngayHienTai);   
     virtual void traSach(const string& maSach);    
-    virtual void hienThiThongTin() const=0;          
+    virtual void hienThiThongTin() const;          
 
     
     friend istream& operator>>(istream& in, DocGia& dg);
     friend ostream& operator<<(ostream& out, const DocGia& dg);
+    DocGia(string ma, string ten, int soLuotMuon);
+
 };
 
 #endif

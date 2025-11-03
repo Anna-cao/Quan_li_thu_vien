@@ -24,6 +24,8 @@ public:
     virtual void hienThiThongTin() const;
 
     double getTongPhi() const { return tongPhi; }
+    virtual string getMaThe(){return maThe; }
+    virtual Date getNgMuon(){return ngMuon; }
 };
 
 #endif

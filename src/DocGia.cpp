@@ -2,7 +2,8 @@
 #include <algorithm> 
 
 DocGia::DocGia() : soLuotMuon(0), theMuon(nullptr) {}
-
+DocGia::DocGia(string ma, string ten, int soLuotMuon)
+    : maDocGia(ma), hoTen(ten), soLuotMuon(soLuotMuon), theMuon(nullptr) {}
 DocGia::DocGia(string ma, string ten, TheMuon* tm)
     : maDocGia(ma), hoTen(ten), soLuotMuon(0), theMuon(tm) {}
 
@@ -14,7 +15,7 @@ int DocGia::getSoLuotMuon() const { return soLuotMuon; }
 TheMuon* DocGia::getTheMuon() const { return theMuon; }
 void DocGia::setTheMuon(TheMuon* tm) { theMuon = tm; }
 
-virtual bool muonSach(const string& maSach, const Date& ngayHienTai) 
+bool DocGia::muonSach(const string& maSach, const Date& ngayHienTai) 
 {
     if (theMuon == nullptr) 
     {

@@ -16,7 +16,8 @@ public:
     bool HopLe() const;
     void Nhap();
     void Xuat() const;
-    int TinhSoNgayChenhLech(const Date& d) const;
+    void congNgay(int soNgay);
+    int TinhSoNgay(const Date& d) const;
     static Date HomNay();
 
     int getNgay() const;
@@ -25,6 +26,16 @@ public:
 
     friend ostream& operator<<(ostream& out, const Date& d);
     friend istream& operator>>(istream& in, Date& d);
-
+    bool operator>=(const Date& other) const 
+    {
+        if (nam > other.nam) return true;
+        if (nam < other.nam) return false;
+        if (thang > other.thang) return true;
+        if (thang < other.thang) return false;
+        return ngay >= other.ngay;
+    }
+    bool operator>(const Date& other) const;
+    int operator-(const Date& other) const;
 };
+
 #endif

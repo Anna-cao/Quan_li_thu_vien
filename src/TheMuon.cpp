@@ -1,5 +1,5 @@
 #include "../include/TheMuon.h"
-using namespace std;
+
 TheMuon::TheMuon():gioiHanMuon(0), status(true) {}
 
 TheMuon::TheMuon(string maThe, string maDocGia, Date ngLapThe, Date HSD, int gioiHanMuon, bool status)
@@ -14,7 +14,7 @@ void TheMuon::setStatus(bool t) { status = t; }
 
 bool TheMuon::kiemTraHieuLuc(const Date& ngayHienTai) const 
 {
-    return HSD >= ngayHienTai; 
+    return (HSD >= ngayHienTai); 
 }
 
 istream& operator>>(istream& in, TheMuon& tm) 

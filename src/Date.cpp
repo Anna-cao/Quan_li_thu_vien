@@ -28,13 +28,26 @@ void Date::Xuat() const{
          << (thang < 10 ? "0" : "") << this->thang <<"/"
          << this->nam;
 }
-int Date::TinhSoNgayChenhLech(const Date& d) const{
+int Date::TinhSoNgay(const Date& d) const{
     tm a = {0, 0, 0, this->ngay, this->thang-1, this->nam -1900 };
     tm b = {0, 0, 0, d.ngay, d.thang - 1, d.nam - 1900 };
     time_t x = mktime(&a);
     time_t y = mktime(&b);
     double diff = difftime(y, x) / 86400;
     return static_cast<int>(diff);
+}
+void Date::congNgay(int soNgay) {
+    ngay += soNgay;
+
+    while (ngay > SoNgayTrongThang(thang, nam)) {
+        ngay -= SoNgayTrongThang(thang, nam);
+        thang++;
+
+        if (thang > 12) {
+            thang = 1;
+            nam++;
+        }
+    }
 }
 Date Date::HomNay(){
     time_t now = time(0);
@@ -53,3 +66,11 @@ istream& operator>>(istream& in, Date& d){
     in >> d.ngay >> d.thang >> d.nam;
     return in;
 }
+bool Date::operator>(const Date& other) const {
+    if (nam != other.nam) return nam > other.nam;
+    if (thang != other.thang) return thang > other.thang;
+    return ngay > other.ngay;
+}
+
+int Date::operator-(const Date& other) const {
+    return (nam - other.nam) * 365 + (thang - other.thang) * 30 + (ngay - other.ngay);}

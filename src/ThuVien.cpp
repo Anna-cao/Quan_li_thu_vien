@@ -7,10 +7,8 @@ ThuVien::ThuVien() {
     soDocGia =0;
     soHoaDon =0;
 }
-ThuVien::ThuVien()
-{
-    for(int i =0; i<soDocGia; i++)
-    {
+ThuVien::~ThuVien() {
+    for (int i = 0; i < soDocGia; i++) {
         delete danhSachDocGia[i];
     }
 }
@@ -86,16 +84,17 @@ void ThuVien::xoaSachTheoMa(string ma)
         cout << "Khong tim thay sach co ma: "<<ma<<endl;
 }
 // DOCGIA
-void ThuVien::themDocGia(DocGia* dg) 
+bool ThuVien::themDocGia(DocGia* dg) 
 {
     if (soDocGia >= Max_docgia) 
     {
         cout << "Danh sach doc gia da day!\n";
         delete dg;
-        return;
+        return false;
     }
     danhSachDocGia[soDocGia++] = dg;
     cout << "Them doc gia: " << dg->getHoTen() << "\n";
+    return true;
 }
 void ThuVien::hienThiDanhSachDocGia() const 
 {
@@ -169,6 +168,5 @@ void ThuVien::tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai
             }
         }
     }
-
     cout << "Tong tien phat qua han cho doc gia " << maDocGia << ": " << tongPhat << " VND" << endl;
 }

@@ -33,7 +33,7 @@ public:
     void suaSachTheoMa(string ma);
     void xoaSachTheoMa(string ma);
     //QLDSDG
-    void themDocGia(DocGia* dg);
+    bool themDocGia(DocGia* dg);
     void hienThiDanhSachDocGia() const;
     DocGia* timDocGiaTheoMa(const string& ma) const;
     void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);

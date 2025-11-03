@@ -21,7 +21,7 @@ void HoaDon::DocFile(ifstream &file) {
 }
 
 void HoaDon::tinhPhiQuaHan() {
-    int soNgay = ngMuon.TinhSoNgayChenhLech(ngTraThucTe);
+    int soNgay = ngMuon.TinhSoNgay(ngTraThucTe);
     if (soNgay > 14) {
         phiQuaHan = (soNgay - 14) * 5000;
     } else phiQuaHan = 0;

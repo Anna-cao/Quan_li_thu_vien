@@ -38,9 +38,9 @@ void HoiVien::setNgayHetHan(string ngay) {
 }
 void HoiVien::hienThiThongTin() const {
     cout << "=== THONG TIN HOI VIEN ===" << endl;
-    cout << "Ten: " << getTen() << endl;
-    cout << "Ma so: " << getMaSo() << endl;
-    cout << "So sach da muon: " << getSoSachDaMuon() << endl;
+    cout << "Ten: " << getHoTen() << endl;
+    cout << "Ma so: " << getMaDocGia() << endl;
+    cout << "So sach da muon: " << getSoLuotMuon() << endl;
     cout << "Thoi gian muon toi da: " << thoiGianMuonMax << " ngay" << endl;
     cout << "Ti le giam gia: " << (tileGiamGia * 100) << "%" << endl;
     cout << "Ngay dang ky: " << ngayDangKy << endl;
