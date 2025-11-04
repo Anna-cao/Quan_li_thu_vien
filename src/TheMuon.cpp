@@ -1,4 +1,4 @@
-#include "../include/TheMuon.h"
+#include "TheMuon.h"
 
 TheMuon::TheMuon():gioiHanMuon(0), status(true) {}
 

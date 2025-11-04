@@ -2,14 +2,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build LibraryManager",
+            "label": "build",
             "type": "shell",
             "command": "g++",
             "args": [
-                "-std=c++17",
-                "-I",
-                "include",
+                "-g",
                 "src/*.cpp",
+                "main.cpp",
+                "-Iinclude",
                 "-o",
                 "LibraryManager.exe"
             ],
@@ -20,7 +20,7 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "detail": "Build toàn bộ project LibraryManager"
+            "detail": "Build project with g++"
         },
         {
             "type": "cppbuild",
@@ -31,8 +31,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                ""
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "C:/msys64/ucrt64/bin"

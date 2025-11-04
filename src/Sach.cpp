@@ -1,4 +1,4 @@
-#include "../include/Sach.h"
+#include "Sach.h"
 #include <iostream>
 using namespace std;
 

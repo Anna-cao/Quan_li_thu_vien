@@ -1,10 +1,10 @@
 #include <iostream>
-#include "../include/ThuVien.h"
-#include "../include/NhaXuatBan.h"
-#include "../include/HoaDon.h"
-#include "../include/DocGiaThuong.h"
-#include "../include/HoiVien.h"
-#include "../include/NhaXuatBan.h"
+#include "ThuVien.h"
+#include "NhaXuatBan.h"
+#include "HoaDon.h"
+#include "DocGiaThuong.h"
+#include "HoiVien.h"
+#include "NhaXuatBan.h"
 
 using namespace std;
 
@@ -23,10 +23,7 @@ int main() {
         cout << "Nhap lua chon: ";
         cin >> chon;
         cin.ignore();
-
         switch (chon) {
-
-        // ========== SACH ==========
         case 1: {
             int chon1;
             do {
@@ -40,7 +37,6 @@ int main() {
                 cout <<"Lua chon: ";
                 cin >> chon1;
                 cin.ignore();
-
                 switch (chon1) {
                     case 1: thuVien.hienThi(); break;
                     case 2: thuVien.themSach(); break;
@@ -68,11 +64,10 @@ int main() {
                     case 6: cout <<"Quay lai menu chinh\n"; break;
                     default: cout <<"Lua chon khong hop le!\n";
                 }
-            } while(chon1 != 6);
+            } 
+            while(chon1 != 6);
             break;
         }
-
-        // ========== DOC GIA ==========
         case 2: {
             int chon2;
             do {
@@ -122,7 +117,8 @@ int main() {
                     case 5: cout <<"Quay lai menu chinh\n"; break;
                     default: cout <<"Lua chon khong hop le!\n";
                 }
-            } while(chon2 != 5);
+            }
+            while(chon2 != 5);
             break;
         }
         case 3: {
@@ -141,18 +137,14 @@ int main() {
                         string maHD, maThe;
                         int d1,m1,y1, d2,m2,y2;
                         double phi=0, tong=0;
-
                         cout << "Nhap ma hoa don: "; getline(cin, maHD);
                         cout << "Nhap ma the (ma the muon): "; getline(cin, maThe);
-
                         cout << "Nhap ngay muon (d m y): ";
                         cin >> d1 >> m1 >> y1;
                         cin.ignore();
-
                         cout << "Nhap ngay tra thuc te (d m y). Neu chua tra, nhap 0 0 0: ";
                         cin >> d2 >> m2 >> y2;
                         cin.ignore();
-
                         Date ngMuon(d1, m1, y1);
                         Date ngTra(d2, m2, y2);
                         HoaDon hd(maHD, maThe, ngMuon, ngTra, phi, tong);

@@ -1,3 +1,5 @@
+#ifndef NHAXUATBAN_H
+#define NHAXUATBAN_H
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,4 +18,5 @@ public:
     void themNXB();
     void hienThiDSNXB() const;
 };
+#endif
 

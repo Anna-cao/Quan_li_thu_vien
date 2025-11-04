@@ -16,13 +16,11 @@ protected:
     int soLuotMuon;                     
     vector<string> dsMaSachDangMuon;    
     TheMuon* theMuon;                   
-
 public:
-    
     DocGia();
-    DocGia(string ma, string ten, int soLuotMuon = 0);
-    DocGia(string ma, string ten, TheMuon* tm);
-    virtual ~DocGia();  
+    DocGia(string ma, string ten, int soLuotMuon = 0);   
+    DocGia(string ma, string ten, TheMuon* tm);          
+    virtual ~DocGia();                                   
 
     string getMaDocGia() const;
     string getHoTen() const;
@@ -30,16 +28,14 @@ public:
     TheMuon* getTheMuon() const;
     void setTheMuon(TheMuon* tm);
 
-    virtual bool muonSach(const string& maSach, const Date& ngayHienTai);   
-    virtual void traSach(const string& maSach);    
-    virtual void hienThiThongTin() const;          
+    virtual bool muonSach(const string& maSach, const Date& ngayHienTai);
+    virtual void traSach(const string& maSach);
+    virtual void hienThiThongTin() const;
     const vector<string>& getDsMaSachDangMuon() const;
-    
+
     friend istream& operator>>(istream& in, DocGia& dg);
     friend ostream& operator<<(ostream& out, const DocGia& dg);
-    DocGia(string ma, string ten, int soLuotMuon);
     virtual void nhap();
-
 };
 
 #endif

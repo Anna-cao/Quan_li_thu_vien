@@ -1,4 +1,4 @@
-#include "../include/HoiVien.h"
+#include "HoiVien.h"
 #include <iostream>
 using namespace std;
 

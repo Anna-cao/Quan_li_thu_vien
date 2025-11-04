@@ -1,4 +1,4 @@
-#include "../include/Date.h"
+#include "Date.h"
 #include <bits/stdc++.h>
 
 Date::Date(int d, int m, int y) : ngay(d), thang(m), nam(y){}
