@@ -5,6 +5,7 @@
 #include "HoaDon.h"
 #include "DocGia.h"
 #include "TheMuon.h"
+#include"NhaXuatBan.h"
 
 #include <string>
 using namespace std;
@@ -12,6 +13,7 @@ using namespace std;
 #define Max_sach 200
 #define Max_docgia  200
 #define Max_hoadon 200
+#define Max_NXB 200
 
 class ThuVien {
 private:
@@ -23,6 +25,9 @@ private:
     
     HoaDon danhSachHoaDon[Max_hoadon];
     int soHoaDon;
+
+    NhaXuatBan* danhSachNXB[Max_NXB];  
+    int soNXB;
 public:
     ThuVien(); 
     ~ThuVien();
@@ -37,16 +42,19 @@ public:
     void hienThiDanhSachDocGia() const;
     DocGia* timDocGiaTheoMa(const string& ma) const;
     void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);
-    //QL muon/tra sach
-    bool muonSach(const string& maDocGia, const string& maSach, const Date& ngayMuon);
-    bool traSach(const string& maDocGia, const string& maSach, const Date& ngayTra);
     //QL HD
-    void themHoaDon(const HoaDon& hd);
+    void themHoaDon();
     void hienThiDanhSachHoaDon() const;
     void tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai);
     //TK&TK
-    void thongKeSachDangMuon() const;
-    void thongKeDocGiaQuaHan() const;
+    void thongKeSachDangMuonCuaDocGia(const string& maDocGia) const;
+    void thongKeSachDaTraCuaDocGia(const string& maDocGia) const;
+    void thongKeSachQuaHanCuaDocGia(const string& maDocGia, const Date& ngayHienTai) const;
+    //QLNXB
+    bool themNXB(const string& tenNXB);
+    void hienThiDanhSachNXB() const;
+    NhaXuatBan* timNXBTheoTen(const string& tenNXB) const;
+    void themSachVaoNXB(const string& maSach, const string& tenNXB);
+    void thongKeSachTheoNXB() const;
 };
-
 #endif

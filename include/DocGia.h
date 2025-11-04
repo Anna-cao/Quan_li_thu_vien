@@ -33,7 +33,7 @@ public:
     virtual bool muonSach(const string& maSach, const Date& ngayHienTai);   
     virtual void traSach(const string& maSach);    
     virtual void hienThiThongTin() const;          
-
+    const vector<string>& getDsMaSachDangMuon() const;
     
     friend istream& operator>>(istream& in, DocGia& dg);
     friend ostream& operator<<(ostream& out, const DocGia& dg);

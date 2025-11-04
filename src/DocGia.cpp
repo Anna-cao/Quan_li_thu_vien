@@ -14,7 +14,9 @@ string DocGia::getHoTen() const { return hoTen; }
 int DocGia::getSoLuotMuon() const { return soLuotMuon; }
 TheMuon* DocGia::getTheMuon() const { return theMuon; }
 void DocGia::setTheMuon(TheMuon* tm) { theMuon = tm; }
-
+const vector<string>& DocGia::getDsMaSachDangMuon() const {
+    return dsMaSachDangMuon;
+}
 bool DocGia::muonSach(const string& maSach, const Date& ngayHienTai) 
 {
     if (theMuon == nullptr) 

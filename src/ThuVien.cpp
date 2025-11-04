@@ -86,6 +86,13 @@ void ThuVien::xoaSachTheoMa(string ma)
 // DOCGIA
 bool ThuVien::themDocGia(DocGia* dg) 
 {
+    for (int i =0; i<n; i++)
+    {
+        if(dg == danhSachDocGia[i])
+        {
+            cout <<"Doc gia da ton tai trong danh sach"<<endl;
+        }
+    }
     if (soDocGia >= Max_docgia) 
     {
         cout << "Danh sach doc gia da day!\n";
@@ -170,3 +177,75 @@ void ThuVien::tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai
     }
     cout << "Tong tien phat qua han cho doc gia " << maDocGia << ": " << tongPhat << " VND" << endl;
 }
+// QL NXB
+ThuVien::ThuVien() 
+{
+    n = 0;
+    soDocGia = 0;
+    soHoaDon = 0;
+    soNXB = 0;  
+    for (int i = 0; i < 100; ++i) {
+        danhSachNXB[i] = nullptr;
+    }
+}
+ThuVien::~ThuVien() {
+    for (int i = 0; i < soDocGia; i++) {
+        delete danhSachDocGia[i];
+    }
+    for (int i = 0; i < soNXB; i++) {
+        delete danhSachNXB[i];  
+    }
+}
+bool ThuVien::themNXB(const string& tenNXB) {
+    if (soNXB >= 100) {
+        cout << "Danh sach nha xuat ban da day!" << endl;
+        return false;
+    }
+
+    if (timNXBTheoTen(tenNXB) != nullptr) {
+        cout << "Nha xuat ban '" << tenNXB << "' da ton tai!" << endl;
+        return false;
+    }
+
+    danhSachNXB[soNXB++] = new NhaXuatBan(tenNXB);
+    cout << "Them nha xuat ban '" << tenNXB << "' thanh cong!" << endl;
+    return true;
+}
+
+void ThuVien::hienThiDanhSachNXB() const {
+    if (soNXB == 0)
+    {
+        cout << "Chua co nha xuat ban nao!" << endl;
+        return;
+    }
+    cout << "\n===== DANH SACH NHA XUAT BAN =====\n";
+    for (int i = 0; i < soNXB; ++i) {
+        cout << "\nNXB thu " << i + 1 << ":\n";
+        danhSachNXB[i]->hienThiDSNXB();
+    }
+}
+
+NhaXuatBan* ThuVien::timNXBTheoTen(const string& tenNXB) const {
+    for (int i = 0; i < soNXB; ++i) {
+        if (danhSachNXB[i]->getNXB() == tenNXB) {
+            return danhSachNXB[i];
+        }
+    }
+    return nullptr;
+}
+// TK
+void ThuVien::thongKeSachTheoNXB() const {
+    if (soNXB == 0) {
+        cout << "Khong co nha xuat ban nao de thong ke!" << endl;
+        return;
+    }
+
+    cout << "\n===== THONG KE SACH THEO NHA XUAT BAN =====\n";
+    for (int i = 0; i < soNXB; ++i) {
+        const vector<string>& dsSach = danhSachNXB[i]->getSoSachXB();
+        cout << "NXB: " << danhSachNXB[i]->getNXB()
+             << " | So luong sach: " << dsSach.size() << endl;
+    }
+    cout << "===========================================\n";
+}
+
