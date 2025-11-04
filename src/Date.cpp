@@ -54,10 +54,6 @@ Date Date::HomNay(){
     tm * ltm = localtime(& now);
     return Date(ltm->tm_mday, ltm->tm_mon + 1, ltm->tm_year + 1900);
 }
-int Date::getNgay() const {return ngay;}
-int Date::getThang() const {return thang;}
-int Date::getNam() const {return nam;}
-
 ostream& operator<<(ostream& out, const Date& d){
     out << d.ngay << " " << d.thang << " " << d.nam;
     return out;
@@ -73,7 +69,7 @@ bool Date::operator>(const Date& other) const {
 }
 
 int Date::operator-(const Date& other) const {
-    return (nam - other.nam) * 365 + (thang - other.thang) * 30 + (ngay - other.ngay);}
+    return (nam - other.nam) * 365 + (thang - other.thang) * 30 + (ngay - other.ngay);};
     bool Date::operator<(const Date& other) const {
     if (nam != other.nam) return nam < other.nam;
     if (thang != other.thang) return thang < other.thang;

@@ -28,7 +28,7 @@ public:
 
     bool kiemTraHieuLuc(const Date& ngayHienTai) const;
 
-    friend istream& operator>>(istream& in, TheMuon& tm);
+    void nhap();  
     friend ostream& operator<<(ostream& out, const TheMuon& tm);
 };
 

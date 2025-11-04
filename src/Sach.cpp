@@ -20,7 +20,6 @@ soTrang(soTrang), soLuongTong(soLuongTong), soLuongDaMuon(soLuongDaMuon), giaTie
 int Sach::soSachConLai() const {
     return soLuongTong - soLuongDaMuon;
 }
-
 bool Sach::muonSach() {
     if (soSachConLai() > 0) {
         soLuongDaMuon++;
@@ -31,7 +30,6 @@ bool Sach::muonSach() {
         return false;
     }
 }
-
 bool Sach::traSach() {
     if (soLuongDaMuon > 0) {
         soLuongDaMuon--;
@@ -44,8 +42,8 @@ bool Sach::traSach() {
 }
 
 void Sach::nhap() {
-    cin.ignore();
     cout << "\n----- NHAP THONG TIN SACH -----\n";
+    
     cout << "Ma sach: "; getline(cin, maSach);
     cout << "Ten sach: "; getline(cin, tenSach);
     cout << "Tac gia: "; getline(cin, tacGia);
@@ -54,9 +52,9 @@ void Sach::nhap() {
     cout << "So trang: "; cin >> soTrang;
     cout << "So luong tong: "; cin >> soLuongTong;
     cout << "So luong da muon: "; cin >> soLuongDaMuon;
-    cout << "Gia tien: "; cin >> giaTien;
+    cout << "Gia tien 1 quyen: "; cin >> giaTien;
+    cin.ignore();
 }
-
 void Sach::hienThiThongTin() {
     cout << "\n----- THONG TIN SACH -----\n";
     cout << "Ma sach: " << maSach << endl;

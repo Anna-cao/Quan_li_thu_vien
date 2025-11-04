@@ -110,7 +110,7 @@ int main() {
                         cout << "Nhap ma doc gia can cap nhat the: ";
                         getline(cin, ma);
                         TheMuon* the = new TheMuon();
-                        cin >> *the;   
+                        the->nhap();   
                         thuVien.capNhatTheMuonChoDocGia(ma, the);
                         break;
                     }

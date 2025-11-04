@@ -1,4 +1,5 @@
 #include "../include/TheMuon.h"
+#include<sstream>
 
 TheMuon::TheMuon():gioiHanMuon(0), status(true) {}
 
@@ -17,16 +18,27 @@ bool TheMuon::kiemTraHieuLuc(const Date& ngayHienTai) const
     return (HSD >= ngayHienTai); 
 }
 
-istream& operator>>(istream& in, TheMuon& tm) 
-{
-    cout << "Nhap ma the: "; getline(in, tm.maThe);
-    cout << "Nhap ma doc gia: "; getline(in, tm.maDocGia);
-    cout << "Nhap ngay lap: "; in >> tm.ngLapThe;
-    cout << "Nhap han su dung: "; in >> tm.HSD;
-    cout << "Nhap gioi han muon: "; in >> tm.gioiHanMuon;
-    tm.status = true;
-    in.ignore();
-    return in;
+void TheMuon::nhap() {
+    cout << "Nhap ma the: ";
+    getline(cin, maThe);
+    cout << "Nhap ma doc gia: ";
+    getline(cin, maDocGia);
+    string line;
+    int d, m, y;
+
+    cout << "Nhap ngay lap (d m y): ";
+    getline(cin, line);
+    stringstream(line) >> d >> m >> y;
+    ngLapThe = Date(d, m, y);
+
+    cout << "Nhap han su dung (d m y): ";
+    getline(cin, line);
+    stringstream(line) >> d >> m >> y;
+    HSD = Date(d, m, y);
+    cout << "Nhap gioi han muon: ";
+    getline(cin, line);
+    stringstream(line) >> gioiHanMuon;
+    status = true;
 }
 
 ostream& operator<<(ostream& out, const TheMuon& tm) 

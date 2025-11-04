@@ -7,6 +7,7 @@
 #include "TheMuon.h"
 #include "NhaXuatBan.h"
 #include <fstream>
+#include <sstream>
 
 #define Max_sach 200
 #define Max_docgia 200
@@ -50,7 +51,5 @@ public:
     NhaXuatBan* timNXBTheoTen(const string& tenNXB) const;
     void themSachVaoNXB(const string& maSach, const string& tenNXB);
 
-    void docDuLieuTuFile();
-    void ghiDuLieuVaoFile();
 };
 #endif
