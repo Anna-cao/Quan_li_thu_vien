@@ -1,4 +1,4 @@
-#include "NhaXuatBan.h"
+#include "../include/NhaXuatBan.h"
 
 NhaXuatBan::NhaXuatBan() = default;
 NhaXuatBan::NhaXuatBan(const string& nxb) : NXB(nxb) {}

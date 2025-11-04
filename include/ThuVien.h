@@ -6,6 +6,7 @@
 #include "DocGia.h"
 #include "TheMuon.h"
 #include "NhaXuatBan.h"
+#include <fstream>
 
 #define Max_sach 200
 #define Max_docgia 200
@@ -48,5 +49,8 @@ public:
     void hienThiDanhSachNXB() const;
     NhaXuatBan* timNXBTheoTen(const string& tenNXB) const;
     void themSachVaoNXB(const string& maSach, const string& tenNXB);
+
+    void docDuLieuTuFile();
+    void ghiDuLieuVaoFile();
 };
 #endif

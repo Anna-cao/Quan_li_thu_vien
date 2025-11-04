@@ -1,4 +1,4 @@
-#include "DocGia.h"
+#include "../include/DocGia.h"
 #include <algorithm> 
 
 DocGia::DocGia() : soLuotMuon(0), theMuon(nullptr) {}

@@ -1,10 +1,10 @@
 #include <iostream>
-#include "ThuVien.h"
-#include "NhaXuatBan.h"
-#include "HoaDon.h"
-#include "DocGiaThuong.h"
-#include "HoiVien.h"
-#include "NhaXuatBan.h"
+#include "../include/ThuVien.h"
+#include "../include/NhaXuatBan.h"
+#include "../include/HoaDon.h"
+#include "../include/DocGiaThuong.h"
+#include "../include/HoiVien.h"
+#include "../include/NhaXuatBan.h"
 
 using namespace std;
 

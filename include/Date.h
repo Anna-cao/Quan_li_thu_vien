@@ -20,9 +20,9 @@ public:
     int TinhSoNgay(const Date& d) const;
     static Date HomNay();
 
-    int getNgay() const;
-    int getThang() const;
-    int getNam() const;
+    int getNgay() const{return ngay;}
+    int getThang() const{return thang;}
+    int getNam() const{return nam;}
 
     friend ostream& operator<<(ostream& out, const Date& d);
     friend istream& operator>>(istream& in, Date& d);

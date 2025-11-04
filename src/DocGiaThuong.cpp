@@ -1,4 +1,4 @@
-#include "DocGiaThuong.h"
+#include "../include/DocGiaThuong.h"
 #include <iostream>
 using namespace std;
 DocGiaThuong::DocGiaThuong() : DocGia(), gioiHanMuon(5) {}

@@ -4,14 +4,14 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "g++",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
             "args": [
                 "-g",
-                "src/*.cpp",
-                "main.cpp",
-                "-Iinclude",
+                "${workspaceFolder}/src/*.cpp",
+                "${workspaceFolder}/main.cpp",
+                "-I${workspaceFolder}/include",
                 "-o",
-                "LibraryManager.exe"
+                "\"${workspaceFolder}/Quan_li_thu_vien.exe\""
             ],
             "group": {
                 "kind": "build",
@@ -20,7 +20,7 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "detail": "Build project with g++"
+            "detail": "Build project with main.cpp outside src/"
         },
         {
             "type": "cppbuild",
