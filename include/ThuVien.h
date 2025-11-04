@@ -43,13 +43,13 @@ public:
     DocGia* timDocGiaTheoMa(const string& ma) const;
     void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);
     //QL HD
-    void themHoaDon();
+    void themHoaDon(const HoaDon& hd);
     void hienThiDanhSachHoaDon() const;
     void tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai);
     //TK&TK
-    void thongKeSachDangMuonCuaDocGia(const string& maDocGia) const;
-    void thongKeSachDaTraCuaDocGia(const string& maDocGia) const;
-    void thongKeSachQuaHanCuaDocGia(const string& maDocGia, const Date& ngayHienTai) const;
+    void thongKeMuonTra(const Date &ngayHienTai) const;
+    void thongKeSachTheoNXB() const; 
+
     //QLNXB
     bool themNXB(const string& tenNXB);
     void hienThiDanhSachNXB() const;

@@ -74,3 +74,8 @@ bool Date::operator>(const Date& other) const {
 
 int Date::operator-(const Date& other) const {
     return (nam - other.nam) * 365 + (thang - other.thang) * 30 + (ngay - other.ngay);}
+    bool Date::operator<(const Date& other) const {
+    if (nam != other.nam) return nam < other.nam;
+    if (thang != other.thang) return thang < other.thang;
+    return ngay < other.ngay;
+}

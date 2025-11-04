@@ -246,6 +246,43 @@ void ThuVien::thongKeSachTheoNXB() const {
         cout << "NXB: " << danhSachNXB[i]->getNXB()
              << " | So luong sach: " << dsSach.size() << endl;
     }
-    cout << "===========================================\n";
 }
+void ThuVien::thongKeMuonTra(const Date &ngayHienTai) const {
+    if (soHoaDon == 0) {
+        cout << "Chua co hoa don nao!\n";
+        return;
+    }
+
+    int countBorrowed = 0;
+    int countReturned = 0;
+    int countOverDue = 0;
+
+    const int hanMuon = 14;
+
+    for (int i = 0; i < soHoaDon; i++) {
+        const HoaDon &hd = danhSachHoaDon[i];
+
+        if (hd.getNgayTraThucTe().HopLe()) {
+            countReturned++;
+        } 
+        else {
+            countBorrowed++;
+
+            Date due = hd.getNgayMuon();
+            due.congNgay(hanMuon);
+
+            if (due < ngayHienTai) {
+                countOverDue++;
+            }
+        }
+    }
+
+    cout << "\n===== THONG KE MUON / TRA =====\n";
+    cout << "Tong hoa don: " << soHoaDon << "\n";
+    cout << "Da tra: " << countReturned << "\n";
+    cout << "Dang muon: " << countBorrowed << "\n";
+    cout << "Qua han: " << countOverDue << "\n";
+    cout << "================================\n";
+}
+
 

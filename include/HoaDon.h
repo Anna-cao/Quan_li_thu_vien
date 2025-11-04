@@ -26,6 +26,10 @@ public:
     double getTongPhi() const { return tongPhi; }
     virtual string getMaThe(){return maThe; }
     virtual Date getNgMuon(){return ngMuon; }
+
+    Date getNgayMuon() const { return ngMuon; }
+    Date getNgayTraThucTe() const { return ngTraThucTe; }
+
 };
 
 #endif

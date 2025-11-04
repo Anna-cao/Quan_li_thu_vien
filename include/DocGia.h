@@ -38,6 +38,7 @@ public:
     friend istream& operator>>(istream& in, DocGia& dg);
     friend ostream& operator<<(ostream& out, const DocGia& dg);
     DocGia(string ma, string ten, int soLuotMuon);
+    virtual void nhap();
 
 };
 
