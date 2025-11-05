@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<string>
+
 using namespace std;
 
 class Sach {
@@ -33,6 +34,9 @@ public:
     void nhap();
     void hienThiThongTin();
     int soSachConLai() const;
+    bool ghiFile(ofstream &out) const;
+    bool docFile(ifstream &in);
+
 
     ~Sach() {}
 };

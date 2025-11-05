@@ -1,5 +1,8 @@
 #include "../include/HoaDon.h"
 #include <iomanip>
+#include <fstream>
+#include <sstream>
+#include <limits>
 using namespace std;
 
 HoaDon::HoaDon() : phiQuaHan(0), tongPhi(0) {}
@@ -35,4 +38,31 @@ void HoaDon::hienThiThongTin() const {
     cout << setw(12); ngTraThucTe.Xuat();
     cout << setw(10) << fixed << setprecision(0) << phiQuaHan
          << setw(10) << tongPhi << endl;
+}
+bool HoaDon::ghiFile(ofstream& out) const {
+    if (!out.good()) return false;
+    out << maHoaDon << "," << maThe << ","
+        << ngMuon.toString() << "," << ngTraThucTe.toString() << ","
+        << phiQuaHan << "," << tongPhi << "\n";
+    return true;
+}
+
+bool HoaDon::docFile(ifstream& in) {
+    string line;
+    if (!getline(in, line) || line.empty()) return false;
+    stringstream ss(line);
+    string ngayMuonStr, ngayTraStr, phiStr, tongStr;
+
+    getline(ss, maHoaDon, ',');
+    getline(ss, maThe, ',');
+    getline(ss, ngayMuonStr, ',');
+    getline(ss, ngayTraStr, ',');
+    getline(ss, phiStr, ',');
+    getline(ss, tongStr, ',');
+
+    ngMuon.fromString(ngayMuonStr);
+    ngTraThucTe.fromString(ngayTraStr);
+    phiQuaHan = stod(phiStr);
+    tongPhi = stod(tongStr);
+    return true;
 }

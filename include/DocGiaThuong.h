@@ -3,6 +3,7 @@
 
 #include "DocGia.h"
 #include <string>
+#include <fstream>
 
 class DocGiaThuong : public DocGia {
 private:
@@ -16,6 +17,11 @@ public:
     void setGioiHanMuon(int gioiHan);
     
     void hienThiThongTin() const override;
+
+    bool ghiFile(std::ofstream &out) const ;
+    bool docFile(std::ifstream &in);
+
+    bool docFileFromString(const std::string& line);
 };
 
 #endif

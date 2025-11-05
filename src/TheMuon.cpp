@@ -38,3 +38,30 @@ ostream& operator<<(ostream& out, const TheMuon& tm)
         << ", Trang thai: " << (tm.status ? "Con han" : "Het han") << endl;
     return out;
 }
+bool TheMuon::ghiFile(ofstream& out) const {
+    if (!out.good()) return false;
+    out << maThe << "," << maDocGia << ","
+        << ngLapThe.toString() << "," << HSD.toString() << ","
+        << gioiHanMuon << "," << status << "\n";
+    return true;
+}
+
+bool TheMuon::docFile(ifstream& in) {
+    string line;
+    if (!getline(in, line) || line.empty()) return false;
+    stringstream ss(line);
+    string ngLap, hsd, gioiHanStr, sttStr;
+
+    getline(ss, maThe, ',');
+    getline(ss, maDocGia, ',');
+    getline(ss, ngLap, ',');
+    getline(ss, hsd, ',');
+    getline(ss, gioiHanStr, ',');
+    getline(ss, sttStr, ',');
+
+    ngLapThe.fromString(ngLap);
+    HSD.fromString(hsd);
+    gioiHanMuon = stoi(gioiHanStr);
+    status = (sttStr == "1" || sttStr == "true");
+    return true;
+}

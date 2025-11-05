@@ -1,5 +1,8 @@
 #include "../include/Sach.h"
 #include <iostream>
+#include <limits>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 Sach::Sach() {
@@ -44,13 +47,13 @@ bool Sach::traSach() {
 }
 
 void Sach::nhap() {
-    cin.ignore();
-    cout << "\n----- NHAP THONG TIN SACH -----\n";
+    cout << "----- NHAP THONG TIN SACH -----\n";
     cout << "Ma sach: "; getline(cin, maSach);
     cout << "Ten sach: "; getline(cin, tenSach);
     cout << "Tac gia: "; getline(cin, tacGia);
     cout << "Nha xuat ban: "; getline(cin, NXB);
     cout << "The loai: "; getline(cin, type);
+
     cout << "So trang: "; cin >> soTrang;
     cout << "So luong tong: "; cin >> soLuongTong;
     cout << "So luong da muon: "; cin >> soLuongDaMuon;
@@ -69,4 +72,38 @@ void Sach::hienThiThongTin() {
     cout << "So luong da muon: " << soLuongDaMuon << endl;
     cout << "So luong con lai: " << soSachConLai() << endl;
     cout << "Gia tien: " << giaTien << endl;
+}
+bool Sach::ghiFile(ofstream& out) const {
+    if (!out.good()) return false;
+    out << maSach << "," << tenSach << "," << tacGia << "," << NXB << ","
+        << type << "," << soTrang << "," << soLuongTong << ","
+        << soLuongDaMuon << "," << giaTien << "\n";
+    return true;
+}
+
+bool Sach::docFile(ifstream& in) {
+    string line;
+    if (!getline(in, line) || line.empty()) return false;
+    stringstream ss(line);
+    string soTrangStr, tongStr, daMuonStr, giaStr;
+
+    getline(ss, maSach, ',');
+    getline(ss, tenSach, ',');
+    getline(ss, tacGia, ',');
+    getline(ss, NXB, ',');
+    getline(ss, type, ',');
+    getline(ss, soTrangStr, ',');
+    getline(ss, tongStr, ',');
+    getline(ss, daMuonStr, ',');
+    getline(ss, giaStr, ',');
+
+    try {
+        soTrang = stoi(soTrangStr);
+        soLuongTong = stoi(tongStr);
+        soLuongDaMuon = stoi(daMuonStr);
+        giaTien = stod(giaStr);
+    } catch (...) {
+        return false;
+    }
+    return true;
 }

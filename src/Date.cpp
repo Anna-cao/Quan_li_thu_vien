@@ -79,3 +79,15 @@ int Date::operator-(const Date& other) const {
     if (thang != other.thang) return thang < other.thang;
     return ngay < other.ngay;
 }
+string Date::toString() const {
+    ostringstream oss;
+    oss << setfill('0') << setw(2) << ngay << "/"
+        << setw(2) << thang << "/" << setw(4) << nam;
+    return oss.str();
+}
+
+void Date::fromString(const string& str) {
+    char sep;
+    stringstream ss(str);
+    ss >> ngay >> sep >> thang >> sep >> nam;
+}

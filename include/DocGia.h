@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 #include "TheMuon.h"
 using namespace std;
 
@@ -18,7 +20,6 @@ protected:
     TheMuon* theMuon;                   
 
 public:
-    
     DocGia();
     DocGia(string ma, string ten, int soLuotMuon = 0);
     DocGia(string ma, string ten, TheMuon* tm);
@@ -29,17 +30,19 @@ public:
     int getSoLuotMuon() const;
     TheMuon* getTheMuon() const;
     void setTheMuon(TheMuon* tm);
+    const vector<string>& getDsMaSachDangMuon() const;
 
     virtual bool muonSach(const string& maSach, const Date& ngayHienTai);   
     virtual void traSach(const string& maSach);    
     virtual void hienThiThongTin() const;          
-    const vector<string>& getDsMaSachDangMuon() const;
-    
-    friend istream& operator>>(istream& in, DocGia& dg);
-    friend ostream& operator<<(ostream& out, const DocGia& dg);
-    DocGia(string ma, string ten, int soLuotMuon);
     virtual void nhap();
 
+    // ==== THÊM PHẦN NÀY ====
+    bool ghiFile(ofstream& out) const;   // Ghi 1 dòng CSV
+    bool docFile(ifstream& in);          // Đọc 1 dòng CSV
+
+    friend istream& operator>>(istream& in, DocGia& dg);
+    friend ostream& operator<<(ostream& out, const DocGia& dg);
 };
 
 #endif

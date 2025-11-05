@@ -1,12 +1,3 @@
-DG002
-Tran Thi B
-2
-S010
-S011
-DG003
-Le Van C
-0
-DG004
-Pham Minh D
-1
-S020
+DG002,Tran Thi B,2,S010,S011
+DG003,Le Van C,0
+DG004,Pham Minh D,1,S020

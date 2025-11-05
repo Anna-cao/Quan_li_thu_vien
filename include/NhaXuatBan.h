@@ -1,6 +1,14 @@
+#ifndef NHAXUATBAN_H
+#define NHAXUATBAN_H
+
+
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <sstream>
+#include <limits>
+
 using namespace std;
 
 class NhaXuatBan {
@@ -15,5 +23,8 @@ public:
     vector<string> getSoSachXB() const;
     void themNXB();
     void hienThiDSNXB() const;
-};
 
+    bool ghiFile(ofstream &out) const;
+    bool docFile(ifstream &in);
+};
+#endif

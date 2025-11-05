@@ -1,10 +1,10 @@
 #include <iostream>
-#include "../include/ThuVien.h"
-#include "../include/NhaXuatBan.h"
-#include "../include/HoaDon.h"
-#include "../include/DocGiaThuong.h"
-#include "../include/HoiVien.h"
-#include "../include/NhaXuatBan.h"
+#include "include/ThuVien.h"
+#include "include/NhaXuatBan.h"
+#include "include/HoaDon.h"
+#include "include/DocGiaThuong.h"
+#include "include/HoiVien.h"
+#include "include/NhaXuatBan.h"
 
 using namespace std;
 
@@ -39,7 +39,7 @@ int main() {
                 cout <<"6. Thoat\n";
                 cout <<"Lua chon: ";
                 cin >> chon1;
-                cin.ignore();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 switch (chon1) {
                     case 1: thuVien.hienThi(); break;
@@ -241,6 +241,12 @@ int main() {
         }
 
     } while (chon != 6);
+
+    thuVien.ghiFileSach();
+    thuVien.ghiFileDocGia();
+    thuVien.ghiFileHoaDon();
+    thuVien.ghiFileNXB();
+    thuVien.ghiFileTheMuon();
 
     return 0;
 }

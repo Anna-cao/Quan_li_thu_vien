@@ -2,6 +2,7 @@
 #define HOADON_H
 
 #include <bits/stdc++.h>
+
 #include "Date.h"
 using namespace std;
 
@@ -29,6 +30,10 @@ public:
 
     Date getNgayMuon() const { return ngMuon; }
     Date getNgayTraThucTe() const { return ngTraThucTe; }
+
+    bool ghiFile(ofstream &out) const;
+    bool docFile(ifstream &in);
+
 
 };
 

@@ -37,6 +37,9 @@ public:
     bool operator>(const Date& other) const;
     bool operator<(const Date& other) const;
     int operator-(const Date& other) const;
+
+    string toString() const;
+    void fromString(const string& str);
 };
 
 #endif

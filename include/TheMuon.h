@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <limits>
 #include "Date.h"    
 using namespace std;
 
@@ -30,6 +33,9 @@ public:
 
     friend istream& operator>>(istream& in, TheMuon& tm);
     friend ostream& operator<<(ostream& out, const TheMuon& tm);
+
+    bool ghiFile(ofstream &out) const;
+    bool docFile(ifstream &in);
 };
 
 #endif
