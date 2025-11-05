@@ -53,7 +53,7 @@ void Sach::nhap() {
     cout << "So luong tong: "; cin >> soLuongTong;
     cout << "So luong da muon: "; cin >> soLuongDaMuon;
     cout << "Gia tien 1 quyen: "; cin >> giaTien;
-    cin.ignore();
+    cin.ignore(1, '\n');
 }
 void Sach::hienThiThongTin() {
     cout << "\n----- THONG TIN SACH -----\n";

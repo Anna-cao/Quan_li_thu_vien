@@ -36,6 +36,7 @@ public:
     friend istream& operator>>(istream& in, DocGia& dg);
     friend ostream& operator<<(ostream& out, const DocGia& dg);
     virtual void nhap();
+    
 };
 
 #endif

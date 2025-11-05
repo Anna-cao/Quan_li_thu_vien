@@ -14,7 +14,7 @@ void menuQuanLiSach(ThuVien& thuVien) {
         cout <<"6. Thoat\n";
         cout <<"Lua chon: ";
         cin >> chon1;
-        cin.ignore();
+        cin.ignore(1000,'\n');
 
         switch(chon1) {
             case 1: thuVien.hienThi(); break;

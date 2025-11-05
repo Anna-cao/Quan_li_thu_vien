@@ -40,7 +40,7 @@ int main() {
         cout << "5. Thong ke\n";
         cout << "6. Dang xuat va thoat\n";
         cout << "Nhap lua chon: ";
-        cin >> chon; cin.ignore();
+        cin >> chon; while (cin.get() != '\n');
 
         switch(chon) {
             case 1: menuQuanLiSach(thuVien); break;
