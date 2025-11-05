@@ -1,4 +1,5 @@
 #include <iostream>
+#include "../include/auth.h"
 #include "../include/ThuVien.h"
 #include "../include/menu/QLSach.h"
 #include "../include/menu/QLDocGia.h"
@@ -8,6 +9,25 @@
 using namespace std;
 
 int main() {
+    Auth auth;
+    auth.docFile("data/user.txt");  
+    string ten, mk;
+    bool daDangNhap = false;
+
+    cout << "===== DANG NHAP HE THONG =====\n";
+    while (!daDangNhap) {
+        cout << "Ten dang nhap: ";
+        cin >> ten;
+        cout << "Mat khau: ";
+        cin >> mk;
+
+        if (auth.dangNhap(ten, mk)) {
+            cout << "Chao mung " << auth.getNguoiDungHienTai()->getTenDangNhap() << "!\n";
+            daDangNhap = true;
+        } else {
+            cout << "Sai thong tin, vui long thu lai!\n";
+        }
+    }
     ThuVien thuVien;
     int chon;
 
@@ -18,7 +38,7 @@ int main() {
         cout << "3. Quan li hoa don\n";
         cout << "4. Quan li nha xuat ban\n";
         cout << "5. Thong ke\n";
-        cout << "6. Thoat\n";
+        cout << "6. Dang xuat va thoat\n";
         cout << "Nhap lua chon: ";
         cin >> chon; cin.ignore();
 
@@ -28,9 +48,15 @@ int main() {
             case 3: menuQuanLiHoaDon(thuVien); break;
             case 4: menuQuanLiNXB(thuVien); break;
             case 5: menuThongKe(thuVien); break;
-            case 6: cout << "Thoat chuong trinh...\n"; break;
-            default: cout << "Lua chon khong hop le!\n";
+            case 6:
+                cout << "Dang xuat...\n";
+                auth.dangXuat();
+                break;
+            default:
+                cout << "Lua chon khong hop le!\n";
         }
     } while (chon != 6);
+
+    cout << "Tam biet!\n";
     return 0;
 }
