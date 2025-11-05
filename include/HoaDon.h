@@ -29,7 +29,6 @@ public:
 
     Date getNgayMuon() const { return ngMuon; }
     Date getNgayTraThucTe() const { return ngTraThucTe; }
-
 };
 
 #endif
