@@ -37,6 +37,11 @@ public:
     bool operator>(const Date& other) const;
     bool operator<(const Date& other) const;
     int operator-(const Date& other) const;
+    bool operator==(const Date& other) const 
+    {
+        return ngay == other.ngay && thang == other.thang && nam == other.nam;
+    }
+    bool operator<=(const Date& other) const {return (*this < other || *this == other);}
 };
 
 #endif

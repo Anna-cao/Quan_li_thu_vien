@@ -11,10 +11,10 @@ using namespace std;
 class DocGia 
 {
 protected:
-    string maDocGia;                    
-    string hoTen;                       
+    string maDocGia, hoTen, sdt, email, diachi;                       
     int soLuotMuon;                     
-    vector<string> dsMaSachDangMuon;    
+    vector<string> dsMaSachDangMuon;   
+    vector<string> lichSuHoaDon; 
     TheMuon* theMuon;                   
 public:
     DocGia();
@@ -32,6 +32,9 @@ public:
     virtual void traSach(const string& maSach);
     virtual void hienThiThongTin() const;
     const vector<string>& getDsMaSachDangMuon() const;
+    virtual bool suaDocGia(const string& maDocGia);
+    virtual bool xoaDocGia(const string& maDocGia);
+
 
     friend istream& operator>>(istream& in, DocGia& dg);
     friend ostream& operator<<(ostream& out, const DocGia& dg);

@@ -1,6 +1,6 @@
 #ifndef SACH_H
 #define SACH_H
-
+#define Max_sach 200
 #include<iostream>
 #include<string>
 using namespace std;
@@ -13,8 +13,7 @@ private:
 
 public:
     Sach();
-    Sach(string maSach, string tenSach, string tacGia, string NXB, string type, int soTrang, int soLuongTong, int soLuongDaMuon, double giaTien);
-
+    Sach(string maSach, string tenSach, double giaTien);
     string getMaSach() const { return maSach; }
     string getTenSach() const { return tenSach; }
     string getTacGia() const { return tacGia; }

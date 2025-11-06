@@ -13,9 +13,9 @@ Sach::Sach() {
     this->soLuongDaMuon = 0;
     this->giaTien = 0;
 }
-
-Sach::Sach(string maSach, string tenSach, string tacGia, string NXB, string type, int soTrang, int soLuongTong, int soLuongDaMuon, double giaTien) : maSach(maSach), tenSach(tenSach), tacGia(tacGia), NXB(NXB), type(type),
-soTrang(soTrang), soLuongTong(soLuongTong), soLuongDaMuon(soLuongDaMuon), giaTien(giaTien) {}
+Sach::Sach(string maSach, string tenSach, double giaTien)
+    : maSach(maSach), tenSach(tenSach), tacGia(""), NXB(""), type(""),
+      soTrang(0), soLuongTong(0), soLuongDaMuon(0), giaTien(giaTien) {}
 
 int Sach::soSachConLai() const {
     return soLuongTong - soLuongDaMuon;

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/ThuVien.h"
+#include "../include/ThuVien/ThuVien.h"
 #include "../include/DocGiaThuong.h"
 #include "../include/HoiVien.h"
 using namespace std;
@@ -50,8 +50,23 @@ void menuQuanLiDocGia(ThuVien& thuVien) {
                 thuVien.capNhatTheMuonChoDocGia(ma, the);
                 break;
             }
-            case 5: break;
+            case 5: {
+                string ma;
+                cout << "Nhap ma doc gia can sua: ";
+                getline(cin, ma);
+                thuVien.suaThongTinDocGia(ma);
+                break;
+            }
+            case 6: {
+                string ma;
+                cout << "Nhap ma doc gia can xoa: ";
+                getline(cin, ma);
+                thuVien.xoaDocGia(ma);
+                break;
+            }
+
+            case 7: break;
             default: cout <<"Lua chon khong hop le!\n";
         }
-    } while(chon2 != 5);
+    } while(chon2 != 7);
 }

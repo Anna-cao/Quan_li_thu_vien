@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/ThuVien.h"
+#include "../include/ThuVien/ThuVien.h"
 #include "../include/NhaXuatBan.h"
 using namespace std;
 
@@ -10,7 +10,9 @@ void menuQuanLiNXB(ThuVien& thuVien) {
         cout <<"1. Them NXB\n";
         cout <<"2. Hien thi danh sach NXB\n";
         cout <<"3. Tim NXB theo ten\n";
-        cout <<"4. Thoat\n";
+        cout <<"4. Sua ten NXB\n";
+        cout <<"5. Xoa NXB\n";
+        cout <<"6. Thoat\n";  
         cout <<"Lua chon: ";
         cin >> chon4;
         cin.ignore();
@@ -35,8 +37,21 @@ void menuQuanLiNXB(ThuVien& thuVien) {
                 } else cout << "Khong tim thay NXB!\n";
                 break;
             }
-            case 4: break;
+            case 4: {
+                string tenCu, tenMoi;
+                cout << "Nhap ten NXB cu: "; getline(cin, tenCu);
+                cout << "Nhap ten moi: "; getline(cin, tenMoi);
+                thuVien.suaNXB(tenCu, tenMoi);
+                 break;
+            }
+            case 5: {
+                string ten;
+                cout << "Nhap ten NXB can xoa: "; getline(cin, ten);
+                thuVien.xoaNXB(ten);
+                break;
+            } 
+            case 6: break;
             default: cout <<"Lua chon khong hop le!\n";
         }
-    } while (chon4 != 4);
+    } while (chon4 != 6);
 }

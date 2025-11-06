@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../include/auth.h"
-#include "../include/ThuVien.h"
+#include "../include/ThuVien/ThuVien.h"
 #include "../include/menu/QLSach.h"
 #include "../include/menu/QLDocGia.h"
 #include "../include/menu/QLHoaDon.h"

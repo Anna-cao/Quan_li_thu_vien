@@ -17,14 +17,15 @@ void DocGia::setTheMuon(TheMuon* tm) { theMuon = tm; }
 const vector<string>& DocGia::getDsMaSachDangMuon() const {
     return dsMaSachDangMuon;
 }
-void DocGia::nhap()
-{
-    cout << "Nhap ma doc gia: ";
-    getline(cin, this->maDocGia);
-    cout << "Nhap ho ten: ";
-    getline(cin, this->hoTen);
+void DocGia::nhap() {
+    cout << "Nhap ma doc gia: ";   getline(cin, maDocGia);
+    cout << "Nhap ho ten: ";       getline(cin, hoTen);
+    cout << "Nhap SDT: ";          getline(cin, sdt);
+    cout << "Nhap email: ";        getline(cin, email);
+    cout << "Nhap dia chi: ";      getline(cin, diachi);
     soLuotMuon = 0;
 }
+
 bool DocGia::muonSach(const string& maSach, const Date& ngayHienTai) 
 {
     if (theMuon == nullptr) 

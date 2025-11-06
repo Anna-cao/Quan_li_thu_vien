@@ -3,17 +3,18 @@
 
 #include <bits/stdc++.h>
 #include "Date.h"
+#include "Sach.h"
 using namespace std;
 
 class HoaDon {
 protected:
     string maHoaDon;
-    string maThe;
+    string maThe;          
     Date ngMuon;
     Date ngTraThucTe;
     double phiQuaHan;
     double tongPhi;
-
+    string maKH;
 public:
     HoaDon();
     HoaDon(string maHD, string maT, Date muon, Date tra, double phi, double tong);
@@ -29,6 +30,7 @@ public:
 
     Date getNgayMuon() const { return ngMuon; }
     Date getNgayTraThucTe() const { return ngTraThucTe; }
-};
 
+    double getPhiQuaHan() const;
+};
 #endif
