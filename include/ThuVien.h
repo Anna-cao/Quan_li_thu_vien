@@ -1,4 +1,3 @@
-// include/ThuVien/ThuVien.h
 #ifndef THUVIEN_H
 #define THUVIEN_H
 
@@ -15,7 +14,7 @@
 #include <vector>
 using namespace std;
 
-#define Max_sach 1000
+#define Max_sach 200
 #define Max_docgia 200
 #define Max_hoadon 200
 #define Max_hoadonban 200
