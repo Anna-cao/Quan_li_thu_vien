@@ -17,6 +17,7 @@ public:
     vector<string> getSoSachXB() const;
     void themNXB();
     void hienThiDSNXB() const;
+    void setNXB(const string& tenMoi) { NXB = tenMoi; }
 };
 #endif
 

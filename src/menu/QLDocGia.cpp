@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/ThuVien/ThuVien.h"
+#include "../include/ThuVien.h"
 #include "../include/DocGiaThuong.h"
 #include "../include/HoiVien.h"
 using namespace std;
@@ -12,7 +12,9 @@ void menuQuanLiDocGia(ThuVien& thuVien) {
         cout <<"2. Hien thi danh sach doc gia\n";
         cout <<"3. Tim doc gia theo ma\n";
         cout <<"4. Cap nhat the muon cho doc gia\n";
-        cout <<"5. Thoat\n";
+        cout <<"5. Sua thong tin the muon cho doc gia theo ma\n";
+        cout <<"6. Xoa doc gia theo ma\n";
+        cout <<"7. Thoat\n";
         cout <<"Lua chon: ";
         cin >> chon2;
         cin.ignore();

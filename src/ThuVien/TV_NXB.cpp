@@ -1,97 +1,75 @@
-#include "../include/NhaXuatBan.h"
-#include "../include/ThuVien/ThuVien.h"
-using namespace std;
+#include "../include/ThuVien.h"
 #include <iostream>
 #include <string>
+using namespace std;
 
-ThuVien::ThuVien() {
-    n = 0;
-    soDocGia = 0;
-    soHoaDon = 0;
-    soNXB = 0;
-    for (int i = 0; i < Max_NXB; ++i) {
-        danhSachNXB[i] = nullptr;
-    }
-}
-ThuVien::~ThuVien() {
-    for (int i = 0; i < soDocGia; i++) {
-        delete danhSachDocGia[i];
-    }
-    for (int i = 0; i < soNXB; i++) {
-        delete danhSachNXB[i];
-    }
-}
 bool ThuVien::themNXB(const string& tenNXB) {
     if (soNXB >= Max_NXB) {
-        cout << "Danh sach nha xuat ban da day!" << endl;
+        cout << "Danh sach NXB da day!\n";
         return false;
     }
-
-    if (timNXBTheoTen(tenNXB) != nullptr) {
-        cout << "Nha xuat ban '" << tenNXB << "' da ton tai!" << endl;
+    if (timNXBTheoTen(tenNXB)) {
+        cout << "NXB '" << tenNXB << "' da ton tai!\n";
         return false;
     }
-
     danhSachNXB[soNXB++] = new NhaXuatBan(tenNXB);
-    cout << "Them nha xuat ban '" << tenNXB << "' thanh cong!" << endl;
+    cout << "Them NXB '" << tenNXB << "' thanh cong!\n";
     return true;
 }
+
 void ThuVien::hienThiDanhSachNXB() const {
     if (soNXB == 0) {
-        cout << "Chua co nha xuat ban nao!" << endl;
+        cout << "Chua co NXB nao!\n";
         return;
     }
     cout << "\n===== DANH SACH NHA XUAT BAN =====\n";
     for (int i = 0; i < soNXB; ++i) {
-        cout << "\nNXB thu " << i + 1 << ":\n";
+        cout << "\nNXB " << i + 1 << ":\n";
         danhSachNXB[i]->hienThiDSNXB();
     }
 }
+
 NhaXuatBan* ThuVien::timNXBTheoTen(const string& tenNXB) const {
-    for (int i = 0; i < soNXB; ++i) {
-        if (danhSachNXB[i]->getNXB() == tenNXB) {
+    for (int i = 0; i < soNXB; ++i)
+        if (danhSachNXB[i]->getNXB() == tenNXB)
             return danhSachNXB[i];
-        }
-    }
     return nullptr;
 }
+
+void ThuVien::themSachVaoNXB(const string& maSach, const string& tenNXB) {
+    NhaXuatBan* nxb = timNXBTheoTen(tenNXB);
+    if (!nxb) {
+        cout << "Khong tim thay NXB '" << tenNXB << "'\n";
+        return;
+    }
+    nxb->ThemSach(maSach);
+    cout << "Da them sach " << maSach << " vao NXB " << tenNXB << "\n";
+}
+
 void ThuVien::suaNXB(const string& tenCu, const string& tenMoi) {
     NhaXuatBan* nxb = timNXBTheoTen(tenCu);
     if (!nxb) {
-        cout << "Khong tim thay NXB co ten: " << tenCu << endl;
+        cout << "Khong tim thay NXB '" << tenCu << "'\n";
         return;
     }
-
     if (timNXBTheoTen(tenMoi)) {
-        cout << "Ten moi da ton tai, khong the doi!" << endl;
+        cout << "Ten moi '" << tenMoi << "' da ton tai!\n";
         return;
     }
-
-    NhaXuatBan* nxbMoi = new NhaXuatBan(tenMoi);
-    for (const auto& maSach : nxb->getSoSachXB()) {
-        nxbMoi->ThemSach(maSach);
-    }
-
-    for (int i = 0; i < soNXB; ++i) {
-        if (danhSachNXB[i] == nxb) {
-            delete danhSachNXB[i];
-            danhSachNXB[i] = nxbMoi;
-            cout << "Da doi ten NXB thanh cong!\n";
-            return;
-        }
-    }
+    nxb->setNXB(tenMoi);
+    cout << "Doi ten NXB thanh cong!\n";
 }
+
 void ThuVien::xoaNXB(const string& ten) {
     for (int i = 0; i < soNXB; ++i) {
         if (danhSachNXB[i]->getNXB() == ten) {
             delete danhSachNXB[i];
-            for (int j = i; j < soNXB - 1; ++j) {
+            for (int j = i; j < soNXB - 1; ++j)
                 danhSachNXB[j] = danhSachNXB[j + 1];
-            }
-            soNXB--;
-            cout << "Da xoa NXB co ten: " << ten << endl;
+            --soNXB;
+            cout << "Da xoa NXB '" << ten << "'\n";
             return;
         }
     }
-    cout << "Khong tim thay NXB co ten: " << ten << endl;
+    cout << "Khong tim thay NXB '" << ten << "'\n";
 }
