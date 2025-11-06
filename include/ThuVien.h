@@ -19,7 +19,6 @@ using namespace std;
 #define Max_hoadon 200
 #define Max_hoadonban 200
 #define Max_NXB 200
-
 class ThuVien {
 private:
     Sach danhSach[Max_sach];
