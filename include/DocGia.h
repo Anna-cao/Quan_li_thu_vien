@@ -32,8 +32,8 @@ public:
     virtual void traSach(const string& maSach);
     virtual void hienThiThongTin() const;
     const vector<string>& getDsMaSachDangMuon() const;
-    virtual bool suaDocGia(const string& maDocGia);
-    virtual bool xoaDocGia(const string& maDocGia);
+    virtual void suaDocGia(const string& maDocGia);
+    virtual void xoaDocGia(const string& maDocGia);
 
 
     friend istream& operator>>(istream& in, DocGia& dg);

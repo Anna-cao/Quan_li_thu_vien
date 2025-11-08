@@ -36,3 +36,7 @@ void HoaDon::hienThiThongTin() const {
     cout << setw(10) << fixed << setprecision(0) << phiQuaHan
          << setw(10) << tongPhi << endl;
 }
+
+double HoaDon::getPhiQuaHan() const {
+    return phiQuaHan;
+}

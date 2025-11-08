@@ -102,3 +102,25 @@ ostream& operator<<(ostream& out, const DocGia& dg)
         << ", So luot muon: " << dg.soLuotMuon << endl;
     return out;
 }
+
+void DocGia::suaDocGia(const string& maDocGia) {
+    if (this->maDocGia == maDocGia) {
+        cout << "Nhap ten moi: ";
+        getline(cin, hoTen);  
+        cout << "Nhap dia chi moi: ";
+        getline(cin, diachi);
+        cout << "Nhap so dien thoai moi: ";
+        getline(cin, sdt);
+        cout << "Da cap nhat thong tin doc gia!\n";
+    } else {
+        cout << "Khong tim thay doc gia!\n";
+    }
+}
+
+void DocGia::xoaDocGia(const string& maDocGia) {
+    if (this->maDocGia == maDocGia) {
+        cout << "Da xoa doc gia: " << hoTen << endl;
+    } else {
+        cout << "Khong tim thay doc gia de xoa!\n";
+    }
+}

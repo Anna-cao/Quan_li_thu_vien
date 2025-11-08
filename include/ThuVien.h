@@ -70,7 +70,7 @@ public:
     void thongKeMuonTra(const Date& ngayHienTai) const;
     void thongKeSachTheoNXB() const;
     void thongKeDoanhThu(const Date& tu, const Date& den) const;
-    void thongKeSachBanChay() const;
+    void thongKeSachBanChay(int topN = 5) const;
     double tongTienPhat() const;
 };
 

@@ -8,6 +8,23 @@ HoaDonBan::HoaDonBan() {
     tongPhi = 0;
 }
 
+void HoaDonBan::DocFile(ifstream &file) {
+    HoaDon::DocFile(file);
+    int soSach;
+    file >> soSach;
+    file.ignore();
+    for(int i = 0; i < soSach; i++) {
+        Sach sach;
+        // Đọc thông tin sách từ file
+        string maSach;
+        getline(file, maSach);
+        // Tạm thời chỉ đọc mã sách
+        dsSachBan.push_back(sach);
+    }
+    file >> tongTienBan;
+    file.ignore();
+}
+
 HoaDonBan::HoaDonBan(string maHD) {
     this->maHoaDon = maHD;
     tongTienBan = 0;

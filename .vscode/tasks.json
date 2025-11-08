@@ -4,15 +4,14 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "command": "g++",
             "args": [
-                "-std=c++17",
                 "-g",
+                "${workspaceFolder}/main.cpp",
                 "${workspaceFolder}/src/*.cpp",
                 "${workspaceFolder}/src/menu/*.cpp",
-                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/src/ThuVien/*.cpp",
                 "-I${workspaceFolder}/include",
-                "-mconsole",
                 "-o",
                 "${workspaceFolder}/Quan_li_thu_vien.exe"
             ],
@@ -20,11 +19,9 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": ["$gcc"],
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
+            "problemMatcher": [
+                "$msCompile"
+            ]
         }
     ]
 }

@@ -79,3 +79,49 @@ void ThuVien::thongKeDoanhThu(const Date& tu, const Date& den) const {
     cout << "\nTong doanh thu: " << tongDoanhThu << " VND\n";
     cout << "==============================\n";
 }
+
+void ThuVien::thongKeSachBanChay(int soLuongHienThi) const {
+    if (soHoaDonBan == 0) {
+        cout << "Chua co hoa don ban nao de thong ke!\n";
+        return;
+    }
+
+    int viTriSach[Max_sach];     
+    int soLuongBan[Max_sach];    
+
+    for (int i = 0; i < n; i++) {
+        viTriSach[i] = i;
+        soLuongBan[i] = danhSach[i].getSoLuongDaMuon();
+    }
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (soLuongBan[j] < soLuongBan[j + 1]) {
+                int temp = soLuongBan[j];
+                soLuongBan[j] = soLuongBan[j + 1];
+                soLuongBan[j + 1] = temp;
+
+                temp = viTriSach[j];
+                viTriSach[j] = viTriSach[j + 1];
+                viTriSach[j + 1] = temp;
+            }
+        }
+    }
+
+    if (soLuongHienThi > n) soLuongHienThi = n;
+
+    cout << "\n===== THONG KE " << soLuongHienThi << " SACH BAN CHAY NHAT =====\n";
+    int daDem = 0;
+    for (int i = 0; i < n && daDem < soLuongHienThi; i++) {
+        if (soLuongBan[i] > 0) {
+            cout << daDem + 1 << ". Sach: " << danhSach[viTriSach[i]].getTenSach() 
+                 << " | So luong ban: " << soLuongBan[i] << endl;
+            daDem++;
+        }
+    }
+
+    if (daDem == 0) {
+        cout << "Khong co sach nao da ban!\n";
+    }
+    cout << "=====================================\n";
+}

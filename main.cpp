@@ -10,7 +10,7 @@ using namespace std;
 
 int main() {
     Auth auth;
-    auth.docFile("data/user.txt");  
+    auth.docFile("data/auth.txt");  
     string ten, mk;
     bool daDangNhap = false;
 

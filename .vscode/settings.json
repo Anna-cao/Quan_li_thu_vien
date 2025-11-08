@@ -159,5 +159,6 @@
     "netfwd": "cpp",
     "rope": "cpp",
     "slist": "cpp"
-  }
+  },
+  "cppRunner.disableDebugLaunchConfigurationGeneration": true
 }
