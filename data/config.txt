@@ -1,0 +1,2 @@
+so_ngay_muon_toi_da = 14
+muc_phat_moi_ngay = 5000

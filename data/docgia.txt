@@ -1,12 +1,34 @@
+DG001
+Nguyen Van A
+3
+S001
+S002
+S003
+
+
 DG002
 Tran Thi B
 2
 S010
 S011
+
+
 DG003
 Le Van C
 0
+
+
 DG004
 Pham Minh D
 1
 S020
+
+
+DG005
+Hoang Thi E
+5
+S001
+S002
+S010
+S011
+S111

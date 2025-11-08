@@ -27,3 +27,43 @@ Giao trinh
 10
 4
 75000
+
+S010
+Giai tich
+Tran Van An
+NXB GD
+Giao trinh
+256
+30
+10
+60000
+
+S011
+Harry Poter
+J.K.Rowling
+NXB Kim Dong
+Tieu thuyet
+460
+15
+3
+120000
+
+S020
+Mang va truyen thong
+Le Thi B 
+NXB GD
+Giao trinh
+123
+16
+12
+50000
+
+S111
+Xac suat thong ke
+Trinh Thi C 
+NXB GD
+Giao trinh
+247
+30
+18
+50000
