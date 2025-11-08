@@ -32,6 +32,11 @@ public:
     virtual void traSach(const string& maSach);
     virtual void hienThiThongTin() const;
     const vector<string>& getDsMaSachDangMuon() const;
+    void setDsMaSachDangMuon(const vector<string>& ds);
+    void setSoLuotMuon(int s);
+    
+    static int docFileDocGia(DocGia danhSach[], int soLuongToiDa, const std::string& duongDan = "data/docgia.txt");
+    static void ghiFileDocGia(const DocGia danhSach[], int soLuong, const std::string& duongDan = "data/docgia.txt");
     virtual void suaDocGia(const string& maDocGia);
     virtual void xoaDocGia(const string& maDocGia);
 

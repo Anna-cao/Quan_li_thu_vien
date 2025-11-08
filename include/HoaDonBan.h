@@ -21,6 +21,13 @@ public:
     void DocFile(ifstream &file) override;
     void tinhPhiQuaHan() override; 
     void hienThiThongTin() const override;
+
+    double getTongTienBan() const;
+    int getSoLuongSachBan() const;
+    string getMaSachBan(int idx) const;
+
+    static int docFileHoaDonBan(HoaDonBan danhSach[], int soLuongToiDa, const std::string& duongDan = "data/hoadonban.txt");
+    static void ghiFileHoaDonBan(const HoaDonBan danhSach[], int soLuong, const std::string& duongDan = "data/hoadonban.txt");
 };
 
 #endif

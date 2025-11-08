@@ -13,9 +13,12 @@ public:
     User();
     User(string tenDangNhap, string matKhau, int vaiTro);
 
-    string getTenDangNhap();
-    string getMatKhau();
-    int getVaiTro();
+    string getTenDangNhap() const;
+    string getMatKhau() const;
+    int getVaiTro() const;
     void doiMatKhau(string mkMoi);
+    // IO kiểu mảng cho user (auth)
+    static int docFileUser(User danhSach[], int soLuongToiDa, const std::string& duongDan = "data/auth.txt");
+    static void ghiFileUser(const User danhSach[], int soLuong, const std::string& duongDan = "data/auth.txt");
 };
 #endif

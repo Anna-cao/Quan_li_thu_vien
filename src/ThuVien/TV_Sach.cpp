@@ -8,7 +8,6 @@ void ThuVien::themSach() {
         cout << "Thu vien da day, khong the them sach moi!\n";
         return;
     }
-    cin.ignore();
     Sach s;
     s.nhap();
     danhSach[n++] = s;

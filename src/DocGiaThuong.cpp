@@ -10,7 +10,7 @@ int DocGiaThuong::getGioiHanMuon() const { return gioiHanMuon; }
 void DocGiaThuong::setGioiHanMuon(int gioiHan) { gioiHanMuon = gioiHan; }
 
 void DocGiaThuong::hienThiThongTin() const {
-    std::cout << "=== THONG TIN DOC GIA THUONG ===" << std::endl;
+    cout << "=== THONG TIN DOC GIA THUONG ===" << endl;
     cout << "Gioi han muon: " << gioiHanMuon << " quyen" << endl;
     cout << "===============================" << endl;
 }

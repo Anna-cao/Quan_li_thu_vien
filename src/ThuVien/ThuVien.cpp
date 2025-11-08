@@ -1,4 +1,7 @@
 #include "../include/ThuVien.h"
+#include <fstream>
+#include <sstream>
+#include <vector>
 using namespace std;
 
 ThuVien::ThuVien() {

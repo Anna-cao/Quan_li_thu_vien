@@ -27,6 +27,12 @@ public:
     void setSoLuongTong(int sl) { soLuongTong = sl; }
     void setSoLuongDaMuon(int sl) { soLuongDaMuon = sl; }
 
+    void setTacGia(const string& tg) { tacGia = tg; }
+    void setNXB(const string& n) { NXB = n; }
+    void setType(const string& t) { type = t; }
+    void setSoTrang(int s) { soTrang = s; }
+    void setGiaTien(double g) { giaTien = g; }
+
     bool muonSach();
     bool traSach();
     void nhap();
@@ -34,6 +40,9 @@ public:
     int soSachConLai() const;
 
     ~Sach() {}
+
+    static int docFileSach(Sach danhSach[], int soLuongToiDa, const string& duongDan = "data/sach.txt");
+    static void ghiFileSach(const Sach danhSach[], int soLuong, const string& duongDan = "data/sach.txt");
 };
 
 #endif

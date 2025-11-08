@@ -28,8 +28,13 @@ public:
 
     bool kiemTraHieuLuc(const Date& ngayHienTai) const;
 
+    Date getNgayLap() const { return ngLapThe; }
+    Date getHSD() const { return HSD; }
+
     void nhap();  
     friend ostream& operator<<(ostream& out, const TheMuon& tm);
+    static int docFileTheMuon(TheMuon danhSach[], int soLuongToiDa, const std::string& duongDan = "data/themuon.txt");
+    static void ghiFileTheMuon(const TheMuon danhSach[], int soLuong, const std::string& duongDan = "data/themuon.txt");
 };
 
 #endif

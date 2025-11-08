@@ -1,5 +1,8 @@
 #include "../include/DocGia.h"
 #include <algorithm> 
+#include <fstream>
+#include <vector>
+#include <sstream>
 
 DocGia::DocGia() : soLuotMuon(0), theMuon(nullptr) {}
 DocGia::DocGia(string ma, string ten, int soLuotMuon)
@@ -16,6 +19,12 @@ TheMuon* DocGia::getTheMuon() const { return theMuon; }
 void DocGia::setTheMuon(TheMuon* tm) { theMuon = tm; }
 const vector<string>& DocGia::getDsMaSachDangMuon() const {
     return dsMaSachDangMuon;
+}
+void DocGia::setDsMaSachDangMuon(const vector<string>& ds) {
+    dsMaSachDangMuon = ds;
+}
+void DocGia::setSoLuotMuon(int s) {
+    soLuotMuon = s;
 }
 void DocGia::nhap() {
     cout << "Nhap ma doc gia: ";   getline(cin, maDocGia);
@@ -123,4 +132,61 @@ void DocGia::xoaDocGia(const string& maDocGia) {
     } else {
         cout << "Khong tim thay doc gia de xoa!\n";
     }
+}
+
+
+static vector<DocGia> docFileDocGia_vector(const string& path) {
+    vector<DocGia> list;
+    ifstream in(path);
+    if (!in.is_open()) return list;
+    string ma;
+    while (true) {
+        if (!getline(in, ma)) break;
+        if (ma.size() == 0) continue;
+        string ten;
+        getline(in, ten);
+        string line;
+        getline(in, line);
+        int k = 0; if (line.size()>0) k = stoi(line);
+        vector<string> ds;
+        for (int i = 0; i < k; ++i) {
+            string ms; getline(in, ms);
+            if (ms.size()>0) ds.push_back(ms);
+        }
+        DocGia dg(ma, ten, (int)ds.size());
+        dg.setDsMaSachDangMuon(ds);
+        dg.setSoLuotMuon((int)ds.size());
+        list.push_back(dg);
+    }
+    in.close();
+    return list;
+}
+
+static void ghiFileDocGia_vector(const vector<DocGia>& list, const string& path) {
+    ofstream out(path);
+    if (!out.is_open()) return;
+    for (const auto& dg : list) {
+        out << dg.getMaDocGia() << "\n";
+        out << dg.getHoTen() << "\n";
+        const auto& ds = dg.getDsMaSachDangMuon();
+        out << ds.size() << "\n";
+        for (const auto& ms : ds) out << ms << "\n";
+        out << "\n";
+    }
+    out.close();
+}
+
+int DocGia::docFileDocGia(DocGia danhSach[], int soLuongToiDa, const string& duongDan) {
+    vector<DocGia> list = docFileDocGia_vector(duongDan);
+    int n = (int)list.size();
+    int cap = min(n, soLuongToiDa);
+    for (int i = 0; i < cap; ++i) danhSach[i] = list[i];
+    return cap;
+}
+
+void DocGia::ghiFileDocGia(const DocGia danhSach[], int soLuong, const string& duongDan) {
+    vector<DocGia> list;
+    list.reserve(soLuong);
+    for (int i = 0; i < soLuong; ++i) list.push_back(danhSach[i]);
+    ghiFileDocGia_vector(list, duongDan);
 }

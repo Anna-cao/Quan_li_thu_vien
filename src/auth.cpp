@@ -52,7 +52,6 @@ void Auth::dangXuat()
 bool Auth::daDangNhap() const {
     return nguoiDungHienTai != nullptr;
 }
-
 User* Auth::getNguoiDungHienTai() {
     return nguoiDungHienTai;
 }

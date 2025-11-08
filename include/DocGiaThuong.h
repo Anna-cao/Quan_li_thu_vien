@@ -10,7 +10,7 @@ private:
 
 public:
     DocGiaThuong();
-    DocGiaThuong(std::string ten, std::string maSo, int soSachDaMuon, int gioiHanMuon);
+    DocGiaThuong(string ten, string maSo, int soSachDaMuon, int gioiHanMuon);
     
     int getGioiHanMuon() const;
     void setGioiHanMuon(int gioiHan);

@@ -1,5 +1,8 @@
 #include "../include/TheMuon.h"
 #include<sstream>
+#include <fstream>
+#include <vector>
+using namespace std;
 
 TheMuon::TheMuon():gioiHanMuon(0), status(true) {}
 
@@ -49,4 +52,55 @@ ostream& operator<<(ostream& out, const TheMuon& tm)
         << ", Gioi han muon: " << tm.gioiHanMuon
         << ", Trang thai: " << (tm.status ? "Con han" : "Het han") << endl;
     return out;
+}
+static vector<TheMuon> docFileTheMuon_vector(const string& path) {
+    vector<TheMuon> list;
+    ifstream in(path);
+    if (!in.is_open()) return list;
+    string maThe;
+    while (true) {
+        if (!getline(in, maThe)) break;
+        if (maThe.size() == 0) continue;
+        string maDocGia;
+        getline(in, maDocGia);
+        int d1,m1,y1,d2,m2,y2;
+        in >> d1 >> m1 >> y1;
+        in >> d2 >> m2 >> y2;
+        int gioiHan; in >> gioiHan;
+        int st; in >> st;
+        in.ignore();
+        Date ngLap(d1,m1,y1), HSD(d2,m2,y2);
+        list.emplace_back(maThe, maDocGia, ngLap, HSD, gioiHan, st==1);
+    }
+    in.close();
+    return list;
+}
+
+static void ghiFileTheMuon_vector(const vector<TheMuon>& list, const string& path) {
+    ofstream out(path);
+    if (!out.is_open()) return;
+    for (const auto& t : list) {
+        out << t.getMaThe() << "\n";
+        out << t.getMaDocGia() << "\n";
+        out << t.getNgayLap().getNgay() << " " << t.getNgayLap().getThang() << " " << t.getNgayLap().getNam() << "\n";
+        out << t.getHSD().getNgay() << " " << t.getHSD().getThang() << " " << t.getHSD().getNam() << "\n";
+        out << t.getGioiHanMuon() << "\n";
+        out << (t.getStatus() ? 1 : 0) << "\n\n";
+    }
+    out.close();
+}
+
+int TheMuon::docFileTheMuon(TheMuon danhSach[], int soLuongToiDa, const string& duongDan) {
+    vector<TheMuon> list = docFileTheMuon_vector(duongDan);
+    int n = (int)list.size();
+    int cap = min(n, soLuongToiDa);
+    for (int i = 0; i < cap; ++i) danhSach[i] = list[i];
+    return cap;
+}
+
+void TheMuon::ghiFileTheMuon(const TheMuon danhSach[], int soLuong, const string& duongDan) {
+    vector<TheMuon> list;
+    list.reserve(soLuong);
+    for (int i = 0; i < soLuong; ++i) list.push_back(danhSach[i]);
+    ghiFileTheMuon_vector(list, duongDan);
 }
