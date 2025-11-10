@@ -19,8 +19,6 @@ public:
     string getTacGia() const { return tacGia; }
     string getNXB() const { return NXB; }
     string getType() const { return type; }
-    int getSoTrang() const { return soTrang; }
-    int getSoLuongTong() const { return soLuongTong; }
     int getSoLuongDaMuon() const { return soLuongDaMuon; }
     double getGiaTien() const { return giaTien; }
 

@@ -7,6 +7,7 @@
 #include "../include/HoaDonBan.h"
 #include "../include/TheMuon.h"
 #include "../include/NhaXuatBan.h"
+#include "../include/Kho.h"
 #include "../include/Date.h"
 
 #include <iostream>
@@ -20,9 +21,9 @@ using namespace std;
 #define Max_hoadonban 200
 #define Max_NXB 200
 class ThuVien {
-private:
+protected:
     Sach danhSach[Max_sach];
-    int n;
+    int soLuongTong;
 
     DocGia* danhSachDocGia[Max_docgia];
     int soDocGia;
@@ -42,16 +43,16 @@ public:
 //SACH
     void themSach();
     void hienThi();
-    void timTheoTen(const string& ten);
-    void suaSachTheoMa(const string& ma);
-    void xoaSachTheoMa(const string& ma);
+    void timTheoMa();
+    void suaSachTheoMa();
+    void xoaSachTheoMa();
 //DOCGIA
     bool themDocGia(DocGia* dg);
     void hienThiDanhSachDocGia() const;
     DocGia* timDocGiaTheoMa(const string& ma) const;
     void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);
-    bool suaThongTinDocGia(const std::string& maDocGia);
-    bool xoaDocGia(const std::string& maDocGia);
+    bool suaThongTinDocGia(const string& maDocGia);
+    bool xoaDocGia(const string& maDocGia);
 //HD MUON
     void themHoaDon(const HoaDon& hd);
     void hienThiDanhSachHoaDon() const;

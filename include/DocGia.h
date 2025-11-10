@@ -1,50 +1,64 @@
 #ifndef DOCGIA_H
 #define DOCGIA_H
 
-#include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
+#include <iostream>
+#include <iomanip>
+#include "Date.h"
 #include "TheMuon.h"
+
 using namespace std;
 
-class DocGia 
-{
-protected:
-    string maDocGia, hoTen, sdt, email, diachi;                       
-    int soLuotMuon;                     
-    vector<string> dsMaSachDangMuon;   
-    vector<string> lichSuHoaDon; 
-    TheMuon* theMuon;                   
+class DocGia {
+private:
+    static int autoID;
+
+    string maDocGia;
+    string hoTen;
+    string sdt;
+    string email;
+    string diachi;
+    Date ngayLapThe;
+
+    int soLuotMuon;
+    vector<string> dsMaSachDangMuon;
+
+    TheMuon* theMuon;
+
 public:
     DocGia();
-    DocGia(string ma, string ten, int soLuotMuon = 0);   
-    DocGia(string ma, string ten, TheMuon* tm);          
-    virtual ~DocGia();                                   
+    DocGia(string ma, string ten, int soLuotMuon);
+    DocGia(string ma, string ten, TheMuon* tm);
+    ~DocGia();
+
+    static string generateMaDocGia();
 
     string getMaDocGia() const;
     string getHoTen() const;
     int getSoLuotMuon() const;
     TheMuon* getTheMuon() const;
-    void setTheMuon(TheMuon* tm);
-
-    virtual bool muonSach(const string& maSach, const Date& ngayHienTai);
-    virtual void traSach(const string& maSach);
-    virtual void hienThiThongTin() const;
     const vector<string>& getDsMaSachDangMuon() const;
+
+    void setTheMuon(TheMuon* tm);
     void setDsMaSachDangMuon(const vector<string>& ds);
     void setSoLuotMuon(int s);
-    
-    static int docFileDocGia(DocGia danhSach[], int soLuongToiDa, const std::string& duongDan = "data/docgia.txt");
-    static void ghiFileDocGia(const DocGia danhSach[], int soLuong, const std::string& duongDan = "data/docgia.txt");
-    virtual void suaDocGia(const string& maDocGia);
-    virtual void xoaDocGia(const string& maDocGia);
 
+    void nhap();
+    void hienThiThongTin() const;
 
-    friend istream& operator>>(istream& in, DocGia& dg);
-    friend ostream& operator<<(ostream& out, const DocGia& dg);
-    virtual void nhap();
     
+    void hienThiDong() const;
+    static void hienThiTieuDe();
+
+    bool muonSach(const string& maSach, const Date& ngayHienTai);
+    void traSach(const string& maSach);
+
+    void suaDocGia(const string& ma);
+    void capNhatTheMuon();
+
+    static int docFileDocGia(DocGia ds[], int soLuongToiDa, const string& duongDan);
+    static void ghiFileDocGia(const DocGia ds[], int soLuong, const string& duongDan);
 };
 
 #endif

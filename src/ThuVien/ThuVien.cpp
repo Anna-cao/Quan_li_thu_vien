@@ -5,7 +5,7 @@
 using namespace std;
 
 ThuVien::ThuVien() {
-    n = 0;
+    soLuongTong = 0;
     soDocGia = 0;
     soHoaDon = 0;
     soNXB = 0;

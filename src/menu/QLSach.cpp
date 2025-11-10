@@ -23,21 +23,21 @@ void menuQuanLiSach(ThuVien& thuVien) {
                 string ten;
                 cout <<"Nhap ten sach: ";
                 getline(cin, ten);
-                thuVien.timTheoTen(ten);
+                thuVien.timTheoMa();
                 break;
             }
             case 4: {
                 string ma;
                 cout <<"Nhap ma sach can sua: ";
                 getline(cin, ma);
-                thuVien.suaSachTheoMa(ma);
+                thuVien.suaSachTheoMa();
                 break;
             }
             case 5: {
                 string ma;
                 cout <<"Nhap ma sach can xoa: ";
                 getline(cin, ma);
-                thuVien.xoaSachTheoMa(ma);
+                thuVien.xoaSachTheoMa();
                 break;
             }
             case 6: break;

@@ -5,6 +5,7 @@ using namespace std;
 #include <sstream>
 #include <vector>
 #include <iomanip>
+#include"Kho.h"
 
 Sach::Sach() {
     this->maSach = "";
@@ -12,18 +13,11 @@ Sach::Sach() {
     this->tacGia = "";
     this->NXB = "";
     this->type = "";
-    this->soTrang = 0;
-    this->soLuongTong = 0;
-    this->soLuongDaMuon = 0;
     this->giaTien = 0;
 }
 Sach::Sach(string maSach, string tenSach, double giaTien)
-    : maSach(maSach), tenSach(tenSach), tacGia(""), NXB(""), type(""),
-      soTrang(0), soLuongTong(0), soLuongDaMuon(0), giaTien(giaTien) {}
+    : maSach(maSach), tenSach(tenSach), tacGia(""), NXB(""), type(""), giaTien(giaTien) {}
 
-int Sach::soSachConLai() const {
-    return soLuongTong - soLuongDaMuon;
-}
 bool Sach::muonSach() {
     if (soSachConLai() > 0) {
         soLuongDaMuon++;
@@ -52,25 +46,25 @@ void Sach::nhap() {
     cout << "Ten sach: "; getline(cin, tenSach);
     cout << "Tac gia: "; getline(cin, tacGia);
     cout << "Nha xuat ban: "; getline(cin, NXB);
-    cout << "The loai: "; getline(cin, type);
-    cout << "So trang: "; cin >> soTrang;
-    cout << "So luong tong: "; cin >> soLuongTong;
-    cout << "So luong da muon: "; cin >> soLuongDaMuon;
+    cout << "The loai sach(Sach bai tap, Tai lieu tham khao, Giao trinh, Luan an): "; getline(cin, type);
     cout << "Gia tien 1 quyen: "; cin >> giaTien;
     cin.ignore(1, '\n');
 }
 void Sach::hienThiThongTin() {
-    cout << "\n----- THONG TIN SACH -----\n";
-    cout << "Ma sach: " << maSach << endl;
-    cout << "Ten sach: " << tenSach << endl;
-    cout << "Tac gia: " << tacGia << endl;
-    cout << "Nha xuat ban: " << NXB << endl;
-    cout << "The loai: " << type << endl;
-    cout << "So trang: " << soTrang << endl;
-    cout << "So luong tong: " << soLuongTong << endl;
-    cout << "So luong da muon: " << soLuongDaMuon << endl;
-    cout << "So luong con lai: " << soSachConLai() << endl;
-    cout << "Gia tien: " << giaTien << endl;
+    cout << left
+         << setw(10) << "Ma sach: "
+         << setw(20) << "Ten sach: "
+         << setw(15) << "Tac gia:"
+         << setw(15) << "Nha xuat ban: "
+         << setw(15) << "The loai sach: "
+         << setw(10) << "Gia tien 1 quyen: " << endl;
+    cout << left
+         << setw(10) << maSach
+         << setw(20) << tenSach
+         << setw(15) << tacGia
+         << setw(15) << NXB
+         << setw(15) << type
+         << setw(10) << giaTien << endl;
 }
 
 int Sach::docFileSach(Sach danhSach[], int soLuongToiDa, const string& duongDan) {
@@ -95,9 +89,6 @@ int Sach::docFileSach(Sach danhSach[], int soLuongToiDa, const string& duongDan)
         s.setTacGia(tacgia);
         s.setNXB(nxb);
         s.setType(theloai);
-        s.setSoTrang(sotrang);
-        s.setSoLuongTong(soLuongTong);
-        s.setSoLuongDaMuon(soLuongDaMuon);
         danhSach[soLuong++] = s;
     }
     in.close();
@@ -114,9 +105,6 @@ void Sach::ghiFileSach(const Sach danhSach[], int soLuong, const string& duongDa
         out << s.getTacGia() << "\n";
         out << s.getNXB() << "\n";
         out << s.getType() << "\n";
-        out << s.getSoTrang() << "\n";
-        out << s.getSoLuongTong() << "\n";
-        out << s.getSoLuongDaMuon() << "\n";
         out <<fixed << setprecision(0) << s.getGiaTien() << "\n\n";
     }
     out.close();
