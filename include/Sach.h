@@ -21,6 +21,7 @@ public:
     string getType() const { return type; }
     int getSoLuongDaMuon() const { return soLuongDaMuon; }
     double getGiaTien() const { return giaTien; }
+    int getSoLuongTong() const {return soLuongTong;}
 
     void setSoLuongTong(int sl) { soLuongTong = sl; }
     void setSoLuongDaMuon(int sl) { soLuongDaMuon = sl; }

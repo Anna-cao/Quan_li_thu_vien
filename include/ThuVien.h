@@ -4,7 +4,8 @@
 #include "../include/Sach.h"
 #include "../include/HoaDon.h"
 #include "../include/DocGia.h"
-#include "../include/HoaDonBan.h"
+#include "../include/Kho.h"
+
 #include "../include/TheMuon.h"
 #include "../include/NhaXuatBan.h"
 #include "../include/Kho.h"
@@ -31,9 +32,6 @@ protected:
     HoaDon danhSachHoaDon[Max_hoadon];
     int soHoaDon;
 
-    HoaDonBan danhSachHoaDonBan[Max_hoadonban];
-    int soHoaDonBan;
-
     NhaXuatBan* danhSachNXB[Max_NXB];
     int soNXB;
 
@@ -49,17 +47,16 @@ public:
 //DOCGIA
     bool themDocGia(DocGia* dg);
     void hienThiDanhSachDocGia() const;
-    DocGia* timDocGiaTheoMa(const string& ma) const;
+    DocGia* timDocGiaTheoMaThe(const string& maThe) const;
     void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);
     bool suaThongTinDocGia(const string& maDocGia);
     bool xoaDocGia(const string& maDocGia);
-//HD MUON
+
+//HD 
     void themHoaDon(const HoaDon& hd);
     void hienThiDanhSachHoaDon() const;
     void tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai);
-//HD BAN
-    void themHoaDonBan(const HoaDonBan& hdb);
-    void hienThiDanhSachHoaDonBan() const;
+    void capNhatHoaDonDaTra(const string& maHD, const Date& ngayTra);
 //NXB
     bool themNXB(const string& tenNXB);
     void hienThiDanhSachNXB() const;
@@ -68,11 +65,11 @@ public:
     void suaNXB(const string& tenCu, const string& tenMoi);
     void xoaNXB(const string& ten);
 //TK
-    void thongKeMuonTra(const Date& ngayHienTai) const;
-    void thongKeSachTheoNXB() const;
-    void thongKeDoanhThu(const Date& tu, const Date& den) const;
-    void thongKeSachBanChay(int topN = 5) const;
-    double tongTienPhat() const;
+    void thongKeMuonTra(const Date& ngayHienTai) const;   // In tổng quan: kho, mượn, trả, quá hạn, doanh thu (phí phạt)
+    double tongTienPhat() const;                          // Tổng phí phạt thu được (từ các hóa đơn đã trả)
+
+//KHO
+    void hienThiKho()const;
 };
 
 #endif

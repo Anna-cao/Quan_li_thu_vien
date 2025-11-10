@@ -1,65 +1,66 @@
-#include "DocGia.h"
+#include "../include/DocGia.h"
+#include "../include/Date.h"
+
 #include <iomanip>
-#include <iostream>
+#include <sstream>
 using namespace std;
+int DocGia::autoID = 1;
 
-
-void DocGia::ghiFileDocGia(const DocGia ds[], int soLuong, const string& path) {
-    ofstream out(path);
-    if (!out.is_open()) return;
-
-    out << soLuong << "\n";
-    for (int i = 0; i < soLuong; i++) {
-        out << ds[i].maDocGia << "\n";
-        out << ds[i].hoTen << "\n";
-        out << ds[i].sdt << "\n";
-        out << ds[i].email << "\n";
-        out << ds[i].diachi << "\n";
-
-        ds[i].ngayLapThe.ghiFile(out);
-
-        const auto& v = ds[i].dsMaSachDangMuon;
-        out << v.size() << "\n";
-        for (auto& s : v) out << s << "\n";
-
-        out << "\n";
-    }
+DocGia::DocGia() : soLuotMuon(0), theMuon() {
+    stringstream ss;
+    ss << "DG" << setw(3) << setfill('0') << autoID++;
+    maDocGia = ss.str();
 }
 
-
-void DocGia::hienThiTieuDe() {
-    cout << left
-         << setw(8) << "MaDG"
-         << setw(20) << "Ho Ten"
-         << setw(15) << "SDT"
-         << setw(25) << "Email"
-         << setw(15) << "TrangThai"
-         << setw(10) << "LuotMuon"
-         << endl;
-
-    cout << string(93, '-') << endl;
+DocGia::DocGia(string ten, string loai) : hoTen(ten), theMuon(loai, Date::HomNay()), soLuotMuon(0) {
+    stringstream ss;
+    ss << "DG" << setw(3) << setfill('0') << autoID++;
+    maDocGia = ss.str();
+    ngayLapThe = Date::HomNay();
 }
 
-void DocGia::hienThiDong() const {
-    cout << left
-         << setw(8)  << maDocGia
+void DocGia::Nhap() {
+    cout << "Ho ten: "; getline(cin, hoTen);
+    cout << "SDT: "; cin >> sdt; cin.ignore();
+    cout << "Email: "; getline(cin, email);
+    cout << "Dia chi: "; getline(cin, diachi);
+
+    string loai;
+    cout << "Loai the (Thuong/HoiVien): "; cin >> loai; cin.ignore();
+    theMuon.setLoaiThe(loai);
+    theMuon.setNgayLap(Date::HomNay());
+}
+
+// ===== Xuất thông tin =====
+void DocGia::Xuat() const {
+    cout << left << setw(6) << maDocGia
          << setw(20) << hoTen
          << setw(15) << sdt
-         << setw(25) << email;
+         << setw(25) << email
+         << setw(20) << diachi;
+    ngayLapThe.Xuat();
+    cout << " | ";
+    theMuon.hienThi();
+}
 
-    if (theMuon != nullptr) {
-        string st = theMuon->getStatus();
+void DocGia::docFileDocGia(istream& in) {
+    in >> maDocGia;
+    in.ignore();
+    getline(in, hoTen);
+    in >> sdt >> email;
+    in.ignore();
+    getline(in, diachi);
+    ngayLapThe.doc(in);
+    in >> soLuotMuon;
+    theMuon.docFile(in);
+}
 
-        
-        if (st == "Hoáº¡t Ä‘á»™ng" || st == "Hoat dong")
-            cout << setw(15) << "CÃ²n háº¡n";
-        else if (st == "Háº¿t háº¡n" || st == "Het han")
-            cout << setw(15) << "Háº¿t háº¡n";
-        else
-            cout << setw(15) << st; 
-    } else {
-        cout << setw(15) << "ChÆ°a cÃ³ tháº»";
-    }
-
-    cout << setw(10) << soLuotMuon << endl;
+void DocGia::ghiFileDocGia(ostream& out) const {
+    out << maDocGia << endl
+        << hoTen << endl
+        << sdt << " " << email << endl
+        << diachi << endl;
+    ngayLapThe.ghi(out);
+    out << " " << soLuotMuon << endl;
+    theMuon.ghiFile(out);
 }

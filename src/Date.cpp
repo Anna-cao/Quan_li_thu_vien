@@ -28,14 +28,14 @@ void Date::Xuat() const{
          << (thang < 10 ? "0" : "") << this->thang <<"/"
          << this->nam;
 }
-int Date::TinhSoNgay(const Date& d) const{
-    tm a = {0, 0, 0, this->ngay, this->thang-1, this->nam -1900 };
-    tm b = {0, 0, 0, d.ngay, d.thang - 1, d.nam - 1900 };
-    time_t x = mktime(&a);
-    time_t y = mktime(&b);
-    double diff = difftime(y, x) / 86400;
-    return static_cast<int>(diff);
+int Date::TinhSoNgay(const Date& d) const {
+    auto toDays = [](int ngay, int thang, int nam) {
+        if (thang < 3) { nam--; thang += 12; }
+        return 365 * nam + nam / 4 - nam / 100 + nam / 400 + (153 * (thang - 3) + 2) / 5 + ngay;
+    };
+    return toDays(d.ngay, d.thang, d.nam) - toDays(ngay, thang, nam);
 }
+
 void Date::congNgay(int soNgay) {
     ngay += soNgay;
 

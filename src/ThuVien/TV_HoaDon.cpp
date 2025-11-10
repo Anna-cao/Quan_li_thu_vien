@@ -22,6 +22,17 @@ void ThuVien::hienThiDanhSachHoaDon() const {
         danhSachHoaDon[i].hienThiThongTin();
     }
 }
+void ThuVien::capNhatHoaDonDaTra(const string& maHD, const Date& ngayTra) {
+    for (int i = 0; i < soHoaDon; ++i) {
+        if (danhSachHoaDon[i].getMaHoaDon() == maHD) {
+            danhSachHoaDon[i].setDaTra(ngayTra);
+            danhSachHoaDon[i].tinhPhiQuaHan(nullptr, ngayTra);
+            cout << "Cap nhat hoa don da tra thanh cong!\n";
+            return;
+        }
+    }
+    cout << "Khong tim thay hoa don!\n";
+}
 
 void ThuVien::tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai) {
     DocGia* dg = timDocGiaTheoMa(maDocGia);

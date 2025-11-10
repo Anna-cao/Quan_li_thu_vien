@@ -19,8 +19,8 @@ public:
     HoiVien(string ten, string maSo, int soSachDaMuon, 
             int thoiGianMuonMax, double tileGiamGia, 
             string ngayDangKy, string ngayHetHan);
-    
-    int getThoiGianMuonMax() const;
+   
+    string getLoaiDocGia() const override { return "HoiVien"; }    int getThoiGianMuonMax() const;
     void setThoiGianMuonMax(int thoiGian);
     double getTileGiamGia() const;
     void setTileGiamGia(double tile);
