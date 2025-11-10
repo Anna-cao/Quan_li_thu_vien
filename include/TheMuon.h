@@ -3,33 +3,66 @@
 
 #include <iostream>
 #include <string>
-#include "Date.h"    
+#include <fstream>
+#include "Date.h"   
 using namespace std;
 
-class TheMuon 
-{
+enum LoaiThe {
+    THE_THUONG,
+    THE_HOI_VIEN
+};
+
+class TheMuon {
 private:
-    string maThe;
-    string maDocGia;
-    Date ngLapThe;
-    Date HSD;
-    int gioiHanMuon;
-    bool status;  
+    string maThe;          
+    string tenDocGia;      
+    LoaiThe loaiThe;       
+    double phiDangKy;     
+    string status;         
+    int gioiHanMuon;       
+    Date ngayLapThe;       
+    Date hanSuDung;        
+
+    static int demThuong;  
+    static int demHoiVien; 
+
+    string taoMaThe(LoaiThe loai); 
+
 public:
+    
     TheMuon();
-    TheMuon(string maThe, string maDocGia, Date ngLapThe, Date HSD, int gioiHanMuon, bool status);
+    TheMuon(string ten, LoaiThe loai);
 
+    
     string getMaThe() const;
-    string getMaDocGia() const;
+    string getTenDocGia() const;
+    LoaiThe getLoaiThe() const;
+    double getPhiDangKy() const;
+    string getStatus() const;
     int getGioiHanMuon() const;
-    bool getStatus() const;
+    Date getNgayLapThe() const;
+    Date getHanSuDung() const;
+
+    
+    void setTenDocGia(string ten);
+    void setLoaiThe(LoaiThe loai);
+    void setStatus(string st);
     void setGioiHanMuon(int g);
-    void setStatus(bool t);
+    void setNgayLapThe(const Date& ngay);
+    void setHanSuDung(const Date& han);
 
-    bool kiemTraHieuLuc(const Date& ngayHienTai) const;
+    
+    void nhap();
+    void xuat() const;
 
+<<<<<<< Updated upstream
     friend istream& operator>>(istream& in, TheMuon& tm);
     friend ostream& operator<<(ostream& out, const TheMuon& tm);
+=======
+    
+    void ghiFile(ofstream& file) const;
+    bool docFile(ifstream& file);
+>>>>>>> Stashed changes
 };
 
 #endif
