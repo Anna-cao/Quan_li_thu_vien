@@ -1,0 +1,22 @@
+DG001
+Nguyen Van A
+0987654321
+a@gmail.com
+Ha Noi
+12 11 2025
+Doc Gia Thuong
+1
+MS001 MS002
+5
+---
+DG002
+Tran Thi B
+0901234567
+b@gmail.com
+TP HCM
+13 11 2025
+Doc Gia Thuong
+1
+MS003
+6
+---

@@ -11,28 +11,25 @@
 using namespace std;
 
 class DocGia {
-private:
-    static int autoID;
-
+protected:
+    static int autoID_Thuong;
+    static int autoID_HoiVien;
     string maDocGia;
     string hoTen;
     string sdt;
     string email;
     string diachi;
     Date ngayLapThe;
-
     int soLuotMuon;
     vector<string> dsMaSachDangMuon;
-    TheMuon* theMuon;
-
-    int status; 
-
+    TheMuon* theMuon;  
+    int status;
 public:
-    DocGia();
-    DocGia(string ma, string ten, int soLuotMuon);
-    DocGia(string ten, string loai); 
+    DocGia();                                           
+    DocGia(string ten, string loai);                   
+    DocGia(string ma, string ten, int soLuotMuon);     
     virtual ~DocGia();
-
+    void nhapThongTinChung();
     string getMaDocGia() const { return maDocGia; }
     string getHoTen() const { return hoTen; }
     int getSoLuotMuon() const { return soLuotMuon; }
@@ -45,7 +42,7 @@ public:
     void setSoLuotMuon(int s) { soLuotMuon = s; }
     void setStatus(int s) { status = s; }
     
-    void nhap();
+    static string nhapMaDocGia(const string& msg);
     virtual void hienThiThongTin() const;
     void hienThiDong() const;
     static void hienThiTieuDe();
@@ -59,8 +56,10 @@ public:
 
     virtual void docFile(istream& in);
     virtual void ghiFile(ostream& out) const;
-
-    static int docFileDocGia(DocGia* ds[], int soLuongToiDa, const string& duongDan);
-    static void ghiFileDocGia(const DocGia* ds[], int soLuong, const string& duongDan);
+    static void ghiFileDocGiaThuong(const DocGia* ds[], int n, const string& file);
+    static void ghiFileHoiVien(const DocGia* ds[], int n, const string& file);
+    static int docFileDocGiaThuong(DocGia* ds[], int soLuongToiDa, const string& duongDan);
+    static int docFileHoiVien(DocGia* ds[], int soLuongToiDa, const string& duongDan);
+    static void capNhatAutoIDTuMa(const string& ma, bool isHoiVien);
 };
 #endif

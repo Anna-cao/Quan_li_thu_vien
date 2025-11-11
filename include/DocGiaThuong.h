@@ -10,13 +10,15 @@ private:
 
 public:
     DocGiaThuong();
+    DocGiaThuong(string ten);
+    virtual ~DocGiaThuong() = default; 
     DocGiaThuong(string ten, string maSo, int soSachDaMuon, int gioiHanMuon);
     string getLoaiDocGia() const override { return "Doc Gia Thuong"; };
+    void hienThiThongTin() const override;
     int getGioiHanMuon() const;
     void setGioiHanMuon(int gioiHan);
-    void nhapGioiHanMuon();          
-    void hienThiThongTin() const override;
-    void docFile(istream& in) override;
+    void nhapGioiHanMuon();
+    void docFile(istream& in) override;   
     void ghiFile(ostream& out) const override;
 };
 

@@ -60,6 +60,8 @@ public:
     bool xoaDocGia(const string& maDocGia);
     DocGia* timDocGiaTheoMaThe(const string& maThe) const;
     void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);
+    int getSoDocGia() const { return soDocGia; }
+    DocGia** getDanhSachDocGia() { return danhSachDocGia; }
 //HD 
     void themHoaDon(const HoaDon& hd);
     void hienThiDanhSachHoaDon() const;

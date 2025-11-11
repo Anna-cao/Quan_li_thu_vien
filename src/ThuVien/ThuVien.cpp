@@ -1,27 +1,19 @@
 #include "../include/ThuVien.h"
 #include "../include/NhaXuatBan.h"
-
+#include "../include/DocGia.h"
 #include "../include/Kho.h"
-
+#include "../include/DocGiaThuong.h"
+#include "../include/HoiVien.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <type_traits>
 using namespace std;
-
-ThuVien::ThuVien() {
-    soLuongTong = 0;
-    soDocGia = 0;
-    soHoaDon = 0;
-    soNXB = 0; 
-    for (int i = 0; i < Max_NXB; ++i) {
-        danhSachNXB[i] = nullptr;
-    }
-}
 string nhapNXBHopLe(ThuVien& tv) {
     string ten;
     while (true) {
         cout << "Nhap NXB (0 de huy): ";
-        getline(cin, ten);
+        getline(cin >> ws, ten); 
         if (ten == "0") {
             cout << "Huy thao tac.\n";
             return "";
@@ -32,29 +24,63 @@ string nhapNXBHopLe(ThuVien& tv) {
         cout << "NXB '" << ten << "' KHONG TON TAI! Nhap lai:\n";
     }
 }
+ThuVien::ThuVien() {
+    soLuongTong = 0;
+    soDocGia = 0;
+    soHoaDon = 0;
+    soNXB = 0; 
+    for (int i = 0; i < Max_NXB; ++i) {
+        danhSachNXB[i] = nullptr;
+    }
+}
 
 ThuVien::~ThuVien() {
-    for (int i = 0; i < soDocGia; i++) delete danhSachDocGia[i];
-    for (int i = 0; i < soNXB; i++) delete danhSachNXB[i];
+    for (int i = 0; i < soDocGia; ++i) delete danhSachDocGia[i];
+    for (int i = 0; i < soNXB; ++i) delete danhSachNXB[i];
 }
 void ThuVien::loadDuLieu() {
     const string path = "data/";
     system("mkdir data 2>nul"); 
+
     auth.docFile(path + "auth.txt");
     kho.docFileKho(path + "Kho.txt"); 
     soNXB = NhaXuatBan::docFileNXB(danhSachNXB, Max_NXB, path + "nhaxuatban.txt");
     soLuongTong = Sach::docFileSach(danhSach, Max_sach, path + "sach.txt");
     soHoaDon = HoaDon::docFileHoaDon(danhSachHoaDon, Max_hoadon, path + "hoadon.txt");
-    soDocGia = DocGia::docFileDocGia(danhSachDocGia, Max_docgia, path + "docgia.txt");
-}
 
+    soDocGia = 0;
+    soDocGia += DocGia::docFileDocGiaThuong(danhSachDocGia, Max_docgia, path + "docgiathuong.txt");
+    soDocGia += DocGia::docFileHoiVien(danhSachDocGia + soDocGia, Max_docgia - soDocGia, path + "hoivien.txt");
+
+    cout << "Da tai " << soDocGia << " doc gia.\n";
+}
 void ThuVien::saveDuLieu() {
     const string path = "data/";
     system("mkdir data 2>nul");
+    vector<DocGia*> thuong, hoivien;
+    for (int i = 0; i < soDocGia; ++i) {
+        if (danhSachDocGia[i]->getStatus() == 1) {
+            if (danhSachDocGia[i]->getLoaiDocGia() == "Doc Gia Thuong")
+                thuong.push_back(danhSachDocGia[i]);
+            else if (danhSachDocGia[i]->getLoaiDocGia() == "HoiVien")
+                hoivien.push_back(danhSachDocGia[i]);
+        }
+    }
     User::ghiFileUser(auth.getDanhSach(), auth.getSoNguoiDung(), path + "auth.txt");
-    kho.ghiFileKho(path + "kho.txt");
-    NhaXuatBan::ghiFileNXB(danhSachNXB, soNXB, path + "nxb.txt");
+    kho.ghiFileKho(path + "Kho.txt");
+    NhaXuatBan::ghiFileNXB(danhSachNXB, soNXB, path + "nhaxuatban.txt");
     Sach::ghiFileSach(danhSach, soLuongTong, path + "sach.txt");
-    HoaDon::ghiFileHoaDon(danhSachHoaDon, soHoaDon, path + "hoadon.txt");
-    DocGia::ghiFileDocGia((const DocGia**)danhSachDocGia, soDocGia, path + "docgia.txt");
+    if (!thuong.empty()) {
+        const DocGia** arr = new const DocGia*[thuong.size()];
+        for (size_t i = 0; i < thuong.size(); ++i) arr[i] = thuong[i];
+        DocGia::ghiFileDocGiaThuong(arr, thuong.size(), path + "docgiathuong.txt");
+        delete[] arr;
+    }
+    if (!hoivien.empty()) {
+        const DocGia** arr = new const DocGia*[hoivien.size()];
+        for (size_t i = 0; i < hoivien.size(); ++i) arr[i] = hoivien[i];
+        DocGia::ghiFileHoiVien(arr, hoivien.size(), path + "hoivien.txt");
+        delete[] arr;
+    }
 }
+
