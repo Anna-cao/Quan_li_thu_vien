@@ -1,16 +1,25 @@
-#include "../include/DocGiaThuong.h"
-#include <iostream>
-using namespace std;
-DocGiaThuong::DocGiaThuong() : DocGia(), gioiHanMuon(5) {}
+#ifndef DOCGIATHUONG_H
+#define DOCGIATHUONG_H
 
-DocGiaThuong::DocGiaThuong(string ten, string maSo, int soSachDaMuon, int gioiHanMuon)
-    : DocGia (ten, maSo, soSachDaMuon), gioiHanMuon(gioiHanMuon) {};
+#include "DocGia.h"
+#include <string>
 
-int DocGiaThuong::getGioiHanMuon() const { return gioiHanMuon; }
-void DocGiaThuong::setGioiHanMuon(int gioiHan) { gioiHanMuon = gioiHan; }
+class DocGiaThuong : public DocGia {
+private:
+    int gioiHanMuon;
 
-void DocGiaThuong::hienThiThongTin() const {
-    std::cout << "=== THONG TIN DOC GIA THUONG ===" << std::endl;
-    cout << "Gioi han muon: " << gioiHanMuon << " quyen" << endl;
-    cout << "===============================" << endl;
-}
+public:
+    DocGiaThuong();
+    DocGiaThuong(string ten);
+    virtual ~DocGiaThuong() = default; 
+    DocGiaThuong(string ten, string maSo, int soSachDaMuon, int gioiHanMuon);
+    string getLoaiDocGia() const override { return "Doc Gia Thuong"; };
+    void hienThiThongTin() const override;
+    int getGioiHanMuon() const;
+    void setGioiHanMuon(int gioiHan);
+    void nhapGioiHanMuon();
+    void docFile(istream& in) override;   
+    void ghiFile(ostream& out) const override;
+};
+
+#endif
