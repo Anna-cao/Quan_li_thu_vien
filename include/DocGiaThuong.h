@@ -14,8 +14,10 @@ public:
     string getLoaiDocGia() const override { return "Doc Gia Thuong"; };
     int getGioiHanMuon() const;
     void setGioiHanMuon(int gioiHan);
-    
+    void nhapGioiHanMuon();          
     void hienThiThongTin() const override;
+    void docFile(istream& in) override;
+    void ghiFile(ostream& out) const override;
 };
 
 #endif

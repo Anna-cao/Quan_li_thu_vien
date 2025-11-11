@@ -1,4 +1,3 @@
-// Kho.h
 #ifndef KHO_H
 #define KHO_H
 
@@ -26,6 +25,9 @@ public:
     bool themNXB(NhaXuatBan* nxb);
     const NhaXuatBan* const* getDSNXB() const { return danhSachNXB; }
     int getSoNXB() const { return soNXB; }
+
+    int docFileKho(const string& duongDan);
+    void ghiFileKho(const string& duongDan) const;
 };
 
 #endif

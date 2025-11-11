@@ -30,6 +30,8 @@ public:
     string getNgayHetHan() const;
     void setNgayHetHan(string ngay);
     void hienThiThongTin() const override;
+    void docFile(istream& in) override;
+    void ghiFile(ostream& out) const override;
 };
 
 #endif

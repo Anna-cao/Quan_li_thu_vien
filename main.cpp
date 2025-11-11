@@ -1,7 +1,8 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wtemplate-body"
-
+#pragma GCC diagnostic pop
 #include <iostream>
+#include <conio.h>
 #include "../include/auth.h"
 #include "../include/ThuVien.h"
 #include "../include/menu/QLSach.h"
@@ -10,28 +11,42 @@
 #include "../include/menu/QLNXB.h"
 #include "../include/menu/ThongKe.h"
 using namespace std;
-#pragma GCC diagnostic pop
+
 int main() {
     Auth auth;
     auth.docFile("data/auth.txt");  
-    string ten, mk;
+    string ten;
     bool daDangNhap = false;
 
     cout << "===== DANG NHAP HE THONG =====\n";
-    while (!daDangNhap) {
-        cout << "Ten dang nhap: ";
-        cin >> ten;
-        cout << "Mat khau: ";
-        cin >> mk;
-
-        if (auth.dangNhap(ten, mk)) {
-            cout << "Chao mung " << auth.getNguoiDungHienTai()->getTenDangNhap() << "!\n";
-            daDangNhap = true;
-        } else {
-            cout << "Sai thong tin, vui long thu lai!\n";
+while (!daDangNhap) {
+    cout << "Ten dang nhap: ";
+    cin >> ten;
+    cin.ignore(); 
+    cout << "Mat khau: ";
+    string matKhau = "";
+    char ch;
+    while ((ch = _getch()) != '\r') {
+        if (ch == '\b' && !matKhau.empty()) {
+            matKhau.pop_back();
+            cout << "\b \b";
+        }
+        else if (ch >= 32 && ch <= 126) {
+            matKhau += ch;
+            cout << '*';
         }
     }
+    cout << endl;
+
+    if (auth.dangNhap(ten, matKhau)) {
+        cout << "Chao mung " << auth.getNguoiDungHienTai()->getTenDangNhap() << "!\n";
+        daDangNhap = true;
+    } else {
+        cout << "Sai thong tin, vui long thu lai!\n";
+    }
+}
     ThuVien thuVien;
+    thuVien.loadDuLieu();
     int chon;
 
     do {
@@ -59,7 +74,7 @@ int main() {
                 cout << "Lua chon khong hop le!\n";
         }
     } while (chon != 6);
-
+    thuVien.saveDuLieu();
     cout << "Tam biet!\n";
     return 0;
 }

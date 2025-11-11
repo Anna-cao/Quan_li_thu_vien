@@ -47,3 +47,17 @@ void HoiVien::hienThiThongTin() const {
     cout << "Ngay het han: " << ngayHetHan << endl;
     cout << "==========================" << endl;
 }
+void HoiVien::docFile(istream& in) {
+    DocGia::docFile(in); 
+
+    in >> thoiGianMuonMax >> tileGiamGia; in.ignore();
+    getline(in, ngayDangKy);
+    getline(in, ngayHetHan);
+}
+
+void HoiVien::ghiFile(ostream& out) const {
+    DocGia::ghiFile(out);
+    out << thoiGianMuonMax << " " << tileGiamGia << "\n"
+        << ngayDangKy << "\n"
+        << ngayHetHan << "\n";
+}

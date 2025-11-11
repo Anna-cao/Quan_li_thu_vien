@@ -1,69 +1,19 @@
-S001
-Toi thay hoa vang tren co xanh
-Nguyen Nhat Anh
-NXB Tre
-Tieu thuyet
-250
-12
-3
-85000
+MS001
+Lap trinh C++
+Bjarne Stroustrup
+NXB Giao Duc
+Giao trinh
+500
+100
+10
+150000
 
-S002
-Tuoi tho du doi
-Phung Quan
+MS002
+Toan roi rac
+Kenneth Rosen
 NXB Kim Dong
-Tieu thuyet
-180
-20
+Tai lieu tham khao
+300
+50
 5
-65000
-
-S003
-Lap trinh C++ co ban
-Nguyen Van A
-NXB GD
-Giao trinh
-350
-10
-4
-75000
-
-S010
-Giai tich
-Tran Van An
-NXB GD
-Giao trinh
-256
-30
-10
-60000
-
-S011
-Harry Poter
-J.K.Rowling
-NXB Kim Dong
-Tieu thuyet
-460
-15
-3
 120000
-
-S020
-Mang va truyen thong
-Le Thi B 
-NXB GD
-Giao trinh
-123
-16
-12
-50000
-
-S111
-Xac suat thong ke
-Trinh Thi C 
-NXB GD
-Giao trinh
-247
-30
-18
-50000

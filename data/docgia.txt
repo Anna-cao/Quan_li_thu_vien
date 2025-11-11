@@ -1,34 +1,30 @@
 DG001
 Nguyen Van A
-3
-S001
-S002
-S003
-
+0123456789
+a@example.com
+Ha Noi
+11 11 2025
+HoiVien
+1
+S001 S002
+30 0.1
+01/01/2025
+01/01/2026
 
 DG002
 Tran Thi B
-2
-S010
-S011
-
+0987654321
+b@example.com
+Ho Chi Minh
+10 11 2025
+Doc Gia Thuong
+1
 
 DG003
 Le Van C
-0
-
-
-DG004
-Pham Minh D
+0909090909
+c@example.com
+Da Nang
+9 11 2025
+Doc Gia Thuong
 1
-S020
-
-
-DG005
-Hoang Thi E
-5
-S001
-S002
-S010
-S011
-S111

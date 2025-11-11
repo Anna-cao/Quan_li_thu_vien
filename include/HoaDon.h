@@ -31,12 +31,15 @@ public:
     string getMaHoaDon() const { return maHoaDon; }
     string getMaKH() const { return maKH; }
     int getStatus() const{return status;}
-    double getTienCoc(){return tiencoc;}
+    double getTienCoc() const { return tiencoc; }
+    double getPhiQuaHan() const { return phiQuaHan; }
+
     Date getNgayMuon() const { return ngMuon; }
     Date getNgayTraThucTe() const { return ngTraThucTe; }
 
     void setDaTra(const Date& ngayTra);
     static int docFileHoaDon(HoaDon danhSach[], int soLuongToiDa, const std::string& duongDan = "data/hoadon.txt");
     static void ghiFileHoaDon(const HoaDon danhSach[], int soLuong, const std::string& duongDan = "data/hoadon.txt");
+
 };
 #endif

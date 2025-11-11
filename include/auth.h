@@ -19,6 +19,10 @@ public:
     bool daDangNhap() const;
     User* getNguoiDungHienTai();
 
+    User* getDanhSach() { return danhSachNguoiDung; }
+    int getSoNguoiDung() const { return soNguoiDung; }
+    
+
     void hienThiTatCaNguoiDung() const;
 };
 

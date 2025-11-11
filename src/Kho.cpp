@@ -1,7 +1,12 @@
-// Kho.cpp
+#include <fstream>
+#include <sstream>
 #include "../include/Kho.h"
-#include <iostream>
+#include <istream>
+#include <ostream>
 #include <iomanip>
+#include <iostream>
+#include <string>
+
 using namespace std;
 
 Kho::Kho(int tong, int muon) 
@@ -44,4 +49,35 @@ void Kho::HienThiKho() const {
             }
         }
     }
+}
+int Kho::docFileKho(const string& duongDan) {
+    ifstream in(duongDan);
+    if (!in.is_open()) return 0;
+
+    in >> soLuongTong >> soLuongDaMuon;
+    in.ignore();
+
+    soNXB = 0;
+    string tenNXB;
+    while (getline(in, tenNXB) && soNXB < Max_NXB) {
+        if (tenNXB.empty()) continue;
+        danhSachNXB[soNXB++] = new NhaXuatBan(tenNXB);
+    }
+
+    in.close();
+    return 1;
+}
+
+void Kho::ghiFileKho(const string& duongDan) const {
+    ofstream out(duongDan);
+    if (!out.is_open()) return;
+
+    out << soLuongTong << "\n";
+    out << soLuongDaMuon << "\n";
+    for (int i = 0; i < soNXB; ++i) {
+        if (danhSachNXB[i]) {
+            out << danhSachNXB[i]->getNXB() << "\n";
+        }
+    }
+    out.close();
 }

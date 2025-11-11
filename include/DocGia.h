@@ -57,11 +57,10 @@ public:
 
     static bool kiemTraNgayHopLe(const Date& d);
 
-    // void docFileDocGia(istream& in);
-    // void ghiFileDocGia(ostream& out) const;
+    virtual void docFile(istream& in);
+    virtual void ghiFile(ostream& out) const;
 
-    // static int docFileDocGia(DocGia* ds[], int soLuongToiDa, const string& duongDan);
-    // static void ghiFileDocGia(const DocGia* ds[], int soLuong, const string& duongDan);
+    static int docFileDocGia(DocGia* ds[], int soLuongToiDa, const string& duongDan);
+    static void ghiFileDocGia(const DocGia* ds[], int soLuong, const string& duongDan);
 };
-
 #endif

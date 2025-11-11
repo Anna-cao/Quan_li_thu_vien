@@ -42,6 +42,8 @@ public:
         return ngay == other.ngay && thang == other.thang && nam == other.nam;
     }
     bool operator<=(const Date& other) const {return (*this < other || *this == other);}
+    void ghiFile(ostream& out) const;
+    void docFile(istream& in);
 };
 
 #endif

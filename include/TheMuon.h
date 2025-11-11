@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+
 #include <fstream>
 #include "Date.h"
 using namespace std;
@@ -54,10 +55,10 @@ public:
     void nhap();
     void hienThi() const;
 
-    void ghiFile(ofstream& file) const;
-    bool docFile(ifstream& file);
-
+    void ghiFile(ostream& out) const;
+    void docFile(istream& in);
+    static int getDemThuong() { return demThuong; };
+    static int getDemHoiVien() { return demHoiVien;};
     static void capNhatAutoID(int id);
 };
-
 #endif

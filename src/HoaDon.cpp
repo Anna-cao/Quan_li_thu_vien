@@ -52,33 +52,67 @@ void HoaDon::hienThiThongTin() const {
          << setw(10) << tongPhi << setw(8)<< status<<endl;
 }
 
-// int HoaDon::docFileHoaDon(HoaDon danhSach[], int soLuongToiDa, const string& duongDan) {
-//     ifstream in(duongDan);
-//     if (!in.is_open()) return 0;
-//     int soLuong = 0;
-//     while (!in.eof() && soLuong < soLuongToiDa) {
-//         HoaDon hd;
-//         hd.DocFile(in);
-//         if (hd.getMaHoaDon().size() == 0) break;
-//         danhSach[soLuong++] = hd;
-//     }
-//     in.close();
-//     return soLuong;
-// }
+void HoaDon::DocFile(ifstream &file) {
+    if (file.eof()) return;
 
-// void HoaDon::ghiFileHoaDon(const HoaDon danhSach[], int soLuong, const string& duongDan) {
-//     ofstream out(duongDan);
-//     if (!out.is_open()) return;
-//     for (int i = 0; i < soLuong; ++i) {
-//         const HoaDon &h = danhSach[i];
-//         out << h.getMaHoaDon() << "\n";
-//         out << h.getMaThe() << "\n";
-//         Date d1 = h.getNgayMuon();
-//         Date d2 = h.getNgayTraThucTe();
-//         out << d1.getNgay() << " " << d1.getThang() << " " << d1.getNam() << " ";
-//         out << d2.getNgay() << " " << d2.getThang() << " " << d2.getNam() << "\n";
-//         out << h.getPhiQuaHan() << " " << h.getTongPhi() << "\n\n";
-//     }
-//     out.close();
+    file >> maHoaDon;
+    file >> maThe;
 
-// }
+    int ngayMuonD, thangMuon, namMuon;
+    int ngayTraD, thangTra, namTra;
+
+    file >> ngayMuonD >> thangMuon >> namMuon
+         >> ngayTraD >> thangTra >> namTra;
+
+    file >> phiQuaHan >> tongPhi >> tiencoc >> status;
+
+    ngMuon = Date(ngayMuonD, thangMuon, namMuon);
+    ngTraThucTe = Date(ngayTraD, thangTra, namTra);
+}
+
+int HoaDon::docFileHoaDon(HoaDon danhSach[], int soLuongToiDa, const string& duongDan) {
+    ifstream in(duongDan);
+    if (!in.is_open()) {
+        cerr << "Khong the mo file hoa don: " << duongDan << endl;
+        return 0;
+    }
+
+    int soLuong = 0;
+    while (!in.eof() && soLuong < soLuongToiDa) {
+        HoaDon hd;
+        hd.DocFile(in);
+
+        if (hd.getMaHoaDon().empty())
+            break;
+
+        danhSach[soLuong++] = hd;
+    }
+
+    in.close();
+    return soLuong;
+}
+
+void HoaDon::ghiFileHoaDon(const HoaDon danhSach[], int soLuong, const string& duongDan) {
+    ofstream out(duongDan);
+    if (!out.is_open()) {
+        cerr << "Khong the ghi file hoa don: " << duongDan << endl;
+        return;
+    }
+
+    for (int i = 0; i < soLuong; ++i) {
+        const HoaDon &h = danhSach[i];
+        out << h.getMaHoaDon() << "\n";
+        out << h.getMaThe() << "\n";
+
+        Date d1 = h.getNgayMuon();
+        Date d2 = h.getNgayTraThucTe();
+
+        out << d1.getNgay() << " " << d1.getThang() << " " << d1.getNam() << " ";
+        out << d2.getNgay() << " " << d2.getThang() << " " << d2.getNam() << "\n";
+
+        out << h.getPhiQuaHan() << " " << h.getTongPhi() << " "
+            << h.getTienCoc() << " " << h.getStatus() << "\n\n";
+    }
+
+    out.close();
+}

@@ -85,3 +85,35 @@ void TheMuon::hienThi() const {
 void TheMuon::capNhatAutoID(int id) {
     if (id > autoID) autoID = id;
 }
+void TheMuon::ghiFile(ostream& out) const {
+    out << maThe << "\n"
+        << tenDocGia << "\n"
+        << (loaiThe == THE_HOI_VIEN ? "HoiVien" : "Thuong") << "\n"
+        << phiDangKy << "\n"
+        << status << "\n"
+        << gioiHanMuon << "\n";
+    ngayLapThe.ghiFile(out); out << "\n";
+    hanSuDung.ghiFile(out); out << "\n";
+}
+
+void TheMuon::docFile(istream& in) {
+    getline(in, maThe);
+    getline(in, tenDocGia);
+    string loaiStr;
+    getline(in, loaiStr);
+    loaiThe = (loaiStr == "HoiVien") ? THE_HOI_VIEN : THE_THUONG;
+
+    string tmp;
+    getline(in, tmp);
+    if (!tmp.empty()) phiDangKy = stod(tmp);
+
+    getline(in, tmp);
+    if (!tmp.empty()) status = tmp;
+
+    getline(in, tmp);
+    if (!tmp.empty()) gioiHanMuon = stoi(tmp);
+
+    ngayLapThe.docFile(in);
+    in.ignore(); 
+    hanSuDung.docFile(in);
+}

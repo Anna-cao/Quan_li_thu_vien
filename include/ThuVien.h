@@ -10,6 +10,8 @@
 #include "../include/NhaXuatBan.h"
 #include "../include/Kho.h"
 #include "../include/Date.h"
+#include "../include/Auth.h"
+
 
 #include <iostream>
 #include <string>
@@ -36,9 +38,13 @@ protected:
     int soNXB;
     
     Kho kho;
+    Auth auth;
 public:
+
     ThuVien();
     ~ThuVien();
+    void loadDuLieu();
+    void saveDuLieu();
 //SACH
     void themSach();
     void hienThi();
@@ -72,5 +78,8 @@ public:
 //KHO
     void hienThiKho() const { kho.HienThiKho();}
     Kho& getKho() { return kho;}
+//AUTH
+    Auth& getAuth() { return auth; }
+    const Auth& getAuth() const { return auth; }
 };
 #endif

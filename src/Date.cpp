@@ -75,3 +75,9 @@ bool Date::operator<(const Date& other) const {
     if (thang != other.thang) return thang < other.thang;
     return ngay < other.ngay;
 }
+void Date::ghiFile(ostream& out) const {
+    out << ngay << " " << thang << " " << nam;
+}
+void Date::docFile(istream& in) {
+    in >> ngay >> thang >> nam;
+}

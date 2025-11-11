@@ -1,4 +1,6 @@
 #include "../include/ThuVien.h"
+#include "../include/NhaXuatBan.h"
+
 #include "../include/Kho.h"
 
 #include <fstream>
@@ -19,4 +21,25 @@ ThuVien::ThuVien() {
 ThuVien::~ThuVien() {
     for (int i = 0; i < soDocGia; i++) delete danhSachDocGia[i];
     for (int i = 0; i < soNXB; i++) delete danhSachNXB[i];
+}
+void ThuVien::loadDuLieu() {
+    const string path = "data/";
+    system("mkdir data 2>nul");
+    auth.docFile(path + "auth.txt");
+    kho.docFileKho(path + "kho.txt");
+    soNXB = NhaXuatBan::docFileNXB(danhSachNXB, Max_NXB, path + "nhaxuatban.txt");
+    soLuongTong = Sach::docFileSach(danhSach, Max_sach, path + "sach.txt");
+    soHoaDon = HoaDon::docFileHoaDon(danhSachHoaDon, Max_hoadon, path + "hoadon.txt");
+    soDocGia = DocGia::docFileDocGia(danhSachDocGia, Max_docgia, path + "docgia.txt");
+}
+
+void ThuVien::saveDuLieu() {
+    const string path = "data/";
+    system("mkdir data 2>nul");
+    User::ghiFileUser(auth.getDanhSach(), auth.getSoNguoiDung(), path + "auth.txt");
+    kho.ghiFileKho(path + "kho.txt");
+    NhaXuatBan::ghiFileNXB(danhSachNXB, soNXB, path + "nxb.txt");
+    Sach::ghiFileSach(danhSach, soLuongTong, path + "sach.txt");
+    HoaDon::ghiFileHoaDon(danhSachHoaDon, soHoaDon, path + "hoadon.txt");
+    DocGia::ghiFileDocGia((const DocGia**)danhSachDocGia, soDocGia, path + "docgia.txt");
 }
