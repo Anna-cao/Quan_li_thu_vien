@@ -14,8 +14,7 @@ private:
     static int autoID;
 public:
     Sach();
-    Sach (string maSach, string tenSach, double giaTien);
-
+    Sach ( string tenSach, double giaTien);
     string getMaSach() const { return maSach; }
     string getTenSach() const { return tenSach; }
     string getTacGia() const { return tacGia; }
@@ -25,7 +24,6 @@ public:
     int getSoLuongDaMuon() const { return soLuongDaMuon; }
     double getGiaTien() const { return giaTien; }
 
-    void setMaSach(const string& ma) { maSach = ma; }
     void setTenSach(const string& ten) { tenSach = ten; }
     void setTacGia(const string& tg) { tacGia = tg; }
     void setNXB(const string& n) { NXB = n; }
@@ -37,10 +35,10 @@ public:
     bool muonSach();
     bool traSach();
     void nhap();
-    void hienThiThongTin();
+    void hienThiThongTin()const;
     int soSachConLai() const;
     static void capNhatAutoID(int id);
-    static int docFileSach(Sach danhSach[], int soLuongTong, const string& duongDan = "data/sach.txt");
+    static int docFileSach(Sach danhSach[], int soLuongToiDa, const string& duongDan = "data/sach.txt");
     static void ghiFileSach(const Sach danhSach[], int soLuong, const string& duongDan = "data/sach.txt");
     ~Sach() {}
 };

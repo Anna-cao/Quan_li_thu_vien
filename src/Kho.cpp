@@ -15,15 +15,12 @@ Kho::Kho(int tong, int muon)
         danhSachNXB[i] = nullptr;
     }
 }
-
-Kho::~Kho() {}
-bool Kho::themNXB(NhaXuatBan* nxb) {
-    if (!nxb || soNXB >= Max_NXB) return false;
+Kho::~Kho() {
     for (int i = 0; i < soNXB; ++i) {
-        if (danhSachNXB[i]->getNXB() == nxb->getNXB()) return false;
+        delete danhSachNXB[i];
+        danhSachNXB[i] = nullptr;
     }
-    danhSachNXB[soNXB++] = nxb;
-    return true;
+    soNXB = 0;
 }
 
 bool Kho::coNXB(const string& ten) const {
@@ -52,11 +49,16 @@ void Kho::HienThiKho() const {
 }
 int Kho::docFileKho(const string& duongDan) {
     ifstream in(duongDan);
-    if (!in.is_open()) return 0;
-
-    in >> soLuongTong >> soLuongDaMuon;
-    in.ignore();
-
+    if (!in.is_open()) {
+        cerr << "Khong mo duoc file kho: " << duongDan << endl;
+        return 0;
+    }
+    if (!(in >> soLuongTong >> soLuongDaMuon)) {
+        cerr << "Loi doc so luong trong file kho\n";
+        in.close();
+        return 0;
+    }
+    in.ignore(); 
     soNXB = 0;
     string tenNXB;
     while (getline(in, tenNXB) && soNXB < Max_NXB) {

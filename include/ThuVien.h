@@ -48,9 +48,10 @@ public:
 //SACH
     void themSach();
     void hienThi();
-    void timTheoMa();
-    void suaSachTheoMa();
-    void xoaSachTheoMa();
+    Sach* timSachTheoTen(const string& ten)const;
+    void suaSachTheoTen();
+    void timVaHienThiSach(const string& ten) const;
+    void xoaSachTheoTen();
 //DOCGIA
     bool themDocGia(DocGia* dg);
     void hienThiDanhSachDocGia() const;

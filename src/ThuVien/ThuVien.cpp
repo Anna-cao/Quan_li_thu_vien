@@ -17,6 +17,21 @@ ThuVien::ThuVien() {
         danhSachNXB[i] = nullptr;
     }
 }
+string nhapNXBHopLe(ThuVien& tv) {
+    string ten;
+    while (true) {
+        cout << "Nhap NXB (0 de huy): ";
+        getline(cin, ten);
+        if (ten == "0") {
+            cout << "Huy thao tac.\n";
+            return "";
+        }
+        if (tv.timNXBTheoTen(ten) != nullptr) {
+            return ten;
+        }
+        cout << "NXB '" << ten << "' KHONG TON TAI! Nhap lai:\n";
+    }
+}
 
 ThuVien::~ThuVien() {
     for (int i = 0; i < soDocGia; i++) delete danhSachDocGia[i];
@@ -24,9 +39,9 @@ ThuVien::~ThuVien() {
 }
 void ThuVien::loadDuLieu() {
     const string path = "data/";
-    system("mkdir data 2>nul");
+    system("mkdir data 2>nul"); 
     auth.docFile(path + "auth.txt");
-    kho.docFileKho(path + "kho.txt");
+    kho.docFileKho(path + "Kho.txt"); 
     soNXB = NhaXuatBan::docFileNXB(danhSachNXB, Max_NXB, path + "nhaxuatban.txt");
     soLuongTong = Sach::docFileSach(danhSach, Max_sach, path + "sach.txt");
     soHoaDon = HoaDon::docFileHoaDon(danhSachHoaDon, Max_hoadon, path + "hoadon.txt");

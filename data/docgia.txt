@@ -11,20 +11,3 @@ S001 S002
 01/01/2025
 01/01/2026
 
-DG002
-Tran Thi B
-0987654321
-b@example.com
-Ho Chi Minh
-10 11 2025
-Doc Gia Thuong
-1
-
-DG003
-Le Van C
-0909090909
-c@example.com
-Da Nang
-9 11 2025
-Doc Gia Thuong
-1

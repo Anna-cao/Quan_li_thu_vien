@@ -1,19 +1,18 @@
-MS001
-Lap trinh C++
+S003
+Lap trinh nang cao C++
 Bjarne Stroustrup
 NXB Giao Duc
 Giao trinh
-500
-100
-10
-150000
-
-MS002
-Toan roi rac
-Kenneth Rosen
-NXB Kim Dong
-Tai lieu tham khao
-300
-50
 5
+0
 120000
+
+S002
+Dai so tuyen tinh
+Toan
+Kim Dong
+Giao trinh
+12
+0
+12000
+

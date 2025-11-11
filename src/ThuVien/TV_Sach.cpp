@@ -6,27 +6,34 @@ using namespace std;
 
 void ThuVien::themSach() {
     if (soLuongTong >= Max_sach) {
-        cout << "Thu vien da day, khong the them sach moi!\n";
+        cout << "Thu vien da day!\n";
         return;
     }
     Sach s;
-    s.nhap();
+    s.nhap(); 
     string nxb = s.getNXB();
-    while (!timNXBTheoTen(nxb)) {
-        cout << "NXB '" << nxb << "' khong ton tai. Nhap lai NXB (nhap 0 de huy): ";
+    while (true) {
+        if (timNXBTheoTen(nxb) != nullptr) {
+            break; 
+        }
+
+        cout << "NXB '" << nxb << "' KHONG TON TAI! Nhap lai (0 huy): ";
         string tmp;
-        getline(cin, tmp);
-        if (tmp == "0" || tmp.size() == 0) {
-            cout << "Huy them sach.\n";
+        if (!getline(cin >> ws, tmp)) {
+            cout << "Loi nhap. Huy.\n";
             return;
         }
-        s.setNXB(tmp);
+        if (tmp == "0") {
+            cout << "Huy.\n";
+            return;
+        }
         nxb = tmp;
+        s.setNXB(nxb); 
     }
     danhSach[soLuongTong++] = s;
-    cout << "Da them sach thanh cong!\n";
+    saveDuLieu();
+    cout << "Them thanh cong! Ma: " << s.getMaSach() << endl;
 }
-
 void ThuVien::hienThi() {
     cout << "\n----- DANH SACH SACH TRONG THU VIEN -----\n";
     for (int i = 0; i < soLuongTong; ++i) {
@@ -34,55 +41,53 @@ void ThuVien::hienThi() {
         danhSach[i].hienThiThongTin();
     }
 }
-void ThuVien::timTheoMa() {
-    string ma;
-    while(true)
-    {
-        cout << "Nhap ma sach can tim la: "; cin >>ma;
-        bool found = false;
-        for (int i = 0; i < soLuongTong; ++i) {
-        if (danhSach[i].getMaSach() == ma) {
-            danhSach[i].hienThiThongTin();
-            found = true;
-            break;
+Sach* ThuVien::timSachTheoTen(const string& ten) const {
+   for (int i = 0; i < soLuongTong; ++i) {
+        if (danhSach[i].getTenSach() == ten) {
+            return const_cast<Sach*>(&danhSach[i]);
         }
     }
-        if (found == false) cout << "Khong tim thay ma sach. Vui long nhap lai! \"" << ma << "\"\n";
-    }
+    return nullptr;
 }
 
-void ThuVien::suaSachTheoMa() {
-    string ma;
-    while(true)
-    {
-        cout << "Nhap ma cua sach can sua la: "; cin >>ma;
-        bool found = false;
-        for (int i = 0; i < soLuongTong; ++i) {
-        if (danhSach[i].getMaSach() == ma) {
-            danhSach[i].nhap();
-            found = true;
-            cout <<"Da sua thanh cong!"<<endl;
-            break;
-        }
+void ThuVien::suaSachTheoTen() {
+    string ten;
+    cout << "Nhap ten sach can sua: ";
+    getline(cin, ten);
+    Sach* s= timSachTheoTen(ten);
+    if (!s) {
+        cout << "Khong tim thay sach!\n";
+        return;
     }
-        if (found == false) cout << "Khong tim thay ma sach. Vui long nhap lai! \"" << ma << "\"\n";
-    }
+    cout << "Nhap thong tin moi:\n";
+    s->nhap();  
+    saveDuLieu();  
+    cout << "Da sua thanh cong!\n";
 }
 
-void ThuVien::xoaSachTheoMa() {
-    while (true)
-    {
-        string ma;
-        cout <<"Nhap ma sach can xoa: "; cin >> ma;
-        bool found = false;
-        for (int i = 0; i < soLuongTong; ++i) {
-        if (danhSach[i].getMaSach() == ma) {
-            for (int j = i; j < soLuongTong - 1; ++j) danhSach[j] = danhSach[j + 1];
+void ThuVien::xoaSachTheoTen() {
+    string ten;
+    cout << "Nhap ten sach can xoa: ";
+    getline(cin, ten);
+
+    for (int i = 0; i < soLuongTong; ++i) {
+        if (danhSach[i].getTenSach() == ten) {
+            for (int j = i; j < soLuongTong - 1; ++j) {
+                danhSach[j] = danhSach[j + 1];
+            }
             --soLuongTong;
-            cout << "Da xoa sach co ma " << ma << "\n";
-            break;
+            saveDuLieu();  
+            cout << "Da xoa sach!\n";
+            return;
         }
     }
-    if (found == false) cout << "Khong tim thay ma sach. Vui long nhap lai! \"" << ma << "\"\n";
+    cout << "Khong tim thay sach!\n";
+}
+void ThuVien::timVaHienThiSach(const string& ten) const {
+    Sach* s = const_cast<ThuVien*>(this)->timSachTheoTen(ten);
+    if (s) {
+        s->hienThiThongTin();
+    } else {
+        cout << "Khong tim thay!\n";
     }
 }

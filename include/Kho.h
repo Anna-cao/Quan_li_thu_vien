@@ -3,7 +3,6 @@
 
 #include <string>
 #include "NhaXuatBan.h"
-#include "Sach.h"
 
 #define Max_NXB 200  
 class Kho {

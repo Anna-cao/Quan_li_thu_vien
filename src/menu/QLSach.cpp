@@ -1,47 +1,37 @@
 #include <iostream>
 #include "../include/ThuVien.h"
+#include "../include/menu/QLSach.h"
+#include <string>
 using namespace std;
 
 void menuQuanLiSach(ThuVien& thuVien) {
-    int chon1;
+    int chon;
     do {
-        cout << "\n--- Quan li sach ---\n";
-        cout <<"1. Hien thi danh sach sach\n";
-        cout <<"2. Them sach\n";
-        cout <<"3. Tim sach theo ten\n";
-        cout <<"4. Sua sach theo ma\n";
-        cout <<"5. Xoa sach theo ma\n";
-        cout <<"6. Thoat\n";
-        cout <<"Lua chon: ";
-        cin >> chon1;
-        cin.ignore(1000,'\n');
+        cout << "\n--- QUAN LI SACH ---\n";
+        cout << "1. Hien thi danh sach\n";
+        cout << "2. Them sach\n";
+        cout << "3. Tim sach theo ten\n";
+        cout << "4. Sua sach theo ten\n";
+        cout << "5. Xoa sach theo ten\n";
+        cout << "6. Thoat\n";
+        cout << "Chon: ";
+        cin >> chon;
+        cin.ignore();
 
-        switch(chon1) {
+        switch (chon) {
             case 1: thuVien.hienThi(); break;
             case 2: thuVien.themSach(); break;
             case 3: {
                 string ten;
-                cout <<"Nhap ten sach: ";
+                cout << "Nhap ten sach can tim: ";
                 getline(cin, ten);
-                thuVien.timTheoMa();
+                thuVien.timVaHienThiSach(ten);
                 break;
             }
-            case 4: {
-                string ma;
-                cout <<"Nhap ma sach can sua: ";
-                getline(cin, ma);
-                thuVien.suaSachTheoMa();
-                break;
-            }
-            case 5: {
-                string ma;
-                cout <<"Nhap ma sach can xoa: ";
-                getline(cin, ma);
-                thuVien.xoaSachTheoMa();
-                break;
-            }
+            case 4: thuVien.suaSachTheoTen(); break;
+            case 5: thuVien.xoaSachTheoTen(); break;
             case 6: break;
-            default: cout <<"Lua chon khong hop le!\n";
+            default: cout << "Sai!\n";
         }
-    } while(chon1 != 6);
+    } while (chon != 6);
 }
