@@ -1,26 +1,31 @@
+// Kho.h
 #ifndef KHO_H
 #define KHO_H
+
 #include <string>
-#include <vector>
-#include "Nhaxuatban.h"
-#include"Sach.h"
-#include "ThuVien.h"
-using namespace std;
-class ThuVien;
-class Kho: public ThuVien {
+#include "NhaXuatBan.h"
+#include "Sach.h"
+
+#define Max_NXB 200  
+class Kho {
 private:
-    Kho();
-    ThuVien * tv;
-    NhaXuatBan NXB;
-    int soLuongTong, soLuongDaMuon;
+    int soLuongTong;
+    int soLuongDaMuon;
+    NhaXuatBan* danhSachNXB[Max_NXB];  
+    int soNXB;
+
 public:
-    Kho (const NhaXuatBan &NXB, int soLuongTong, int soLuongDaMuon):NXB(NXB), soLuongTong(soLuongTong), soLuongDaMuon(soLuongDaMuon) {}
-    void HienThiKho()const;
-    int soSachConLai() const {return soLuongTong - soLuongDaMuon;}
-    int getSoLuongTong(){return soLuongTong;};
-    bool coNXB(string& ten)const;
-    int getSoLuongDaMuon(){return soLuongDaMuon;}
+    Kho(int tong = 0, int muon = 0);
+    ~Kho();
+
+    void HienThiKho() const;
+    int soSachConLai() const { return soLuongTong - soLuongDaMuon; }
+    int getSoLuongTong() const { return soLuongTong; }
+    int getSoLuongDaMuon() const { return soLuongDaMuon; }
+    bool coNXB(const string& ten) const;
+    bool themNXB(NhaXuatBan* nxb);
+    const NhaXuatBan* const* getDSNXB() const { return danhSachNXB; }
+    int getSoNXB() const { return soNXB; }
 };
 
 #endif
-

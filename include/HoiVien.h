@@ -20,7 +20,8 @@ public:
             int thoiGianMuonMax, double tileGiamGia, 
             string ngayDangKy, string ngayHetHan);
    
-    string getLoaiDocGia() const override { return "HoiVien"; }    int getThoiGianMuonMax() const;
+    string getLoaiDocGia() const override { return "HoiVien"; }
+     int getThoiGianMuonMax() const;
     void setThoiGianMuonMax(int thoiGian);
     double getTileGiamGia() const;
     void setTileGiamGia(double tile);

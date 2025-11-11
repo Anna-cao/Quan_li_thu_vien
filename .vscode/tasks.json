@@ -1,27 +1,31 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "build",
-            "type": "shell",
-            "command": "g++",
-            "args": [
-                "-g",
-                "${workspaceFolder}/main.cpp",
-                "${workspaceFolder}/src/*.cpp",
-                "${workspaceFolder}/src/menu/*.cpp",
-                "${workspaceFolder}/src/ThuVien/*.cpp",
-                "-I${workspaceFolder}/include",
-                "-o",
-                "${workspaceFolder}/Quan_li_thu_vien.exe"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": [
-                "$msCompile"
-            ]
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "C:/msys64/ucrt64/bin/g++.exe",
+      "args": [
+        "-std=c++17",
+        "-g",
+        "-O0",
+        "-Wall",
+        "-Wextra",
+
+        "${workspaceFolder}/main.cpp",
+        "${workspaceFolder}/src/*.cpp",
+        "${workspaceFolder}/src/menu/*.cpp",
+        "${workspaceFolder}/src/ThuVien/*.cpp",
+
+        "-I", "${workspaceFolder}/include",
+        "-o", "${workspaceFolder}/Quan_li_thu_vien.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Compile using MSYS2 UCRT64 g++"
+    }
+  ]
 }

@@ -1,10 +1,10 @@
 #include "../include/Date.h"
 #include <bits/stdc++.h>
+#include <string>
 
 Date::Date(int d, int m, int y) : ngay(d), thang(m), nam(y){}
-
 bool Date::LaNamNhuan(int y) const{
-    return (y % 4 == 0 && y % 100 != 0 || y % 400 == 0);    
+    return ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0));    
 }
 int Date::SoNgayTrongThang(int m, int y) const{
     static int ngayThang[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
@@ -67,10 +67,10 @@ bool Date::operator>(const Date& other) const {
     if (thang != other.thang) return thang > other.thang;
     return ngay > other.ngay;
 }
-
 int Date::operator-(const Date& other) const {
-    return (nam - other.nam) * 365 + (thang - other.thang) * 30 + (ngay - other.ngay);};
-    bool Date::operator<(const Date& other) const {
+    return TinhSoNgay(other); 
+}
+bool Date::operator<(const Date& other) const {
     if (nam != other.nam) return nam < other.nam;
     if (thang != other.thang) return thang < other.thang;
     return ngay < other.ngay;

@@ -20,7 +20,3 @@ ThuVien::~ThuVien() {
     for (int i = 0; i < soDocGia; i++) delete danhSachDocGia[i];
     for (int i = 0; i < soNXB; i++) delete danhSachNXB[i];
 }
-
-void ThuVien::HienThiKho(){
-    kho.HienThiKho();
-}

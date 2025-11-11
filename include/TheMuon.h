@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "Date.h"   
+#include "Date.h"
 using namespace std;
 
 enum LoaiThe {
@@ -14,51 +14,50 @@ enum LoaiThe {
 
 class TheMuon {
 private:
-	static int autoID;
-    string maThe;          
-    string tenDocGia;      
-    LoaiThe loaiThe;       
-    double phiDangKy;     
-    string status;         
-    int gioiHanMuon;       
-    Date ngayLapThe;       
-    Date hanSuDung;        
+    static int autoID;
+    string maThe;
+    string tenDocGia;
+    LoaiThe loaiThe;
+    double phiDangKy;
+    string status;           
+    int gioiHanMuon;
+    Date ngayLapThe;
+    Date hanSuDung;
 
-    static int demThuong;  
-    static int demHoiVien; 
+    static int demThuong;
+    static int demHoiVien;
 
-    string taoMaThe(LoaiThe loai); 
+    string taoMaThe(LoaiThe loai);
+    void tinhPhiVaGioiHan(); 
 
 public:
-    
     TheMuon();
     TheMuon(string ten, LoaiThe loai);
+    TheMuon(string loaiStr, Date ngayLap); 
 
-    
-    string getMaThe() const;
-    string getTenDocGia() const;
-    LoaiThe getLoaiThe() const;
-    double getPhiDangKy() const;
-    string getStatus() const;
-    int getGioiHanMuon() const;
-    Date getNgayLapThe() const;
-    Date getHanSuDung() const;
+    string getMaThe() const { return maThe; }
+    string getTenDocGia() const { return tenDocGia; }
+    LoaiThe getLoaiThe() const { return loaiThe; }
+    double getPhiDangKy() const { return phiDangKy; }
+    string getStatus() const { return status; }
+    int getGioiHanMuon() const { return gioiHanMuon; }
+    Date getNgayLapThe() const { return ngayLapThe; }
+    Date getHanSuDung() const { return hanSuDung; }
 
-    
-    void setTenDocGia(string ten);
-    void setLoaiThe(LoaiThe loai);
-    void setStatus(string st);
-    void setGioiHanMuon(int g);
+    void setTenDocGia(string ten) { tenDocGia = ten; }
+    void setLoaiThe(LoaiThe loai) { loaiThe = loai; tinhPhiVaGioiHan(); }
+    void setStatus(string st) { status = st; }
+    void setGioiHanMuon(int g) { gioiHanMuon = g; }
     void setNgayLapThe(const Date& ngay);
-    void setHanSuDung(const Date& han);
+    void setHanSuDung(const Date& han) { hanSuDung = han; }
 
-    
     void nhap();
-    void xuat() const;
+    void hienThi() const;
 
-    
     void ghiFile(ofstream& file) const;
     bool docFile(ifstream& file);
+
+    static void capNhatAutoID(int id);
 };
 
 #endif

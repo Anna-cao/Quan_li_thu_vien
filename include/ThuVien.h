@@ -34,7 +34,8 @@ protected:
 
     NhaXuatBan* danhSachNXB[Max_NXB];
     int soNXB;
-
+    
+    Kho kho;
 public:
     ThuVien();
     ~ThuVien();
@@ -47,11 +48,11 @@ public:
 //DOCGIA
     bool themDocGia(DocGia* dg);
     void hienThiDanhSachDocGia() const;
-    DocGia* timDocGiaTheoMaThe(const string& maThe) const;
-    void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);
+    DocGia* timDocGiaTheoMa(const string& ma) const;  
     bool suaThongTinDocGia(const string& maDocGia);
     bool xoaDocGia(const string& maDocGia);
-
+    DocGia* timDocGiaTheoMaThe(const string& maThe) const;
+    void capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the);
 //HD 
     void themHoaDon(const HoaDon& hd);
     void hienThiDanhSachHoaDon() const;
@@ -65,11 +66,11 @@ public:
     void suaNXB(const string& tenCu, const string& tenMoi);
     void xoaNXB(const string& ten);
 //TK
-    void thongKeMuonTra(const Date& ngayHienTai) const;   // In tổng quan: kho, mượn, trả, quá hạn, doanh thu (phí phạt)
-    double tongTienPhat() const;                          // Tổng phí phạt thu được (từ các hóa đơn đã trả)
+    void thongKeMuonTra(const Date& ngayHienTai) const;   
+    double tongTienPhat() const;                          
 
 //KHO
-    void hienThiKho()const;
+    void hienThiKho() const { kho.HienThiKho();}
+    Kho& getKho() { return kho;}
 };
-
 #endif

@@ -1,56 +1,87 @@
-
 #include "../include/TheMuon.h"
 #include <sstream>
+#include <iomanip>
+using namespace std;
+
 int TheMuon::autoID = 1;
+int TheMuon::demThuong = 0;
+int TheMuon::demHoiVien = 0;
 
-TheMuon::TheMuon() {
+string TheMuon::taoMaThe(LoaiThe loai) {
     stringstream ss;
     ss << "TM" << setw(3) << setfill('0') << autoID++;
-    maThe = ss.str();
-
-    loaiThe = "Thuong";
-    ngayLap = Date();
-    status = true;
-    tinhPhiVaGioiHan();
-}
-
-TheMuon::TheMuon(string loai, Date date) : loaiThe(loai), ngayLap(date), status(true) {
-    stringstream ss;
-    ss << "TM" << setw(3) << setfill('0') << autoID++;
-    maThe = ss.str();
-    tinhPhiVaGioiHan();
+    if (loai == THE_HOI_VIEN) demHoiVien++;
+    else demThuong++;
+    return ss.str();
 }
 
 void TheMuon::tinhPhiVaGioiHan() {
-    if (loaiThe == "HoiVien") { phiDangKy = 150000; gioiHanSach = 10; }
-    else { phiDangKy = 50000; gioiHanSach = 5; }
+    if (loaiThe == THE_HOI_VIEN) {
+        phiDangKy = 150000;
+        gioiHanMuon = 10;
+        hanSuDung = ngayLapThe;
+        hanSuDung.congNgay(365); 
+    } else {
+        phiDangKy = 10000;
+        gioiHanMuon = 5;
+        hanSuDung = ngayLapThe;
+        hanSuDung.congNgay(180); 
+    }
+    status = "Con han";
+}
+
+TheMuon::TheMuon() {
+    loaiThe = THE_THUONG;
+    ngayLapThe = Date::HomNay();
+    maThe = taoMaThe(loaiThe);
+    tenDocGia = "";
+    tinhPhiVaGioiHan();
+}
+
+TheMuon::TheMuon(string ten, LoaiThe loai) {
+    tenDocGia = ten;
+    loaiThe = loai;
+    ngayLapThe = Date::HomNay();
+    maThe = taoMaThe(loai);
+    tinhPhiVaGioiHan();
+}
+
+TheMuon::TheMuon(string loaiStr, Date ngayLap) {
+    ngayLapThe = ngayLap;
+    loaiThe = (loaiStr == "HoiVien") ? THE_HOI_VIEN : THE_THUONG;
+    maThe = taoMaThe(loaiThe);
+    tenDocGia = "";
+    tinhPhiVaGioiHan();
+}
+
+void TheMuon::setNgayLapThe(const Date& ngay) {
+    ngayLapThe = ngay;
+    tinhPhiVaGioiHan();
+}
+
+void TheMuon::nhap() {
+    cout << "Ten doc gia: "; getline(cin, tenDocGia);
+    string loai;
+    do {
+        cout << "Loai the (Thuong/HoiVien): "; getline(cin, loai);
+        if (loai == "HoiVien") loaiThe = THE_HOI_VIEN;
+        else if (loai == "Thuong") loaiThe = THE_THUONG;
+        else cout << "Chi nhap Thuong hoac HoiVien!\n";
+    } while (loai != "Thuong" && loai != "HoiVien");
+    tinhPhiVaGioiHan();
 }
 
 void TheMuon::hienThi() const {
+    string loaiStr = (loaiThe == THE_HOI_VIEN) ? "HoiVien" : "Thuong";
     cout << left << setw(10) << maThe
-         << setw(12) << loaiThe
+         << setw(20) << tenDocGia
+         << setw(12) << loaiStr
          << setw(12) << fixed << setprecision(0) << phiDangKy
-         << setw(10) << gioiHanSach;
-    ngayLap.xuat();
-    cout << setw(10) << (status ? "Con han" : "Het han") << endl;
+         << setw(10) << gioiHanMuon;
+    ngayLapThe.Xuat();
+    cout << " | Han: "; hanSuDung.Xuat();
+    cout << " | " << status << endl;
 }
-
-void TheMuon::ghiFile(ofstream& file) const {
-    file << maThe << " " << loaiThe << " " << phiDangKy << " "
-         << gioiHanSach << " ";
-    ngayLap.ghi(file);
-    file << " " << status << endl;
-}
-
-void TheMuon::docFile(ifstream& file) {
-    file >> maThe >> loaiThe >> phiDangKy >> gioiHanSach;
-    ngayLap.doc(file);
-    file >> status;
-
-    int id = stoi(maThe.substr(2));
-    capNhatAutoID(id + 1);
-}
-
 void TheMuon::capNhatAutoID(int id) {
     if (id > autoID) autoID = id;
 }

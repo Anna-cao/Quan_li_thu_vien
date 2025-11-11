@@ -1,3 +1,6 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtemplate-body"
+
 #include <iostream>
 #include "../include/auth.h"
 #include "../include/ThuVien.h"
@@ -7,7 +10,7 @@
 #include "../include/menu/QLNXB.h"
 #include "../include/menu/ThongKe.h"
 using namespace std;
-
+#pragma GCC diagnostic pop
 int main() {
     Auth auth;
     auth.docFile("data/auth.txt");  

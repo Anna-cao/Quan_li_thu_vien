@@ -23,42 +23,45 @@ private:
 
     int soLuotMuon;
     vector<string> dsMaSachDangMuon;
-
     TheMuon* theMuon;
+
+    int status; 
 
 public:
     DocGia();
     DocGia(string ma, string ten, int soLuotMuon);
-    DocGia(string ma, string ten, TheMuon* tm);
-    ~DocGia();
+    DocGia(string ten, string loai); 
+    virtual ~DocGia();
 
-    static string generateMaDocGia();
-
-    string getMaDocGia() const;
-    string getHoTen() const;
-    int getSoLuotMuon() const;
-    TheMuon* getTheMuon() const;
-    const vector<string>& getDsMaSachDangMuon() const;
-
-    void setTheMuon(TheMuon* tm);
-    void setDsMaSachDangMuon(const vector<string>& ds);
-    void setSoLuotMuon(int s);
-
-    void nhap();
-    void hienThiThongTin() const;
-
+    string getMaDocGia() const { return maDocGia; }
+    string getHoTen() const { return hoTen; }
+    int getSoLuotMuon() const { return soLuotMuon; }
+    TheMuon* getTheMuon() const { return theMuon; }
+    const vector<string>& getDsMaSachDangMuon() const { return dsMaSachDangMuon; }
+    int getStatus() const { return status; }
+    virtual string getLoaiDocGia() const { return "Doc Gia Thuong"; } 
+    void setTheMuon(TheMuon* tm){delete theMuon; theMuon = tm;};
+    void setDsMaSachDangMuon(const vector<string>& ds) { dsMaSachDangMuon = ds; }
+    void setSoLuotMuon(int s) { soLuotMuon = s; }
+    void setStatus(int s) { status = s; }
     
+    void nhap();
+    virtual void hienThiThongTin() const;
     void hienThiDong() const;
     static void hienThiTieuDe();
 
     bool muonSach(const string& maSach, const Date& ngayHienTai);
     void traSach(const string& maSach);
-
     void suaDocGia(const string& ma);
     void capNhatTheMuon();
 
-    static int docFileDocGia(DocGia ds[], int soLuongToiDa, const string& duongDan);
-    static void ghiFileDocGia(const DocGia ds[], int soLuong, const string& duongDan);
+    static bool kiemTraNgayHopLe(const Date& d);
+
+    // void docFileDocGia(istream& in);
+    // void ghiFileDocGia(ostream& out) const;
+
+    // static int docFileDocGia(DocGia* ds[], int soLuongToiDa, const string& duongDan);
+    // static void ghiFileDocGia(const DocGia* ds[], int soLuong, const string& duongDan);
 };
 
 #endif

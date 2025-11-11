@@ -5,7 +5,7 @@
 #include <algorithm>
 using namespace std;
 
-HoaDon::HoaDon() : phiQuaHan(0), tongPhi(0)  {}
+HoaDon::HoaDon() : phiQuaHan(0), tongPhi(0), tiencoc(0)  {}
 
 HoaDon::HoaDon(string maHD, string maT, Date muon, Date tra, double phi, double tong)
     : maHoaDon(maHD), maThe(maT), ngMuon(muon), ngTraThucTe(tra), phiQuaHan(phi), tongPhi(tong) {
@@ -16,22 +16,27 @@ HoaDon::HoaDon(string maHD, string maT, Date muon, Date tra, double phi, double 
 HoaDon::~HoaDon() {}
 
 void HoaDon::tinhPhiQuaHan(const DocGia* dg, const Date& ngayTra) {
-    if(status ==0) return;
-    if(status ==1)
-    {
-        int soNgay = ngMuon.TinhSoNgay(ngayTra);
-        int quahan = soNgay -14;
-        int soTuan = 0;
-    if (quahan > 0) {
-        soTuan = (quahan + 6) / 7;  
+    if (status != 1) return;  
+    if (!ngayTra.HopLe()) return;
+
+    int soNgay = ngMuon.TinhSoNgay(ngayTra);
+    if (soNgay < 0) return; 
+
+    int quaHan = soNgay - 14;
+    if (quaHan <= 0) {
+        phiQuaHan = 0;
+        tongPhi = tiencoc;
+        return;
     }
-        double phi1Tuan = 10000;
-        if(dg != NULL && dg->getLoaiDocGia()=="HoiVien"){
-            phi1Tuan = 5000;
-        }
-        phiQuaHan = soTuan*phi1Tuan;
-        tongPhi = phiQuaHan + tiencoc;
+
+    int soTuan = (quaHan + 6) / 7; 
+    double phi1Tuan = 10000;
+    if (dg != nullptr && dg->getLoaiDocGia() == "HoiVien") {
+        phi1Tuan = 5000;
     }
+
+    phiQuaHan = soTuan * phi1Tuan;
+    tongPhi = phiQuaHan + tiencoc;
 }
 void HoaDon::setDaTra(const Date& ngayTra)
 {

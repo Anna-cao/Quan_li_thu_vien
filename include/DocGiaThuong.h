@@ -11,7 +11,7 @@ private:
 public:
     DocGiaThuong();
     DocGiaThuong(string ten, string maSo, int soSachDaMuon, int gioiHanMuon);
-    
+    string getLoaiDocGia() const override { return "Doc Gia Thuong"; };
     int getGioiHanMuon() const;
     void setGioiHanMuon(int gioiHan);
     
