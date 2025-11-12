@@ -1,18 +1,27 @@
-S003
-Lap trinh nang cao C++
-Bjarne Stroustrup
-NXB Giao Duc
-Giao trinh
-5
-0
-120000
-
-S002
-Dai so tuyen tinh
-Toan
+S001
+Lap trinh C++
+Kteam
 Kim Dong
 Giao trinh
-12
+10
 0
-12000
+100000
+
+S002
+Toan roi rac
+Nguyen Duc Nghia
+NXB Giao Duc
+Tai lieu tham khao
+8
+0
+80000
+
+S003
+Co so du lieu
+Silberschatz
+NXB Khoa hoc
+Giao trinh
+15
+0
+120000
 

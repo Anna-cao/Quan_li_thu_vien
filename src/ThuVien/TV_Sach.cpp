@@ -41,6 +41,14 @@ void ThuVien::hienThi() {
         danhSach[i].hienThiThongTin();
     }
 }
+Sach* ThuVien::timSachTheoMa(const string& maSach) const {
+    for (int i = 0; i < soLuongTong; ++i) {
+        if (danhSach[i].getMaSach() == maSach) {
+            return const_cast<Sach*>(&danhSach[i]);  // Vì const, nhưng cần mutable để muonSach()
+        }
+    }
+    return nullptr;
+}
 Sach* ThuVien::timSachTheoTen(const string& ten) const {
    for (int i = 0; i < soLuongTong; ++i) {
         if (danhSach[i].getTenSach() == ten) {

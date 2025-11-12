@@ -10,36 +10,42 @@ using namespace std;
 class HoaDon {
 protected:
     string maHoaDon;
-    string maThe;          
+    string maThe;
     Date ngMuon;
     Date ngTraThucTe;
     double phiQuaHan, tongPhi, tiencoc;
-    string maKH;
     int status;
+    static int autoID;
+    vector<pair<string, int>> dsSachMuon;
+
 public:
     HoaDon();
-    HoaDon(string maHD, string maT, Date muon, Date tra , double phi , double tong);
-    virtual ~HoaDon();
+    HoaDon(string maHD, string maT, Date muon, Date tra, double phi, double tong);
+    virtual ~HoaDon() = default;
 
-    virtual void DocFile(ifstream &file);
-    void tinhPhiQuaHan(const DocGia* dg, const Date& ngayTra);
-    virtual void hienThiThongTin() const;
-
-    double getTongPhi() const { return tongPhi; }
-    virtual string getMaThe() const { return maThe; }
-    virtual Date getNgMuon() const { return ngMuon; }
     string getMaHoaDon() const { return maHoaDon; }
-    string getMaKH() const { return maKH; }
-    int getStatus() const{return status;}
-    double getTienCoc() const { return tiencoc; }
-    double getPhiQuaHan() const { return phiQuaHan; }
-
+    string getMaThe() const { return maThe; }
     Date getNgayMuon() const { return ngMuon; }
     Date getNgayTraThucTe() const { return ngTraThucTe; }
+    double getPhiQuaHan() const { return phiQuaHan; }
+    double getTongPhi() const { return tongPhi; }
+    double getTienCoc() const { return tiencoc; }
+    int getStatus() const { return status; }
+    const vector<pair<string, int>>& getDsSachMuon() const { return dsSachMuon; }
 
+    void setMaThe(const string& ma) { maThe = ma; }
+    void setNgayMuon(const Date& d) { ngMuon = d; }
+    void setNgayTraThucTe(const Date& d) { ngTraThucTe = d; }
+    void setTienCoc(double coc) { tiencoc = coc; }
+    void setDsSachMuon(const vector<pair<string, int>>& ds) { dsSachMuon = ds; }
+    void taoMaTuDong();
+    void capNhatAutoID(int id);
     void setDaTra(const Date& ngayTra);
-    static int docFileHoaDon(HoaDon danhSach[], int soLuongToiDa, const std::string& duongDan = "data/hoadon.txt");
-    static void ghiFileHoaDon(const HoaDon danhSach[], int soLuong, const std::string& duongDan = "data/hoadon.txt");
-
+    void tinhPhiQuaHan(const DocGia* dg, const Date& ngayTra);
+    virtual void hienThiThongTin() const;
+    virtual void DocFile(ifstream& file);
+    static int docFileHoaDon(HoaDon danhSach[], int soLuongToiDa, const string& duongDan = "data/hoadon.txt");
+    static void ghiFileHoaDon(const HoaDon danhSach[], int soLuong, const string& duongDan = "data/hoadon.txt");
 };
+
 #endif

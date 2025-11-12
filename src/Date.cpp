@@ -1,7 +1,6 @@
 #include "../include/Date.h"
 #include <bits/stdc++.h>
 #include <string>
-
 Date::Date(int d, int m, int y) : ngay(d), thang(m), nam(y){}
 bool Date::LaNamNhuan(int y) const{
     return ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0));    
@@ -35,14 +34,11 @@ int Date::TinhSoNgay(const Date& d) const {
     };
     return toDays(d.ngay, d.thang, d.nam) - toDays(ngay, thang, nam);
 }
-
 void Date::congNgay(int soNgay) {
     ngay += soNgay;
-
     while (ngay > SoNgayTrongThang(thang, nam)) {
         ngay -= SoNgayTrongThang(thang, nam);
         thang++;
-
         if (thang > 12) {
             thang = 1;
             nam++;
@@ -80,4 +76,62 @@ void Date::ghiFile(ostream& out) const {
 }
 void Date::docFile(istream& in) {
     in >> ngay >> thang >> nam;
+}
+Date Date::NhapTuChuoi(const string& msg) {
+    string s;
+    int d, m, y;
+    while (true) {
+        cout << msg;
+        getline(cin >> ws, s);
+        vector<string> parts;
+        string token;
+        stringstream ss(s);
+        while (getline(ss, token, '/')) {
+            parts.push_back(token);
+        }
+        if (parts.size() != 3) {
+            cout << "Phai nhap dung dinh dang: dd/mm/yyyy\n";
+            continue;
+        }
+        try {
+            d = stoi(parts[0]);
+            m = stoi(parts[1]);
+            y = stoi(parts[2]);
+        } catch (...) {
+            cout << "Phai nhap dung dinh dang: dd/mm/yyyy\n";
+            continue;
+        }
+        if (y < 1900 || y > 2100) {
+            cout << "Nam khong hop le! Nhap lai.\n";
+            continue;
+        }
+        Date temp(d, m, y);
+        if (temp.HopLe()) {
+            return temp;
+        }
+        cout << "Ngay khong hop le! Nhap lai.\n";
+    }
+}
+void Date::XuatDinhDang() const {
+    if (ngay < 10) cout << "0";
+    cout << ngay << "/";
+    if (thang < 10) cout << "0";
+    cout << thang << "/" << nam;
+}
+Date Date::NhapNgayHopLe(const string& msg) {
+    int d, m, y;
+    while (true) {
+        cout << msg;
+        if (cin >> d >> m >> y) {
+            Date temp(d, m, y);
+            if (temp.HopLe()) {
+                cin.ignore(10000, '\n');
+                return temp;
+            }
+        } else {
+            cin.clear();
+        }
+        cin.ignore(10000, '\n');
+        cout << "Ngay khong hop le! Nhap lai.\n";
+    }
 }

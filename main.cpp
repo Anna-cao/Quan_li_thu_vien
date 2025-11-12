@@ -12,16 +12,7 @@
 #include "../include/menu/QLHoaDon.h"
 #include "../include/menu/QLNXB.h"
 #include "../include/menu/ThongKe.h"
-
 using namespace std;
-
-void pauseAndClear() {
-    cout << "\nNhan Enter de tiep tuc...";
-    cin.get();
-    cin.clear();
-    cin.ignore(10000, '\n');
-}
-
 int main() {
     Auth auth;
     auth.docFile("data/auth.txt");
@@ -29,87 +20,97 @@ int main() {
     if (auth.getSoNguoiDung() == 0) {
         auth.dangKy("admin", "123456", 2);
         cout << "Da tao tai khoan Admin mac dinh: admin / 123456\n";
-        pauseAndClear();
     }
-
     ThuVien thuVien;
     thuVien.loadDuLieu();
-
     while (true) {
-        int luaChon, lanThu = 0;
-        bool daDangNhap = false;
+    int luaChon, lanThu = 0;
+    bool daDangNhap = false;
 
-        do {
+    do {
+        system("cls");
+        cout << "\n";
+        cout << "    HE THONG QUAN LY THU VIEN\n";
+        cout << "    ------------------------\n";
+        cout << "    1. Dang nhap\n";
+        cout << "    2. Dang ky tai khoan\n";
+        cout << "    3. Thoat chuong trinh\n";
+        cout << "    ------------------------\n";
+        cout << "    Chon: ";
+        cin >> luaChon; 
+        cin.ignore();
+        if (luaChon == 1) {
+            string ten, mk = "";
+            char ch;
             system("cls");
-            cout << "========================================\n";
-            cout << "     HE THONG QUAN LY THU VIEN          \n";
-            cout << "========================================\n";
-            cout << "1. Dang nhap\n";
-            cout << "2. Dang ky tai khoan\n";
-            cout << "3. Thoat chuong trinh\n";
-            cout << "----------------------------------------\n";
-            cout << "Chon: ";
-            cin >> luaChon; cin.ignore();
-
-            if (luaChon == 1) {
-                string ten, mk = "";
-                char ch;
+            cout << " --- DANG NHAP ---\n";
+            cout << "Con " << (3 - lanThu) << " lan thu.\n\n";
+            cout << "Ten dang nhap: "; getline(cin, ten);
+            cout << "Mat khau: ";
+            while ((ch = _getch()) != '\r') {
+                if (ch == '\b' && !mk.empty()) { mk.pop_back(); cout << "\b \b"; }
+                else if (ch >= 32 && ch <= 126) { mk += ch; cout << '*'; }
+            }
+            cout << endl;
+            if (auth.dangNhap(ten, mk, lanThu)) {
+                daDangNhap = true;
                 system("cls");
-                cout << "--- DANG NHAP ---\n";
-                cout << "Con " << (3 - lanThu) << " lan thu.\n\n";
-                cout << "Ten dang nhap: "; getline(cin, ten);
-                cout << "Mat khau: ";
+                cout << "Dang nhap thanh cong!\n";
+                this_thread::sleep_for(chrono::milliseconds(600));
+            } else if (lanThu >= 3) {
+                system("cls");
+                cout << "Nhap sai 3 lan. Tro ve menu chinh...\n";
+                this_thread::sleep_for(chrono::milliseconds(1000));
+            } else {
+                system("cls");
+                cout << "Sai thong tin. Con " << (3 - lanThu) << " lan thu.\n";
+                this_thread::sleep_for(chrono::milliseconds(800));
+            }
+        } else if (luaChon == 2) {
+            string ten, mk1, mk2;
+            system("cls");
+            cout << " --- DANG KY TAI KHOAN MOI ---\n\n";
+            cout << "Ten dang nhap: "; getline(cin, ten);
+            do {
+                cout << "Mat khau: "; mk1 = "";
+                char ch;
                 while ((ch = _getch()) != '\r') {
-                    if (ch == '\b' && !mk.empty()) { mk.pop_back(); cout << "\b \b"; }
-                    else if (ch >= 32 && ch <= 126) { mk += ch; cout << '*'; }
+                    if (ch == '\b' && !mk1.empty()) { mk1.pop_back(); cout << "\b \b"; }
+                    else if (ch >= 32 && ch <= 126) { mk1 += ch; cout << '*'; }
+                }
+                cout << endl << "Nhap lai mat khau: "; mk2 = "";
+                while ((ch = _getch()) != '\r') {
+                    if (ch == '\b' && !mk2.empty()) { mk2.pop_back(); cout << "\b \b"; }
+                    else if (ch >= 32 && ch <= 126) { mk2 += ch; cout << '*'; }
                 }
                 cout << endl;
-
-                if (auth.dangNhap(ten, mk, lanThu)) {
-                    daDangNhap = true;
-                } else if (lanThu >= 3) {
-                    cout << "\nBan da nhap sai 3 lan. Tro ve menu chinh...\n";
-                    pauseAndClear();
-                } else {
-                    cout << "\nSai thong tin. Vui long thu lai!\n";
-                    pauseAndClear();
+                if (mk1 != mk2) {
+                    cout << "Mat khau khong khop!\n";
+                    this_thread::sleep_for(chrono::milliseconds(800));
+                    system("cls");
+                    cout << " --- DANG KY TAI KHOAN MOI ---\n\n";
+                    cout << "Ten dang nhap: " << ten << endl;
                 }
-
-            } else if (luaChon == 2) {
-                string ten, mk1, mk2;
+            } while (mk1 != mk2);
+            if (auth.dangKy(ten, mk1, 0)) {
                 system("cls");
-                cout << "--- DANG KY TAI KHOAN MOI ---\n";
-                cout << "Ten dang nhap: "; getline(cin, ten);
-                do {
-                    cout << "Mat khau: "; mk1 = "";
-                    char ch;
-                    while ((ch = _getch()) != '\r') {
-                        if (ch == '\b' && !mk1.empty()) { mk1.pop_back(); cout << "\b \b"; }
-                        else if (ch >= 32 && ch <= 126) { mk1 += ch; cout << '*'; }
-                    }
-                    cout << endl << "Nhap lai mat khau: "; mk2 = "";
-                    while ((ch = _getch()) != '\r') {
-                        if (ch == '\b' && !mk2.empty()) { mk2.pop_back(); cout << "\b \b"; }
-                        else if (ch >= 32 && ch <= 126) { mk2 += ch; cout << '*'; }
-                    }
-                    cout << endl;
-                    if (mk1 != mk2) cout << "Mat khau khong khop!\n";
-                } while (mk1 != mk2);
-
-                auth.dangKy(ten, mk1, 0);
-                cout << "\nDang ky thanh cong!\n";
-                pauseAndClear();
-
-            } else if (luaChon == 3) {
-                cout << "\nDang luu du lieu...\n";
-                thuVien.saveDuLieu();
-                auth.luuFile();
-                cout << "Cam on ban da su dung he thong!\n";
-                return 0;
+                cout << "Dang ky thanh cong!\n";
+                this_thread::sleep_for(chrono::milliseconds(800));
             }
-
-        } while (!daDangNhap);
-
+        } else if (luaChon == 3) {
+            system("cls");
+            cout << "Dang luu du lieu...\n";
+            thuVien.saveDuLieu();
+            auth.luuFile();
+            cout << "Cam on ban da su dung!\n";
+            this_thread::sleep_for(chrono::milliseconds(800));
+            return 0;
+        } else {
+            system("cls");
+            cout << "Lua chon khong hop le!\n";
+            this_thread::sleep_for(chrono::milliseconds(800));
+        }
+    } while (!daDangNhap);
         int chon;
         do {
             system("cls");
@@ -154,7 +155,6 @@ int main() {
                     }
                     cout << endl;
                     auth.doiMatKhau(mkCu, mkMoi);
-                    pauseAndClear();
                     break;
                 }
                 case 7: if (role == 2) {
@@ -163,16 +163,13 @@ int main() {
                     cout << "--- XOA TAI KHOAN ---\n";
                     cout << "Nhap ten: "; getline(cin, tenXoa);
                     auth.xoaTaiKhoan(tenXoa);
-                    pauseAndClear();
                 } break;
                 case 8:
                     auth.dangXuat();
                     cout << "\nDa dang xuat. Quay lai dang nhap...\n";
-                    pauseAndClear();
                     break;
                 default:
                     cout << "Lua chon khong hop le!\n";
-                    pauseAndClear();
                     break;
             }
         } while (chon != 8);

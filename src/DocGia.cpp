@@ -82,20 +82,31 @@ void DocGia::hienThiThongTin() const {
          <<  setw(13) << ss.str()
          <<  setw(12) << trangThaiThe;
 }
-void DocGia::hienThiDong() const {
-    if (status == 0) return;
-    hienThiThongTin();  
-    cout << endl;       
-}
 void DocGia::hienThiTieuDe() {
     cout << left
          << setw(8)  << "Ma DG"
          << setw(20) << "Ho Ten"
-         << setw(13) << "SDT"
+         << setw(12) << "SDT"
          << setw(25) << "Email"
          << setw(20) << "Dia chi"
-         << setw(16) << "Ngay lap the"
-         << "| Thong tin the\n";
+         << setw(13) << "Ngay lap"
+         << setw(10) << "The" << endl;
+    cout << string(105, '-') << endl;
+}
+void DocGia::hienThiDong() const {
+    if (status == 0) return;
+    stringstream ss;
+    ss << setw(2) << setfill('0') << ngayLapThe.getNgay() << "/"
+       << setw(2) << setfill('0') << ngayLapThe.getThang() << "/"
+       << ngayLapThe.getNam();
+    cout << left
+         << setw(8)  << maDocGia
+         << setw(20) << hoTen
+         << setw(12) << sdt
+         << setw(25) << email
+         << setw(20) << diachi
+         << setw(13) << ss.str()
+         << setw(10) << (theMuon ? "Co" : "Khong") << endl;
 }
 void DocGia::docFile(istream& in) {
     getline(in, maDocGia);

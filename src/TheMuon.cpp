@@ -81,8 +81,8 @@ void TheMuon::hienThi() const {
          << setw(12) << loaiStr
          << setw(12) << fixed << setprecision(0) << phiDangKy
          << setw(10) << gioiHanMuon;
-    ngayLapThe.Xuat();
-    cout << " | Han: "; hanSuDung.Xuat();
+    ngayLapThe.XuatDinhDang();
+    cout << " | Han: "; hanSuDung.XuatDinhDang();
     cout << " | " << status << endl;
 }
 void TheMuon::capNhatAutoID(int id) {

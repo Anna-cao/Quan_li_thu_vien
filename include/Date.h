@@ -2,6 +2,7 @@
 #define DATE_H
 
 #include<iostream>
+#include<string>
 using namespace std;
 
 class Date {
@@ -24,6 +25,10 @@ public:
     int getThang() const{return thang;}
     int getNam() const{return nam;}
 
+    static Date NhapTuChuoi(const string& msg = "Nhap ngay (dd/mm/yyyy): ");
+    void XuatDinhDang() const;  
+    static Date NhapNgayHopLe(const string& msg = "Nhap ngay (dd/mm/yyyy): ");
+
     friend ostream& operator<<(ostream& out, const Date& d);
     friend istream& operator>>(istream& in, Date& d);
     bool operator>=(const Date& other) const 
@@ -45,5 +50,4 @@ public:
     void ghiFile(ostream& out) const;
     void docFile(istream& in);
 };
-
 #endif

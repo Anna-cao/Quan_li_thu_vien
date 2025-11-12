@@ -76,7 +76,6 @@ static void ghiFileNXB_vector(const vector<NhaXuatBan>& list, const string& duon
     out.close();
 }
 
-// === ĐỌC VÀO MẢNG CON TRỎ ===
 int NhaXuatBan::docFileNXB(NhaXuatBan* danhSach[], int soLuongToiDa, const string& duongDan) {
     vector<NhaXuatBan> list = docFileNXB_vector(duongDan);
     int n = min((int)list.size(), soLuongToiDa);

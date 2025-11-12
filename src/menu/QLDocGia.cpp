@@ -46,7 +46,7 @@ void menuQuanLiDocGia(ThuVien& thuVien) {
                 }
                 dg->nhapThongTinChung();
                 if (thuVien.themDocGia(dg)) {
-                    cout << "Them thanh cong! Ma: " << dg->getMaDocGia() << endl;
+                    cout << "Them thanh cong! Ma: " << dg->getMaDocGia() ;
                 } else {
                     cout << "Them that bai!\n";
                 }

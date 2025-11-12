@@ -26,33 +26,49 @@ void ThuVien::capNhatHoaDonDaTra(const string& maHD, const Date& ngayTra) {
     for (int i = 0; i < soHoaDon; ++i) {
         if (danhSachHoaDon[i].getMaHoaDon() == maHD) {
             danhSachHoaDon[i].setDaTra(ngayTra);
-            danhSachHoaDon[i].tinhPhiQuaHan(nullptr, ngayTra);
+            DocGia* dg = timDocGiaTheoMaThe(danhSachHoaDon[i].getMaThe());  
+            danhSachHoaDon[i].tinhPhiQuaHan(dg, ngayTra);
+            for (const auto& p : danhSachHoaDon[i].getDsSachMuon()) {
+                Sach* s = timSachTheoMa(p.first);
+                if (s) {
+                    for (int j = 0; j < p.second; ++j) {  
+                        s->traSach();
+                    }
+                }
+            }
             cout << "Cap nhat hoa don da tra thanh cong!\n";
             return;
         }
     }
     cout << "Khong tim thay hoa don!\n";
 }
-
 void ThuVien::tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai) {
     DocGia* dg = timDocGiaTheoMa(maDocGia);
     if (!dg) {
         cout << "Khong tim thay doc gia!\n";
         return;
     }
+    TheMuon* the = dg->getTheMuon();
+    if (!the) {
+        cout << "Doc gia chua co the muon!\n";
+        return;
+    }
     double tongPhat = 0.0;
-    const double phatMoiNgay = 1000.0;
-
+    string loaiDG = dg->getLoaiDocGia();
+    double phiMotTuan = (loaiDG == "HoiVien") ? 5000.0 : 10000.0;
     for (int i = 0; i < soHoaDon; ++i) {
-        if (danhSachHoaDon[i].getMaThe() == dg->getTheMuon()->getMaThe()) {
-            Date duKien = danhSachHoaDon[i].getNgMuon();
+        if (danhSachHoaDon[i].getMaThe() == the->getMaThe() && 
+            danhSachHoaDon[i].getStatus() == 0) {  
+            Date duKien = danhSachHoaDon[i].getNgayMuon();
             duKien.congNgay(14);
+
             if (ngayHienTai > duKien) {
-                int quaHan = ngayHienTai - duKien;
-                tongPhat += quaHan * phatMoiNgay;
+                int soNgayQuaHan = ngayHienTai - duKien;
+                int soTuan = (soNgayQuaHan + 6) / 7;
+                tongPhat += soTuan * phiMotTuan;
             }
         }
     }
     cout << "Tong tien phat qua han cho doc gia " << maDocGia
-         << ": " << tongPhat << " VND\n";
+         << " (" << loaiDG << "): " << fixed << setprecision(0) << tongPhat << " VND\n";
 }
