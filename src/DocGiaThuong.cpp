@@ -15,12 +15,9 @@ void DocGiaThuong::nhapGioiHanMuon() {
     cin.ignore();
     gioiHanMuon = limit;
 }
-void DocGiaThuong::hienThiThongTin() const {  
-    cout << "=== DOC GIA THUONG ===\n";
-    cout << "Ma DG: " << getMaDocGia() << "\n";
-    cout << "Ho ten: " << getHoTen() << "\n";
-    cout << "Gioi han muon: " << gioiHanMuon << " quyen\n";
-    cout << "======================\n";
+void DocGiaThuong::hienThiThongTin() const {
+    DocGia::hienThiThongTin();
+    cout << " | Gioi han: " << gioiHanMuon << " quyen";
 }
 void DocGiaThuong::docFile(istream& in) {
     DocGia::docFile(in);

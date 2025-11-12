@@ -22,7 +22,7 @@ protected:
     Date ngayLapThe;
     int soLuotMuon;
     vector<string> dsMaSachDangMuon;
-    TheMuon* theMuon;  
+    TheMuon* theMuon = NULL;  
     int status;
 public:
     DocGia();                                           
@@ -37,7 +37,7 @@ public:
     const vector<string>& getDsMaSachDangMuon() const { return dsMaSachDangMuon; }
     int getStatus() const { return status; }
     virtual string getLoaiDocGia() const { return "Doc Gia Thuong"; } 
-    void setTheMuon(TheMuon* tm){delete theMuon; theMuon = tm;};
+    void setTheMuon(TheMuon* tm){theMuon = tm;};
     void setDsMaSachDangMuon(const vector<string>& ds) { dsMaSachDangMuon = ds; }
     void setSoLuotMuon(int s) { soLuotMuon = s; }
     void setStatus(int s) { status = s; }

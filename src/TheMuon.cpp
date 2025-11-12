@@ -58,19 +58,22 @@ void TheMuon::setNgayLapThe(const Date& ngay) {
     ngayLapThe = ngay;
     tinhPhiVaGioiHan();
 }
-
 void TheMuon::nhap() {
-    cout << "Ten doc gia: "; getline(cin, tenDocGia);
-    string loai;
-    do {
-        cout << "Loai the (Thuong/HoiVien): "; getline(cin, loai);
-        if (loai == "HoiVien") loaiThe = THE_HOI_VIEN;
-        else if (loai == "Thuong") loaiThe = THE_THUONG;
-        else cout << "Chi nhap Thuong hoac HoiVien!\n";
-    } while (loai != "Thuong" && loai != "HoiVien");
-    tinhPhiVaGioiHan();
-}
+    cout << "Ten doc gia: ";
+    getline(cin, tenDocGia);
 
+    string loaiStr;
+    do {
+        cout << "Loai the (Thuong/HoiVien): ";
+        getline(cin, loaiStr);
+        if (loaiStr == "HoiVien") loaiThe = THE_HOI_VIEN;
+        else if (loaiStr == "Thuong") loaiThe = THE_THUONG;
+        else cout << "Chi nhap Thuong hoac HoiVien!\n";
+    } while (loaiStr != "Thuong" && loaiStr != "HoiVien");
+
+    tinhPhiVaGioiHan();
+    maThe = taoMaThe(loaiThe); 
+}
 void TheMuon::hienThi() const {
     string loaiStr = (loaiThe == THE_HOI_VIEN) ? "HoiVien" : "Thuong";
     cout << left << setw(10) << maThe

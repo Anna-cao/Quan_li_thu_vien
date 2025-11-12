@@ -22,14 +22,12 @@ Kho::~Kho() {
     }
     soNXB = 0;
 }
-
 bool Kho::coNXB(const string& ten) const {
     for (int i = 0; i < soNXB; ++i) {
         if (danhSachNXB[i] && danhSachNXB[i]->getNXB() == ten) return true;
     }
     return false;
 }
-
 void Kho::HienThiKho() const {
     cout << "-----THONG TIN TRONG KHO-----\n";
     cout << "Tong sach trong: " << soLuongTong << endl;

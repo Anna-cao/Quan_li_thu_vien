@@ -17,18 +17,39 @@ bool ThuVien::themDocGia(DocGia* dg) {
     return true;
 }
 void ThuVien::hienThiDanhSachDocGia() const {
-    if (soDocGia == 0) {
-        cout << "Chua co doc gia nao!\n";
-        return;
-    }
-    DocGia::hienThiTieuDe();
-    cout << string(110, '-') << endl;
+    int countThuong = 0, countHoiVien = 0;
     for (int i = 0; i < soDocGia; ++i) {
-        if (danhSachDocGia[i]->getStatus() == 1) {
-            danhSachDocGia[i]->hienThiDong();
-        }
+        if (!danhSachDocGia[i] || danhSachDocGia[i]->getStatus() == 0) continue;
+        string loai = danhSachDocGia[i]->getLoaiDocGia();
+        if (loai == "Doc Gia Thuong" || loai == "DocGiaThuong") countThuong++;
+        else if (loai == "HoiVien" || loai == "Hoi Vien") countHoiVien++;
     }
-    cout << string(110, '-') << endl;
+    cout << "\n--- DOC GIA THUONG (" << countThuong << ") ---\n";
+    if (countThuong > 0) {
+        DocGia::hienThiTieuDe();
+        for (int i = 0; i < soDocGia; ++i) {
+            DocGia* dg = danhSachDocGia[i];
+            if (dg && dg->getStatus() == 1 && 
+                (dg->getLoaiDocGia() == "Doc Gia Thuong" || dg->getLoaiDocGia() == "DocGiaThuong")) {
+                dg->hienThiDong();
+            }
+        }
+    } else {
+        cout << "  (Khong co du lieu)\n";
+    }
+    cout << "\n--- HOI VIEN (" << countHoiVien << ") ---\n";
+    if (countHoiVien > 0) {
+        DocGia::hienThiTieuDe();
+        for (int i = 0; i < soDocGia; ++i) {
+            DocGia* dg = danhSachDocGia[i];
+            if (dg && dg->getStatus() == 1 && 
+                (dg->getLoaiDocGia() == "HoiVien" || dg->getLoaiDocGia() == "Hoi Vien")) {
+                dg->hienThiDong();
+            }
+        }
+    } else {
+        cout << "  (Khong co du lieu)\n";
+    }
 }
 DocGia* ThuVien::timDocGiaTheoMa(const string& ma) const {
     for (int i = 0; i < soDocGia; ++i) {
@@ -40,14 +61,19 @@ DocGia* ThuVien::timDocGiaTheoMa(const string& ma) const {
     return nullptr;
 }
 void ThuVien::capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the) {
+    if (!the) return; 
     DocGia* dg = timDocGiaTheoMa(maDocGia);
     if (!dg) {
         cout << "Khong tim thay doc gia ma: " << maDocGia << endl;
         delete the;
         return;
     }
-    delete dg->getTheMuon();     
-    dg->setTheMuon(the);        
+    TheMuon* oldThe = dg->getTheMuon();
+    if (oldThe) {
+        delete oldThe;
+        dg->setTheMuon(nullptr); 
+    }
+    dg->setTheMuon(the);
     cout << "Da cap nhat the muon cho " << dg->getHoTen() << endl;
     saveDuLieu();
 }

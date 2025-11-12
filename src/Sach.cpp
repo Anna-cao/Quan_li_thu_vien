@@ -182,7 +182,6 @@ void Sach::ghiFileSach(const Sach danhSach[], int soLuong, const string& duongDa
         out << "\n"; 
     }
     out.close();
-    cout << "Da ghi " << soLuong << " sach vao file thanh cong!\n";
 }
 
 void Sach::capNhatAutoID(int id) {

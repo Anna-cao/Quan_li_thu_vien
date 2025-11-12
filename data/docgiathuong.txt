@@ -1,22 +1,24 @@
-DG001
-Nguyen Van A
+ Thi B
 0987654321
-a@gmail.com
-Ha Noi
-12 11 2025
+b@yahoo.com
+HCM
+10 11 2025
+1 1 1970
 Doc Gia Thuong
 1
-MS001 MS002
+7
 5
----
-DG002
-Tran Thi B
-0901234567
-b@gmail.com
-TP HCM
-13 11 2025
+
+
+hien Minh
+8887665567
+kkk@gmial.com
+Ninh Binh
+12 11 2025
+1 1 1970
 Doc Gia Thuong
 1
-MS003
-6
----
+23
+5
+
+

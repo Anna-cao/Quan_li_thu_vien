@@ -52,38 +52,54 @@ void menuQuanLiDocGia(ThuVien& thuVien) {
                 }
                 break;
             }
-            case 2: {
+                case 2: {
                 int loai;
                 cout << "1. Doc gia thuong\n2. Hoi vien\n3. Tat ca\nChon: ";
-                if (!(cin >> loai) || (loai < 1 || loai > 3)) {
+                if (!(cin >> loai) || loai < 1 || loai > 3) {
                     cout << "Lua chon khong hop le!\n";
                     cin.clear(); cin.ignore(1000, '\n');
                     break;
                 }
                 cin.ignore();
-                DocGia* ds[Max_docgia];  
-                int n = 0;
-                if (loai == 1 || loai == 3) {
-                    n = DocGia::docFileDocGiaThuong(ds, Max_docgia, "docgiathuong.txt");
-                    cout << "\n--- DOC GIA THUONG (" << n << ") ---\n";
-                    DocGia::hienThiTieuDe();
-                    cout << string(110, '-') << endl;
-                    for (int i = 0; i < n; ++i) {
-                        if (ds[i] && ds[i]->getStatus() == 1) ds[i]->hienThiDong();
+                cout << "Tong so doc gia trong he thong: " << thuVien.getSoDocGia()<<endl; 
+                int countThuong = 0, countHoiVien = 0;
+                for (int i = 0; i < thuVien.getSoDocGia(); ++i) {
+                    DocGia* dg = thuVien.getDanhSachDocGia()[i];
+                    if (dg && dg->getStatus() == 1) {
+                        string l = dg->getLoaiDocGia();
+                        if (l == "Doc Gia Thuong" || l == "DocGiaThuong") countThuong++;
+                        else if (l == "HoiVien" || l == "Hoi Vien") countHoiVien++;
                     }
-                    cout << string(110, '-') << endl;
-                    for (int i = 0; i < n; ++i) delete ds[i];
+                }
+                if (loai == 1 || loai == 3) {
+                    cout << "\n--- DOC GIA THUONG (" << countThuong << ") ---\n";
+                    if (countThuong > 0) {
+                        DocGia::hienThiTieuDe();
+                        for (int i = 0; i < thuVien.getSoDocGia(); ++i) {
+                            DocGia* dg = thuVien.getDanhSachDocGia()[i];
+                            if (dg && dg->getStatus() == 1 && 
+                                (dg->getLoaiDocGia() == "Doc Gia Thuong" || dg->getLoaiDocGia() == "DocGiaThuong")) {
+                                dg->hienThiDong();
+                            }
+                        }
+                    } else {
+                        cout << "  (Khong co du lieu)\n";
+                    }
                 }
                 if (loai == 2 || loai == 3) {
-                    n = DocGia::docFileHoiVien(ds, Max_docgia, "hoivien.txt");
-                    cout << "\n--- HOI VIEN (" << n << ") ---\n";
-                    DocGia::hienThiTieuDe();
-                    cout << string(110, '-') << endl;
-                    for (int i = 0; i < n; ++i) {
-                        if (ds[i] && ds[i]->getStatus() == 1) ds[i]->hienThiDong();
+                    cout << "\n--- HOI VIEN (" << countHoiVien << ") ---\n";
+                    if (countHoiVien > 0) {
+                        DocGia::hienThiTieuDe();
+                        for (int i = 0; i < thuVien.getSoDocGia(); ++i) {
+                            DocGia* dg = thuVien.getDanhSachDocGia()[i];
+                            if (dg && dg->getStatus() == 1 && 
+                                (dg->getLoaiDocGia() == "HoiVien" || dg->getLoaiDocGia() == "Hoi Vien")) {
+                                dg->hienThiDong();
+                            }
+                        }
+                    } else {
+                        cout << "  (Khong co du lieu)\n";
                     }
-                    cout << string(110, '-') << endl;
-                    for (int i = 0; i < n; ++i) delete ds[i];
                 }
                 break;
             }
@@ -98,15 +114,21 @@ void menuQuanLiDocGia(ThuVien& thuVien) {
                 }
                 break;
             }
-            case 4: {
+           case 4: {
                 string ma = DocGia::nhapMaDocGia("Nhap ma doc gia (0 de huy): ");
                 if (ma.empty()) break;
-                TheMuon* the = new TheMuon();
-                cout << "Nhap thong tin the moi:\n";
-                the->nhap();
+                DocGia* dg = thuVien.timDocGiaTheoMa(ma);
+                if (!dg) {
+                    cout << "Khong tim thay doc gia ma: " << ma << endl;
+                    break;
+                }
+                LoaiThe loai = (ma.substr(0, 2) == "DG") ? THE_THUONG : THE_HOI_VIEN;
+                TheMuon* the = new TheMuon(dg->getHoTen(), loai);
                 thuVien.capNhatTheMuonChoDocGia(ma, the);
-                break;
-            }
+                cout << "Da cap nhat the muon thanh cong!\n";
+                the->hienThi();
+                 break;
+}
             case 5: {
                 string ma = DocGia::nhapMaDocGia("Nhap ma doc gia (0 de huy): ");
                 if (ma.empty()) break;
@@ -137,8 +159,7 @@ void menuQuanLiDocGia(ThuVien& thuVien) {
             case 0:
                 cout << "Thoat ve chuong trinh chinh...\n";
                 return;  
-            default:
-                cout << "Lua chon khong hop le!\n";
+            default: cout << "Lua chon khong hop le!\n";
         }
     } while (true);  
 }

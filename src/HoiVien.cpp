@@ -1,5 +1,6 @@
 #include "../include/HoiVien.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 HoiVien::HoiVien(string ten) 
     : DocGia(ten, "HoiVien"), 
@@ -32,15 +33,10 @@ string HoiVien::getNgayDangKy() const {
     return ngayDangKy;
 }
 void HoiVien::hienThiThongTin() const {
-    cout << "=== THONG TIN HOI VIEN ===\n";
-    cout << "Ten: " << getHoTen() << endl;
-    cout << "Ma so: " << getMaDocGia() << endl;
-    cout << "So sach da muon: " << getSoLuotMuon() << endl;
-    cout << "Thoi gian muon toi da: " << thoiGianMuonMax << " ngay" << endl;
-    cout << "Ti le giam gia: " << (tileGiamGia * 100) << "%" << endl;
-    cout << "Ngay dang ky: " << ngayDangKy << endl;
-    cout << "Ngay het han: " << ngayHetHan << endl;
-    cout << "==========================\n";
+    DocGia::hienThiThongTin();
+    cout << " | Max: " << thoiGianMuonMax << " ngay"
+         << " | Giam: " << fixed << setprecision(0) << (tileGiamGia * 100) << "%"
+         << " | DK: " << ngayDangKy << " | HH: " << ngayHetHan;
 }
 void HoiVien::ghiFile(ostream& out) const {
     DocGia::ghiFile(out);
@@ -48,7 +44,6 @@ void HoiVien::ghiFile(ostream& out) const {
         << ngayDangKy << "\n"
         << ngayHetHan << "\n";  
 }
-
 void HoiVien::docFile(istream& in) {
     DocGia::docFile(in);
     in >> thoiGianMuonMax >> tileGiamGia;
@@ -56,4 +51,3 @@ void HoiVien::docFile(istream& in) {
     getline(in, ngayDangKy);
     getline(in, ngayHetHan);
 }
-
