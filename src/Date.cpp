@@ -34,14 +34,20 @@ int Date::TinhSoNgay(const Date& d) const {
     };
     return toDays(d.ngay, d.thang, d.nam) - toDays(ngay, thang, nam);
 }
-void Date::congNgay(int soNgay) {
-    ngay += soNgay;
-    while (ngay > SoNgayTrongThang(thang, nam)) {
-        ngay -= SoNgayTrongThang(thang, nam);
+void Date::congNgay(int n) {
+    if (n == 0) return;
+    int maxNgay[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (thang == 2 && nam % 4 == 0 && (nam % 100 != 0 || nam % 400 == 0)) {
+        maxNgay[2] = 29;
+    }
+    ngay += n;
+    while (ngay > maxNgay[thang]) {
+        ngay -= maxNgay[thang];
         thang++;
         if (thang > 12) {
             thang = 1;
             nam++;
+            maxNgay[2] = (nam % 4 == 0 && (nam % 100 != 0 || nam % 400 == 0)) ? 29 : 28;
         }
     }
 }
@@ -64,7 +70,7 @@ bool Date::operator>(const Date& other) const {
     return ngay > other.ngay;
 }
 int Date::operator-(const Date& other) const {
-    return TinhSoNgay(other); 
+    return -TinhSoNgay(other);  
 }
 bool Date::operator<(const Date& other) const {
     if (nam != other.nam) return nam < other.nam;

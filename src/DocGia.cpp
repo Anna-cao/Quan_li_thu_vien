@@ -143,19 +143,37 @@ void DocGia::ghiFile(ostream& out) const {
         if (i < dsMaSachDangMuon.size() - 1) out << " ";
     }
     out << "\n"; 
-}
-
-void DocGia::ghiFileDocGiaThuong(const DocGia* ds[], int n, const string& file) {
-    ofstream out(file);
+};
+void DocGia::ghiFileDocGiaThuong(const DocGia* const ds[], int soLuong, const string& duongDan) {
+    ofstream out(duongDan);
     if (!out.is_open()) return;
-    for (int i = 0; i < n; ++i) {
-        if (ds[i] && ds[i]->getStatus() == 1 && ds[i]->getLoaiDocGia() == "Doc Gia Thuong") {
-            ds[i]->ghiFile(out);
-            out << "\n\n";  
+
+    for (int i = 0; i < soLuong; ++i) {
+        const DocGia* dg = ds[i];
+        if (!dg || dg->getStatus() == 0 || dg->getLoaiDocGia() != "Doc Gia Thuong") continue;
+
+        out << dg->maDocGia << "\n";
+        out << dg->hoTen << "\n";
+        out << dg->sdt << "\n";
+        out << dg->email << "\n";
+        out << dg->diachi << "\n";
+        out << dg->ngayLapThe.getNgay() << " " << dg->ngayLapThe.getThang() << " " << dg->ngayLapThe.getNam() << "\n";
+        out << dg->getLoaiDocGia() << "\n";
+        out << dg->getStatus() << "\n";
+        TheMuon* the = dg->getTheMuon();
+        out << (the ? the->getMaThe() : "") << "\n";
+        const vector<string>& dsSach = dg->getDsMaSachDangMuon();
+        for (size_t j = 0; j < dsSach.size(); ++j) {
+            out << dsSach[j];
+            if (j < dsSach.size() - 1) out << " ";
         }
+        out << "\n";
+        out << static_cast<const DocGiaThuong*>(dg)->getGioiHanMuon() << "\n";
+        out << "\n"; 
     }
     out.close();
 }
+
 void DocGia::ghiFileHoiVien(const DocGia* ds[], int n, const string& file) {
     ofstream out(file);
     if (!out.is_open()) return;
@@ -183,14 +201,13 @@ int DocGia::docFileDocGiaThuong(DocGia* ds[], int soLuongToiDa, const string& du
     if (!in.is_open()) return 0;
     int n = 0;
     string line;
-
     while (n < soLuongToiDa) {
         string ma;
-        while (std::getline(in, ma) && ma.empty()) {}
+        while (getline(in, ma) && ma.empty()) {}
         if (!in || ma.empty()) break;
 
-        string ten, sdt, email, diachi;
-        int d, m, y, status;
+        string ten, sdt, email, diachi, loai, maThe;
+        int d, m, y, status = 1;
         string masach_line;
         if (!getline(in, ten)) break;
         if (!getline(in, sdt)) break;
@@ -201,16 +218,17 @@ int DocGia::docFileDocGiaThuong(DocGia* ds[], int soLuongToiDa, const string& du
             stringstream ss(line);
             if (!(ss >> d >> m >> y)) { d = 1; m = 1; y = 1970; }
         }
+        if (!getline(in, loai)) break;
         if (!getline(in, line)) break; 
-        if (!getline(in, line)) break;
         {
             stringstream ss(line);
             if (!(ss >> status)) status = 1;
         }
-        if (!getline(in, masach_line)) break;
+        if (!getline(in, maThe)) break; 
+        if (!getline(in, masach_line)) break; 
+        if (!getline(in, line)) break; 
         int gioiHan = 5;
-        if (!getline(in, line)) {
-        } else {
+        {
             stringstream ss(line);
             if (!(ss >> gioiHan)) gioiHan = 5;
         }
@@ -223,17 +241,23 @@ int DocGia::docFileDocGiaThuong(DocGia* ds[], int soLuongToiDa, const string& du
         dg->ngayLapThe = Date(d, m, y);
         dg->status = status;
         dg->setGioiHanMuon(gioiHan);
+        if (status == 1 && !maThe.empty()) {
+            TheMuon* the = new TheMuon(dg->getHoTen(), THE_THUONG);
+            the->setMaThe(maThe);
+            dg->setTheMuon(the);
+        }
         vector<string> tmp;
         stringstream ms(masach_line);
         string maSach;
         while (ms >> maSach) tmp.push_back(maSach);
         dg->setDsMaSachDangMuon(tmp);
+
         capNhatAutoIDTuMa(ma, false);
         ds[n++] = dg;
         while (getline(in, line) && line.empty()) {}
         if (!in) break;
         if (in && !line.empty()) {
-            in.seekg(-static_cast<long long>(line.size()) , ios::cur);
+            in.seekg(-static_cast<long long>(line.size()), ios::cur);
         }
     }
     in.close();

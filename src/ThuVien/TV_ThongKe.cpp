@@ -1,18 +1,9 @@
 #include "../include/ThuVien.h"
-#include"../include/Sach.h"
-#include"../include/HoaDon.h"
-
+#include "../include/Sach.h"
+#include "../include/HoaDon.h"
 #include <iostream>
 #include <string>
 using namespace std;
-DocGia* ThuVien::timDocGiaTheoMaThe(const string& maThe) const {
-    for (int i = 0; i < soDocGia; ++i) {
-        if (danhSachDocGia[i]->getTheMuon()->getMaThe() == maThe) {
-            return danhSachDocGia[i];
-        }
-    }
-    return nullptr;
-}
 
 void ThuVien::thongKeMuonTra(const Date& ngayHienTai) const {
     if (soHoaDon == 0 && soLuongTong == 0) {
@@ -28,7 +19,6 @@ void ThuVien::thongKeMuonTra(const Date& ngayHienTai) const {
 
     for (int i = 0; i < soHoaDon; ++i) {
         HoaDon* hd = new HoaDon(danhSachHoaDon[i]); 
-
         if (!hd) continue;
 
         if (hd->getNgayTraThucTe().HopLe()) {
@@ -39,13 +29,13 @@ void ThuVien::thongKeMuonTra(const Date& ngayHienTai) const {
         }
         else {
             demDangMuon++;
-
             Date hetHan = hd->getNgayMuon();
             hetHan.congNgay(hanMuon);
             if (hetHan < ngayHienTai) {
                 demQuaHan++;
             }
         }
+        delete hd;  
     }
 
     int tongSach = 0, tongDangMuonSoLuong = 0, tongCon = 0;

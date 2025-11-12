@@ -3,6 +3,7 @@
 #include "../include/Date.h"
 #include "../include/DocGia.h"
 #include "../include/HoaDon.h"
+#include "../include/DocGiaThuong.h"
 
 using namespace std;
 void menuQuanLiHoaDon(ThuVien& thuVien) {
@@ -29,16 +30,34 @@ void menuQuanLiHoaDon(ThuVien& thuVien) {
         }
         switch (chon) {
            case 1: {
-                string maThe;
-                cout << "Nhap ma the muon: ";  
-                getline(cin >> ws, maThe);
-                DocGia* dg = thuVien.timDocGiaTheoMaThe(maThe);
+                string maDocGia;
+                cout << "Nhap ma doc gia: ";  
+                getline(cin >> ws, maDocGia);
+                DocGia* dg = thuVien.timDocGiaTheoMa(maDocGia);
                 if (!dg) {
-                    cout << "Khong tim thay doc gia!\n";
+                    cout << "Khong tim thay doc gia!\n"; break;
+        }
+                TheMuon* the = dg->getTheMuon();
+                if (!the) {
+                    cout << "Doc gia chua duoc cap the muon!\n"; break;
+        }
+                string maThe = the->getMaThe();  
+                cout << "Doc gia: " << dg->getHoTen() << " | Ma the: " << maThe << endl;
+                Date ngMuon = Date::NhapTuChuoi("Nhap ngay muon (dd/mm/yyyy): ");
+                if (!ngMuon.HopLe()) {
+                    cout << "Ngay muon khong hop le!\n";
                     break;
         }
-                Date ngMuon = Date::NhapTuChuoi("Nhap ngay muon (dd/mm/yyyy): ");
-                Date ngTraThucTe(0, 0, 0);  
+                int daMuon = dg->getDsMaSachDangMuon().size();
+                int gioiHan = (dg->getLoaiDocGia() == "Doc Gia Thuong") 
+                    ? static_cast<DocGiaThuong*>(dg)->getGioiHanMuon() : 10; 
+                if (daMuon > 0) {
+                cout << "Doc gia dang muon " << daMuon << " sach. ";
+                if (daMuon >= gioiHan) {
+                    cout << "Da vuot gioi han!\n"; break;
+        }
+                cout << "Con duoc muon toi da " << (gioiHan - daMuon) << " sach.\n";
+        }
                 vector<pair<string, int>> dsSach;
                 double tongCoc = 0.0;
                 string maSach;
@@ -49,33 +68,36 @@ void menuQuanLiHoaDon(ThuVien& thuVien) {
                     if (maSach == "x" || maSach == "X") break;
                     Sach* s = thuVien.timSachTheoMa(maSach);
                     if (!s) {
-                        cout << "Khong tim thay sach!\n";
-                        continue;
+                        cout << "Khong tim thay sach!\n"; continue;
+        }
+                if (s->soSachConLai() <= 0) {
+                    cout << "Sach da het!\n"; continue;
         }
                 int sl;
                 cout << "So luong muon: ";
-                cin >> sl;
-                cin.ignore();
-                if (sl <= 0 || sl > s->soSachConLai()) {
-                cout << "So luong khong hop le! Con lai: " << s->soSachConLai() << endl;
-                continue;
+                if (!(cin >> sl) || sl <= 0 || sl > s->soSachConLai()) {
+                    cin.clear(); cin.ignore(1000, '\n');
+                    continue;
         }
+                cin.ignore();
                 dsSach.emplace_back(maSach, sl);
-                tongCoc += (s->getGiaTien() * 0.5 * sl);  
+                tongCoc += (s->getGiaTien() * 0.5 * sl);
                 for (int j = 0; j < sl; ++j) {
                     s->muonSach();
         }
     }
-            HoaDon hd;
-            hd.taoMaTuDong();
-            hd.setMaThe(maThe);
-            hd.setNgayMuon(ngMuon);
-            hd.setNgayTraThucTe(ngTraThucTe);
-            hd.setTienCoc(tongCoc);
-            hd.setDsSachMuon(dsSach);
-            thuVien.themHoaDon(hd);
-            cout << "Them hoa don thanh cong voi ma: " << hd.getMaHoaDon() << endl;
-            break;
+                if (dsSach.empty()) {
+                    cout << "Chua chon sach nao!\n"; break;
+    }
+                HoaDon hd;
+                hd.taoMaTuDong();
+                hd.setMaThe(maThe);
+                hd.setNgayMuon(ngMuon);
+                hd.setNgayTraThucTe(Date(0,0,0));
+                hd.setTienCoc(tongCoc);
+                hd.setDsSachMuon(dsSach);
+                thuVien.themHoaDon(hd);
+                cout << "Them hoa don thanh cong! Ma HD: " << hd.getMaHoaDon() << endl;break;
 }
             case 2: {
                 string maHD;

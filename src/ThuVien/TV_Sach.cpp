@@ -16,8 +16,10 @@ void ThuVien::themSach() {
         if (timNXBTheoTen(nxb) != nullptr) {
             break; 
         }
-
-        cout << "NXB '" << nxb << "' KHONG TON TAI! Nhap lai (0 huy): ";
+        cout << "NXB '" << nxb << "' KHONG TON TAI!\n";
+        cout << "Danh sach NXB hien co:\n";
+        hienThiDanhSachNXB();  
+        cout << "Nhap lai (0 huy): ";
         string tmp;
         if (!getline(cin >> ws, tmp)) {
             cout << "Loi nhap. Huy.\n";
@@ -44,7 +46,7 @@ void ThuVien::hienThi() {
 Sach* ThuVien::timSachTheoMa(const string& maSach) const {
     for (int i = 0; i < soLuongTong; ++i) {
         if (danhSach[i].getMaSach() == maSach) {
-            return const_cast<Sach*>(&danhSach[i]);  // Vì const, nhưng cần mutable để muonSach()
+            return const_cast<Sach*>(&danhSach[i]);  
         }
     }
     return nullptr;

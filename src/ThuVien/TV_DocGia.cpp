@@ -60,6 +60,17 @@ DocGia* ThuVien::timDocGiaTheoMa(const string& ma) const {
     }
     return nullptr;
 }
+DocGia* ThuVien::timDocGiaTheoMaThe(const string& maThe) const {
+    for (int i = 0; i < soDocGia; ++i) {
+        if (danhSachDocGia[i] && danhSachDocGia[i]->getStatus() == 1) {
+            TheMuon* the = danhSachDocGia[i]->getTheMuon();
+            if (the && the->getMaThe() == maThe) {
+                return danhSachDocGia[i];
+            }
+        }
+    }
+    return nullptr;
+}
 void ThuVien::capNhatTheMuonChoDocGia(const string& maDocGia, TheMuon* the) {
     if (!the) return; 
     DocGia* dg = timDocGiaTheoMa(maDocGia);

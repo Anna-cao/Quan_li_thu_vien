@@ -44,31 +44,24 @@ void ThuVien::capNhatHoaDonDaTra(const string& maHD, const Date& ngayTra) {
 }
 void ThuVien::tinhTienPhatQuaHan(const string& maDocGia, const Date& ngayHienTai) {
     DocGia* dg = timDocGiaTheoMa(maDocGia);
-    if (!dg) {
-        cout << "Khong tim thay doc gia!\n";
-        return;
-    }
-    TheMuon* the = dg->getTheMuon();
-    if (!the) {
-        cout << "Doc gia chua co the muon!\n";
+    if (!dg || !dg->getTheMuon()) {
+        cout << "Khong tim thay doc gia hoac chua co the!\n";
         return;
     }
     double tongPhat = 0.0;
-    string loaiDG = dg->getLoaiDocGia();
-    double phiMotTuan = (loaiDG == "HoiVien") ? 5000.0 : 10000.0;
+    double phiMotTuan = (dg->getLoaiDocGia() == "HoiVien") ? 5000.0 : 10000.0;
     for (int i = 0; i < soHoaDon; ++i) {
-        if (danhSachHoaDon[i].getMaThe() == the->getMaThe() && 
-            danhSachHoaDon[i].getStatus() == 0) {  
-            Date duKien = danhSachHoaDon[i].getNgayMuon();
-            duKien.congNgay(14);
-
-            if (ngayHienTai > duKien) {
-                int soNgayQuaHan = ngayHienTai - duKien;
-                int soTuan = (soNgayQuaHan + 6) / 7;
-                tongPhat += soTuan * phiMotTuan;
-            }
-        }
+        HoaDon& hd = danhSachHoaDon[i];
+        if (hd.getMaThe() != dg->getTheMuon()->getMaThe() || hd.getStatus() != 0) continue;
+        Date duKien = hd.getNgayMuon();
+        duKien.congNgay(14);
+        if (!(ngayHienTai > duKien)) continue;  
+        int soNgayQuaHan = ngayHienTai - duKien;
+        if (soNgayQuaHan <= 0) continue;  
+        int soTuan = (soNgayQuaHan + 6) / 7;
+        tongPhat += soTuan * phiMotTuan;
     }
     cout << "Tong tien phat qua han cho doc gia " << maDocGia
-         << " (" << loaiDG << "): " << fixed << setprecision(0) << tongPhat << " VND\n";
+         << " (" << dg->getLoaiDocGia() << "): "
+         << fixed << setprecision(0) << tongPhat << " VND\n";
 }

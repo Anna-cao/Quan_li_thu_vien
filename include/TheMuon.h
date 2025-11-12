@@ -46,6 +46,7 @@ public:
     Date getHanSuDung() const { return hanSuDung; }
 
     void setTenDocGia(string ten) { tenDocGia = ten; }
+    void setMaThe(string maT) {maThe = maT;}
     void setLoaiThe(LoaiThe loai) { loaiThe = loai; tinhPhiVaGioiHan(); }
     void setStatus(string st) { status = st; }
     void setGioiHanMuon(int g) { gioiHanMuon = g; }

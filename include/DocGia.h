@@ -56,7 +56,7 @@ public:
 
     virtual void docFile(istream& in);
     virtual void ghiFile(ostream& out) const;
-    static void ghiFileDocGiaThuong(const DocGia* ds[], int n, const string& file);
+    static void ghiFileDocGiaThuong(const DocGia* const ds[], int n, const string& file);    
     static void ghiFileHoiVien(const DocGia* ds[], int n, const string& file);
     static int docFileDocGiaThuong(DocGia* ds[], int soLuongToiDa, const string& duongDan);
     static int docFileHoiVien(DocGia* ds[], int soLuongToiDa, const string& duongDan);
