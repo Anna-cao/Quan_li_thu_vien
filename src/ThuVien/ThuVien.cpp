@@ -8,7 +8,9 @@
 #include <sstream>
 #include <vector>
 #include <type_traits>
+#include <conio.h>
 using namespace std;
+
 string nhapNXBHopLe(ThuVien& tv) {
     string ten;
     while (true) {
@@ -33,7 +35,7 @@ ThuVien::ThuVien() {
         danhSachNXB[i] = nullptr;
     }
 }
-ThuVien::~ThuVien() {
+ThuVien:: ~ThuVien() {
     for (int i = 0; i < soDocGia; ++i) delete danhSachDocGia[i];
     for (int i = 0; i < soNXB; ++i) delete danhSachNXB[i];
 }
@@ -77,4 +79,49 @@ void ThuVien::saveDuLieu() {
         DocGia::ghiFileHoiVien(hoivien.data(), hoivien.size(), "data/HoiVien.txt");
 }
 
+void ThuVien::xemTatCaSach() const {
+    if (soLuongTong == 0) {
+        cout << "Khong co sach nao trong thu vien!\n";
+        return;
+    }
 
+    
+    cout << left
+         << setw(10)  << "Ma sach"
+         << setw(20)  << "Ten sach"                  
+         << setw(18)  << "Tac gia"
+         << setw(18)  << "Nha xuat ban"
+         << setw(18)  << "The loai"
+         << setw(14)  << "Gia (VND)"
+         << setw(8)   << "Tong"
+         << setw(10)  << "Da muon"
+         << setw(10)  << "Con lai" << endl;
+
+    
+    cout << string(130, '-') << endl;
+
+    for (int i = 0; i < soLuongTong; ++i) {
+        danhSach[i].hienThiThongTin();
+    }
+}
+
+bool ThuVien::xemChiTietSach(const std::string& maSach) const {
+    for (int i = 0; i < soLuongTong; ++i) {
+        if (danhSach[i].getMaSach() == maSach) {
+            const Sach& s = danhSach[i];
+            cout << left
+                 << setw(15) << "Ma sach: "     << s.getMaSach()     << endl
+                 << setw(15) << "Ten sach: "    << s.getTenSach()    << endl
+                 << setw(15) << "Tac gia: "     << s.getTacGia()     << endl
+                 << setw(15) << "NXB: "         << s.getNXB()        << endl
+                 << setw(15) << "The loai: "    << s.getType()       << endl
+                 << setw(15) << "Gia: "         << fixed << setprecision(0) << s.getGiaTien() << " VND" << endl
+                 << setw(15) << "Tong: "        << s.getSoLuongTong() << endl
+                 << setw(15) << "Da muon: "     << s.getSoLuongDaMuon() << endl
+                 << setw(15) << "Con lai: "     << s.soSachConLai()   << endl;
+            return true;
+        }
+    }
+    cout << "Khong tim thay sach voi ma: " << maSach << endl;
+    return false;
+}

@@ -17,7 +17,6 @@ namespace Utils {
         ifstream f(tenFile);
         return f.good();
     }
-   
 }
 
 

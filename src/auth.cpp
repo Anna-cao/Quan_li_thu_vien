@@ -1,4 +1,3 @@
-// src/auth.cpp
 #include "../include/auth.h"
 #include <fstream>
 #include <iostream>
@@ -53,7 +52,7 @@ bool Auth::dangNhap(const string& tenDangNhap, const string& matKhau, int& lanTh
     if (pos != -1 && danhSachNguoiDung[pos].getMatKhau() == matKhau) {
         nguoiDungHienTai = &danhSachNguoiDung[pos];
         cout << "Dang nhap thanh cong!\n";
-        lanThu = 0; // Reset
+        lanThu = 0; 
         return true;
     }
 

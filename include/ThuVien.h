@@ -52,6 +52,8 @@ public:
     void timVaHienThiSach(const string& ten) const;
     void xoaSachTheoTen();
     Sach* timSachTheoMa(const string& maSach) const;
+    void xemTatCaSach() const;           
+    bool xemChiTietSach(const std::string& maSach) const;
 //DOCGIA
     bool themDocGia(DocGia* dg);
     void hienThiDanhSachDocGia() const;
